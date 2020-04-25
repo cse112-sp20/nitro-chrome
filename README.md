@@ -16,111 +16,18 @@
 
 
 
-## Step 1\. Open a Pull Request
+## Pull Request Guidelines
 
-`master`, you can open a _pull request_.
+Put the name of the exercise in the subject line of the commit. E.g. hamming: Add test case for strands of unequal length
 
-Pull Requests are the heart of collaboration on GitHub. When you open a _pull request_, you’re proposing your changes and requesting that someone review and pull in your contribution and merge them into their branch. Pull requests show _diffs_, or differences, of the content from both branches. The changes, additions, and subtractions are shown in green and red.
+The subject line should be a one-sentence summary.
 
-As soon as you make a commit, you can open a pull request and start a discussion, even before the code is finished.
+Any extra detail should be provided in the body of the pull request.
 
-By using GitHub’s [@mention system](https://help.github.com/articles/about-writing-and-formatting-on-github/#text-formatting-toolbar) in your pull request message, you can ask for feedback from specific people or teams, whether they’re down the hall or 10 time zones away.
+Don't submit unrelated changes in the same pull request.
 
-You can even open pull requests in your own repository and merge them yourself. It’s a great way to learn the GitHub flow before working on larger projects.
+If you end up with a lot of small commits that really make up one change, squash your commits. Refer to the guidelines on [squashing commits](/contributing/git-basics.md#squashing).
 
-#### Open a Pull Request for changes to the README
+If you had to refactor in order to add your change, then please put two commits: First the refactoring, then the added behavior. It's fine to put this in the same pull request, unless the refactoring is huge and would make it hard to review both at the same time.
 
-<table>
-
-<thead>
-
-<tr>
-
-<th>Step</th>
-
-<th>Screenshot</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td>Click the <span class="octicon octicon-git-pull-request"></span><strong>Pull Request</strong> tab, then from the Pull Request page, click the green <strong>New pull request</strong> button.</td>
-
-<td><img src="https://guides.github.com/activities/hello-world/pr-tab.gif"
-     alt="Pull Request button"
-     /></td>
-
-</tr>
-
-<tr>
-
-<td>In the <strong>Example Comparisons</strong> box, select the branch you made, <code>readme-edits</code>, to compare with <code>master</code> (the original).</td>
-
-<td><img src="https://guides.github.com/activities/hello-world/pick-branch.png"
-     alt="Pull Request title"
-     /></td>
-
-</tr>
-
-<tr>
-
-<td>Look over your changes in the diffs on the Compare page, make sure they’re what you want to submit.</td>
-
-<td><img src="https://guides.github.com/activities/hello-world/diff.png"
-     alt="Diffs on page"
-     /></td>
-
-</tr>
-
-<tr>
-
-<td>When you’re satisfied that these are the changes you want to submit, click the big green <strong>Create Pull Request</strong> button.</td>
-
-<td><img src="https://guides.github.com/activities/hello-world/pr-form.png"
-     alt="Create pull request"
-     /></td>
-
-</tr>
-
-<tr>
-
-<td>Give your pull request a title and write a brief description of your changes.</td>
-
-<td><img src="https://guides.github.com/activities/hello-world/create-pr.png"
-     alt="Pull Request title"
-     /></td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-When you’re done with your message, click **Create pull request**!
-
-* * *
-
-> **Tip**: You can use [emoji](https://help.github.com/articles/basic-writing-and-formatting-syntax/#using-emoji) and [drag and drop images and gifs](https://help.github.com/articles/file-attachments-on-issues-and-pull-requests/) onto comments and Pull Requests.
-
-<a id="merge" title="Merge Pull Request" class="toc-item"></a>
-
-## Step 2\. Merge your Pull Request
-
-In this final step, it’s time to bring your changes together – merging your `readme-edits` branch into the `master` branch.
-
-1.  Click the green **Merge pull request** button to merge the changes into `master`.
-2.  Click **Confirm merge**.
-3.  Go ahead and delete the branch, since its changes have been incorporated, with the **Delete branch** button in the purple box.
-
-<img src="https://guides.github.com/activities/hello-world/merge-button.png"
-     alt="Merge button"
-     /> 
-<img src="https://guides.github.com/activities/hello-world/delete-button.png"
-     alt="Delete branch"
-     />
-
-
+Once you've submitted a pull request, one or more of the QA team members will review it.

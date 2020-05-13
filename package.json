@@ -1,0 +1,25 @@
+{
+  "name": "nitro-chrome",
+  "version": "1.0.0",
+  "description": "* Winson Luk\r * Race Hunter\r * Phuc Dao\r * Andrew Benser\r * Kaylen Li\r * Nicholas Chung\r * Dimitri Matevossian\r * Johnny Lam\r * Jason Lau\r * Yanxun Li\r * Luis Angel Ramos-Castillo\r * Austin Cheong",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-plugin-react": "^7.20.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse112-sp20/nitro-chrome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse112-sp20/nitro-chrome/issues"
+  },
+  "homepage": "https://github.com/cse112-sp20/nitro-chrome#readme"
+}

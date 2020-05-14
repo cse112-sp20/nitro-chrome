@@ -9,8 +9,14 @@
     </style>
   </head>
   <body>
-    
-    
+    {{#each tasks}}
+      <h1>*back button* {{task title}}</h1>
+      <ul id= “task breakdown”>
+        <!-- // use js to populate description -->
+      </ul>
+      <button> Checkmark </button>
+      <button> Delete </button>
+    {{/each}}
     
     <script src="task.js"></script>
   </body>

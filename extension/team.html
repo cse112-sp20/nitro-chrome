@@ -9,8 +9,19 @@
     </style>
   </head>
   <body>
-    
-    
+    {{#each teams}} 
+      <h1>*back button* {{team title}}</h1>
+      <ul id= “progress”>
+        <h2>Progress</h2>
+          <!-- // use js to populate description -->
+        <h2>Completed</h2>
+          <!-- // use js to populate description -->
+      </ul>
+      <h1 href="linkToScreen5"> Productivity: {{productivity}} </h1>
+      <h1> Total Points: {{totalPoints}} </h1>
+      <button> Checkmark </button>
+      <button> Delete </button>
+    {{/each}}
     
     <script src="team.js"></script>
   </body>

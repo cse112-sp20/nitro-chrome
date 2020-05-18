@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+<<<<<<< Updated upstream
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>    
+>>>>>>> Stashed changes
     <link href="../CSS/leaderboard.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
   </head>
@@ -8,10 +14,10 @@
     <h1 class="card1">
       <a> Leaderboard </a>
     </h1>
-    <table id="table" style="font-family: Lato;">
-      {{#each teams}}
+    <table id="table" style="font-family: Lato; width: 100%;"> <!--Added width attr-->
+      <!-- {{#each teams}} -->
 	      <!-- // use js to populate -->
-      {{/each}}
+      <!-- {{/each}} -->
     </table>
     
     <br>
@@ -23,6 +29,6 @@
 
     <button id="btn">Tasks</button>
     
-    <script src="leaderboard.js"></script>
+    <script src="../JavaScript/leaderboard.js"></script> <!-- <script src="leaderboard.js"></script> -->
   </body>
 </html>

@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="../CSStingz/task.css" rel="stylesheet">
+    <link href="../CSS/task.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
   </head>
-  <body>
-    {{#each tasks}}
-      <h1>*back button* {{task title}}</h1>
+  <body class="card">
+    <!-- {{#each tasks}} -->
+      <h1 class="card1">*back btn* {{task title}} </h1>
       <ul id= “task breakdown”>
         <!-- // use js to populate description -->
       </ul>
-      <button> Checkmark </button>
-      <button> Delete </button>
-    {{/each}}
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <button id="btn"> Checkmark </button>
+      <button id="btn"> Delete </button>
+    <!-- {{/each}} -->
     
     <script src="task.js"></script>
   </body>

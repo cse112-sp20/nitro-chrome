@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="../CSStingz/team.css" rel="stylesheet">
+    <link href="../CSS/team.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
   </head>
-  <body>
-    {{#each teams}} 
-      <h1>*back button* {{team title}}</h1>
+  <body class="card">
+    <!-- {{#each teams}} --> 
+      <h1 class="card1">*back button* {{team title}}</h1>
       <ul id= “progress”>
-        <h2>Progress</h2>
+        <h3>Progress</h3>
           <!-- // use js to populate description -->
-        <h2>Completed</h2>
+        <h3>Completed</h3>
           <!-- // use js to populate description -->
       </ul>
-      <h1 href="linkToScreen5"> Productivity: {{productivity}} </h1>
-      <h1> Total Points: {{totalPoints}} </h1>
-      <button> Checkmark </button>
-      <button> Delete </button>
-    {{/each}}
+      <h4> Productivity: {{productivity}} </h4>
+      <h4> Total Points: {{totalPoints}} </h4>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <button id="btn"> Checkmark </button>
+      <button id="btn"> Delete </button>
+    <!-- {{/each}} -->
     
     <script src="team.js"></script>
   </body>

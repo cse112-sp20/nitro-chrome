@@ -1,5 +1,5 @@
-let myJSON = 
-`{
+let myJSON =
+  `{
    "account_id": "4514340", 
    "teams": [
      {
@@ -83,26 +83,24 @@ let myJSON =
    ]
  }`;
 
- let response = JSON.parse(myJSON);
- console.log(response);
- document.querySelector("h1").innerHTML += `Team ${response.teams[0].name}`;
- let ulP = document.getElementById("progress");
- let ulC = document.getElementById("completed");
- /*==============================================================
+let response = JSON.parse(myJSON);
+console.log(response);
+document.querySelector("p").innerHTML = `${response.teams[0].name}`;
+let ulP = document.getElementById("progress");
+let ulC = document.getElementById("completed");
+/*==============================================================
 Functionality of BACK button --> redirect to 'Tasks' screen
 ==============================================================*/
-let backBtn = document.getElementById('back');
-function gotoTasks(){
-   location.href = "./tasks.html";
+function gotoTasks() {
+  location.href = "./tasks.html";
 }
-backBtn.addEventListener('click', gotoTasks);
 
 /*==============================================================
 Functionality of CHECKMARK button --> checks off this task
 ==============================================================*/
 let checkBtn = document.getElementById('check');
-function checkoffTask(){
-   alert("Checking off this task"); // TODO: Remove this alert when finished
+function checkoffTask() {
+  alert("Checking off this task"); // TODO: Remove this alert when finished
 }
 checkBtn.addEventListener('click', checkoffTask);
 
@@ -110,16 +108,16 @@ checkBtn.addEventListener('click', checkoffTask);
 Functionality of DELETE button --> deletes this task
 ==============================================================*/
 let deleteBtn = document.getElementById('delete');
-function deleteTask(){
-   alert("Deleting this task"); // TODO: Remove this alert when finished
+function deleteTask() {
+  alert("Deleting this task"); // TODO: Remove this alert when finished
 }
 deleteBtn.addEventListener('click', deleteTask);
 
 
 // myMap.set(response.teams[0].task_list[0].task[0].id, response.teams[0].task_list[0].points);      
 // myMap.set(response.teams[0].task_list[0].task[1].id, response.teams[0].task_list[1].points);      
-         // myMap.set(response.teams[i].task_list[j].task[k].id.toString(), response.teams[i].name);      
- 
+// myMap.set(response.teams[i].task_list[j].task[k].id.toString(), response.teams[i].name);      
+
 let liP = document.createElement("li");
 // liP.appendChild(document.createTextNode(`Task ${myMap.keys().next().value} (${myMap.values().next().value})`));
 liP.appendChild(document.createTextNode("Foo (200)"));

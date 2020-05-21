@@ -44,7 +44,7 @@ body {
     min-height: 240px;
 }
 
-.card1 {
+.headerWOBackButton {
     margin-top: auto;
     margin-bottom: auto;
     
@@ -58,6 +58,12 @@ body {
     width: 239px;
     height: 45px;
     position: relative;
+}
+
+.headerWOBackButton p {
+    padding-top: 6px;
+    font-weight: bold;
+    margin: 0;
 }
 
 /*

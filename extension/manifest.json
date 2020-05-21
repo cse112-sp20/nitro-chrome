@@ -1,7 +1,7 @@
 {
-  "name": "Nitro Chrome",
+  "name": "Nitro Project Manager",
   "version": "1.0",
-  "description": "Leaderboard that tracks team progress through basecamp",
+  "description": "Leaderboard that tracks team progress through Basecamp",
   "permissions": [
     "storage"
   ],

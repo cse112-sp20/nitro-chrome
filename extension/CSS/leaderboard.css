@@ -66,6 +66,10 @@ body {
     margin: 0;
 }
 
+#btn {
+    cursor: pointer;
+}
+
 /*
 .card1 a {
     position: absolute;

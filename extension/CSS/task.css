@@ -85,6 +85,7 @@ body {
     height: 39px;
     border: 0;
     margin-top: 3px;
+    cursor: pointer;
 }
 
 #delete {
@@ -94,6 +95,7 @@ body {
     height: 60px;
     border: 0;
     clear: both;
+    cursor: pointer;
 }
 
 #check {
@@ -103,4 +105,5 @@ body {
     height: 60px;
     border: 0;
     clear: both;
+    cursor: pointer;
 }

@@ -102,16 +102,20 @@ backBtn.addEventListener('click', gotoTasks);
 /*==============================================================
 Functionality of CHECKMARK button --> checks off this task
 ==============================================================*/
+let checkBtn = document.getElementById('check');
 function checkoffTask() {
   alert("Checking off this task"); // TODO: Remove this alert when finished
 }
+checkBtn.addEventListener('click', checkoffTask);
 
 /*==============================================================
 Functionality of DELETE button --> deletes this task
 ==============================================================*/
+let deleteBtn = document.getElementById('delete');
 function deleteTask() {
   alert("Deleting this task"); // TODO: Remove this alert when finished
 }
+deleteBtn.addEventListener('click', deleteTask);
 
 
 let ul = document.getElementById("task_breakdown");

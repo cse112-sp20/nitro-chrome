@@ -62,6 +62,7 @@ body {
     height: 39px;
     border: 0;
     margin-top: 3px;
+    cursor: pointer;
 }
 
 .header img {

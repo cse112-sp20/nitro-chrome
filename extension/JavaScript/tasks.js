@@ -103,9 +103,11 @@ console.log(`# of tasks = ${response.teams[1].task_list[0].task.length}`);
 /*==============================================================
 Functionality of BACK button --> redirect to 'Leaderboard' screen
 ==============================================================*/
+let backBtn = document.getElementById('back');
 function gotoLeaderboard() {
   location.href = "./leaderboard.html";
 }
+backBtn.addEventListener('click', gotoLeaderboard);
 
 /*==============================================================
 Functionality to populate the table: 

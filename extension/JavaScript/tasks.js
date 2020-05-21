@@ -1,5 +1,5 @@
-let myJSON = 
-`{
+let myJSON =
+  `{
    "account_id": "4514340", 
    "teams": [
      {
@@ -83,29 +83,29 @@ let myJSON =
    ]
  }`;
 
- let response = JSON.parse(myJSON);
- console.log(response);
- console.log(`Account ID = ${response.account_id}`);
- console.log(`# of Teams = ${response.teams.length}`);
- console.log(`=====================================`);
+let response = JSON.parse(myJSON);
+console.log(response);
+console.log(`Account ID = ${response.account_id}`);
+console.log(`# of Teams = ${response.teams.length}`);
+console.log(`=====================================`);
 
- console.log(`Team 0 = ${response.teams[0].name}`);
- console.log(`Points completed = ${response.teams[0].task_list[0].points_completed}`);
- console.log(`# of taskLists = ${response.teams[0].task_list.length}`);
- console.log(`# of tasks = ${response.teams[0].task_list[0].task.length}`);
+console.log(`Team 0 = ${response.teams[0].name}`);
+console.log(`Points completed = ${response.teams[0].task_list[0].points_completed}`);
+console.log(`# of taskLists = ${response.teams[0].task_list.length}`);
+console.log(`# of tasks = ${response.teams[0].task_list[0].task.length}`);
 
- console.log(`=====================================`);
+console.log(`=====================================`);
 
- console.log(`Team 1 = ${response.teams[1].name}`);
- console.log(`# of taskLists = ${response.teams[1].task_list.length}`);
- console.log(`# of tasks = ${response.teams[1].task_list[0].task.length}`);
+console.log(`Team 1 = ${response.teams[1].name}`);
+console.log(`# of taskLists = ${response.teams[1].task_list.length}`);
+console.log(`# of tasks = ${response.teams[1].task_list[0].task.length}`);
 
 /*==============================================================
 Functionality of BACK button --> redirect to 'Leaderboard' screen
 ==============================================================*/
 let backBtn = document.getElementById('back');
-function gotoLeaderboard(){
-   location.href = "./leaderboard.html";
+function gotoLeaderboard() {
+  location.href = "./leaderboard.html";
 }
 backBtn.addEventListener('click', gotoLeaderboard);
 
@@ -123,48 +123,48 @@ TODO:
 let myMap = new Map();   //unsorted
 
 // Get the total number of tasks
-for(let i = 0; i < response.teams.length; i++)  // for each team
+for (let i = 0; i < response.teams.length; i++)  // for each team
 {
-   for(let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
-   {
-      for(let k = 0; k < response.teams[i].task_list[j].task.length; k++)  // for each task in each task_list from each team
-      {
-         myMap.set(response.teams[i].task_list[j].task[k].id, response.teams[i].name);      
-         // myMap.set(response.teams[i].task_list[j].task[k].id.toString(), response.teams[i].name);      
-      }
-   }
+  for (let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
+  {
+    for (let k = 0; k < response.teams[i].task_list[j].task.length; k++)  // for each task in each task_list from each team
+    {
+      myMap.set(response.teams[i].task_list[j].task[k].id, response.teams[i].name);
+      // myMap.set(response.teams[i].task_list[j].task[k].id.toString(), response.teams[i].name);      
+    }
+  }
 }
 
 // Get reference to the table element from the HTML
 let table = document.getElementById('table');
 
 // Populate the table: 
-function populateTable(value, key, map){
-   // Create 2 anchor elements
-   let anchorTask = document.createElement('a');
-   let anchorTeam = document.createElement('a');
-   // Insert a new row at the end of the table
-   let newRow = table.insertRow(-1);
-   // create/insert 2 new <td> (table data/cell) elements in the new row
-   let cell1 = newRow.insertCell(0);   // Team Name
-   let cell2 = newRow.insertCell(1);   // Points   
-   // create the contents of the new cells
-   let cell1Text = document.createTextNode(`Task ${key} - `);
-   let cell2Text = document.createTextNode(`Team ${value}`);
+function populateTable(value, key, map) {
+  // Create 2 anchor elements
+  let anchorTask = document.createElement('a');
+  let anchorTeam = document.createElement('a');
+  // Insert a new row at the end of the table
+  let newRow = table.insertRow(-1);
+  // create/insert 2 new <td> (table data/cell) elements in the new row
+  let cell1 = newRow.insertCell(0);   // Team Name
+  let cell2 = newRow.insertCell(1);   // Points   
+  // create the contents of the new cells
+  let cell1Text = document.createTextNode(`Task ${key} - `);
+  let cell2Text = document.createTextNode(`Team ${value}`);
 
-   anchorTask.appendChild(cell1Text);
-   anchorTask.href = "./task.html";
+  anchorTask.appendChild(cell1Text);
+  anchorTask.href = "./task.html";
 
-   anchorTeam.appendChild(cell2Text);
-   anchorTeam.href = "./team.html";
+  anchorTeam.appendChild(cell2Text);
+  anchorTeam.href = "./team.html";
 
-   // insert the contents of the new cells to the table
-   cell1.appendChild(anchorTask);
-   cell2.appendChild(anchorTeam);
+  // insert the contents of the new cells to the table
+  cell1.appendChild(anchorTask);
+  cell2.appendChild(anchorTeam);
 
-   // Remove underlink/color of the anchor text? 
-   anchorTask.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
-   anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+  // Remove underlink/color of the anchor text? 
+  anchorTask.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+  anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
 }
 myMap.forEach(populateTable);
 //=============================================================

@@ -21,8 +21,6 @@ body {
     width: 100px;
     font-size: 25px;
     font-family: 'Lato';
-    /* Add shadows to create the "card" effect */
-    /* box-shadow: 1px 1px 12px 0 #888888; */
     box-shadow: inset 0 0 5px #333333;
     border-radius: 12px; /* rounded corners */
     background-color: #6388E8;
@@ -33,8 +31,6 @@ body {
 
 .card {
     text-align: center;
-    /* Add shadows to create the "card" effect */
-    /* box-shadow: 1px 1px 12px 0 #888888; */
     border-radius: 20px; /* rounded corners */
     background-color: #3E3D3D;
     border-width: 6px;
@@ -44,25 +40,59 @@ body {
     min-height: 240px;
 }
 
-.card1 {
+.header {
     margin-top: auto;
     margin-bottom: auto;
     
     font-size: 24px;
-    /* Add shadows to create the "card" effect */
-    /* box-shadow: 1px 1px 12px 0 #888888; */
     box-shadow: inset 0 0 3px #333333;
     border-radius: 12px; /* rounded corners */
-    background-color: #D15B5B;
+    background-color: #6388E8;
     border-width: none;
     width: 239px;
     height: 45px;
     position: relative;
 }
-/*
-.card1 a {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%)
+
+.header p {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 40px;
+    width: 149px;
+    float: right;
+    padding-top: 7px;
+    font-weight: bold;
+    text-align: center;
 }
-*/
+
+#back {
+    background-image: url('../images/blueBackButton.JPG');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 39px;
+    border: 0;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+#delete {
+    background-image: url('../images/delete.JPG');
+    background-size: contain;
+    width: 72px;
+    height: 60px;
+    border: 0;
+    clear: both;
+    cursor: pointer;
+}
+
+#check {
+    background-image: url('../images/checkmark.JPG');
+    background-size: contain;
+    width: 73px;
+    height: 60px;
+    border: 0;
+    clear: both;
+    cursor: pointer;
+}

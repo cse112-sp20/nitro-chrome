@@ -1,5 +1,5 @@
-let myJSON = 
-`{
+let myJSON =
+  `{
    "account_id": "4514340", 
    "teams": [
      {
@@ -83,9 +83,9 @@ let myJSON =
    ]
  }`;
 
- let response = JSON.parse(myJSON);
- console.log(response);
- document.querySelector("h1").innerHTML += `Task ${response.teams[0].task_list[0].task[0].id}`;
+let response = JSON.parse(myJSON);
+console.log(response);
+document.querySelector("p").innerHTML = `Task ${response.teams[0].task_list[0].task[0].id}`;
 
 
 
@@ -94,8 +94,8 @@ let myJSON =
 Functionality of BACK button --> redirect to 'Tasks' screen
 ==============================================================*/
 let backBtn = document.getElementById('back');
-function gotoTasks(){
-   location.href = "./tasks.html";
+function gotoTasks() {
+  location.href = "./tasks.html";
 }
 backBtn.addEventListener('click', gotoTasks);
 
@@ -103,8 +103,8 @@ backBtn.addEventListener('click', gotoTasks);
 Functionality of CHECKMARK button --> checks off this task
 ==============================================================*/
 let checkBtn = document.getElementById('check');
-function checkoffTask(){
-   alert("Checking off this task"); // TODO: Remove this alert when finished
+function checkoffTask() {
+  alert("Checking off this task"); // TODO: Remove this alert when finished
 }
 checkBtn.addEventListener('click', checkoffTask);
 
@@ -112,24 +112,24 @@ checkBtn.addEventListener('click', checkoffTask);
 Functionality of DELETE button --> deletes this task
 ==============================================================*/
 let deleteBtn = document.getElementById('delete');
-function deleteTask(){
-   alert("Deleting this task"); // TODO: Remove this alert when finished
+function deleteTask() {
+  alert("Deleting this task"); // TODO: Remove this alert when finished
 }
 deleteBtn.addEventListener('click', deleteTask);
 
 
 let ul = document.getElementById("task_breakdown");
 let assigned = "",
-   value = "",
-   description = "";
+  value = "",
+  description = "";
 
 // for(let i = 0; i < response.teams.length; i++)  // for each team
 // {
 //    for(let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
 //    {
-     assigned = response.teams[0].task_list[0].parent_project;
-     value = response.teams[0].task_list[0].points;
-     description = response.teams[0].task_list[0].description;
+assigned = response.teams[0].task_list[0].parent_project;
+value = response.teams[0].task_list[0].points;
+description = response.teams[0].task_list[0].description;
 //    }
 // }
 console.log(`Assigned: Team ${assigned}`);

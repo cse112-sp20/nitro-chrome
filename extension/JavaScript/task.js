@@ -1,95 +1,40 @@
-let myJSON = 
-`{
-   "account_id": "4514340", 
-   "teams": [
-     {
-       "name": "Front end", 
-       "project_id": 17150139, 
-       "task_list": [
-         {
-           "description": "", 
-           "parent_id": 2679895739, 
-           "parent_project": "Front end", 
-           "points": 3, 
-           "points_completed": 0, 
-           "task": [
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679895952, 
-               "points": 0, 
-               "status": "active", 
-               "title": "nitro two"
-             }, 
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679895968, 
-               "points": 3, 
-               "status": "active", 
-               "title": "nitro (3)"
-             }
-           ], 
-           "task_list_id": 2679895900, 
-           "task_list_name": "Front end (NITRO)"
-         }
-       ], 
-       "todoset_id": 2679895739
-     }, 
-     {
-       "name": "Devops", 
-       "project_id": 17149883, 
-       "task_list": [
-         {
-           "description": "", 
-           "parent_id": 2679853458, 
-           "parent_project": "Devops", 
-           "points": 0, 
-           "points_completed": 0, 
-           "task": [], 
-           "task_list_id": 2680519875, 
-           "task_list_name": "anotehr list (NITRO)"
-         }, 
-         {
-           "description": "", 
-           "parent_id": 2679853458, 
-           "parent_project": "Devops", 
-           "points": 30, 
-           "points_completed": 15, 
-           "task": [
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679854538, 
-               "points": 0, 
-               "status": "active", 
-               "title": "not normal shit 3"
-             }, 
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679854530, 
-               "points": 30, 
-               "status": "active", 
-               "title": "not normal shit 2 (30)"
-             }
-           ], 
-           "task_list_id": 2679854470, 
-           "task_list_name": "devops (NITRO)"
-         }
-       ], 
-       "todoset_id": 2679853458
-     }
-   ]
- }`;
+/*====================================================================
+ TODO:
+   - test button functionalities 
+   - checkmark and delete functionality
+   - implement redirect to team screen when team is clicked?
+====================================================================*/
+const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
+// // GET tasks
+let response = null;
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      response = JSON.parse(xhr.responseText);
+      console.log(response);
+   }
+};
+xhr.open("GET", tasks_endpoint, true);
+xhr.send(); 
 
- let response = JSON.parse(myJSON);
- console.log(response);
- document.querySelector("h1").innerHTML += `Task ${response.teams[0].task_list[0].task[0].id}`;
+// Apply title
+document.querySelector("h1").innerHTML += `Task ${localStorage.getItem('curr_Task')}`;
+
+// Retrieve TEAM responsible for current task 
+let teamString = `${localStorage.getItem('curr_Task')} Team`;
+// let teamResponsible = localStorage.getItem(teamString);
+
+// Retrieve/store projectID and taskID for checkoff/delete calls
+let projectID = `${localStorage.getItem('curr_Task')} Project ID`;
+console.log(`Current project ID = ${projectID}` );
+let taskID = `JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id`;
+console.log(`Current project ID = ${taskID}` );
+
+// Retrieve task object
+console.log("Current task object = "  + JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))) );
+// console.log("Current task object = "  + JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).points );
 
 
-
-// TODO: get Task data from JSON
 /*==============================================================
 Functionality of BACK button --> redirect to 'Tasks' screen
 ==============================================================*/
@@ -104,7 +49,39 @@ Functionality of CHECKMARK button --> checks off this task
 ==============================================================*/
 let checkBtn = document.getElementById('check');
 function checkoffTask(){
-   alert("Checking off this task"); // TODO: Remove this alert when finished
+   let xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         let response = JSON.parse(xhr.responseText);
+         console.log(response);
+      }
+   };
+   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=${projectID}&task=${taskID}`, true);
+   xhr.send();
+
+   //Redirect back to tasks page
+   gotoTasks();
+
+
+         //   let checkoff_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=";
+         //   // Open a POST request to CHECKOFF this current task
+         //   chrome.storage.local.get(['curr_PID'], function(result) {
+         //       checkoff_endpoint += `${result.curr_PID}`;
+         //    });
+         //   chrome.storage.local.get(['curr_TID'], function(result) {
+         //       checkoff_endpoint += `&task=${result.curr_TID}`;
+         //    });
+
+         //    xhr.open("POST", checkoff_endpoint, true);
+
+         //    // Send Auth token as header
+         //   chrome.storage.local.get(['stored_token'], function(result) {
+         //       xhr.setRequestHeader("Authorization", result.stored_token);
+         //    });
+         //   xhr.send(); 
+
+         //   // TODO: update screen innerHTML contents
+
 }
 checkBtn.addEventListener('click', checkoffTask);
 
@@ -113,100 +90,74 @@ Functionality of DELETE button --> deletes this task
 ==============================================================*/
 let deleteBtn = document.getElementById('delete');
 function deleteTask(){
-   alert("Deleting this task"); // TODO: Remove this alert when finished
+   let xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         let response = JSON.parse(xhr.responseText);
+         console.log(response);
+      }
+   };
+   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=${projectID}&task=${taskID}`, true);
+   xhr.send();
+
+   //Redirect back to tasks page
+   gotoTasks();
+      
+         // let delete_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=";
+         // // Open a POST request to CHECKOFF this current task
+         // chrome.storage.local.get(['curr_PID'], function(result) {
+         //    delete_endpoint += `${result.curr_PID}`;
+         //  });
+         // chrome.storage.local.get(['curr_TID'], function(result) {
+         //    delete_endpoint += `&task=${result.curr_TID}`;
+         //  });
+      
+         //  xhr.open("POST", delete_endpoint, true);
+      
+         //  // Send Auth token as header
+         // chrome.storage.local.get(['stored_token'], function(result) {
+         //     xhr.setRequestHeader("Authorization", result.stored_token);
+         //  });
+         // xhr.send(); 
+      
+         // // TODO: update screen innerHTML contents 
 }
 deleteBtn.addEventListener('click', deleteTask);
 
 
-let ul = document.getElementById("task_breakdown");
-let assigned = "",
-   value = "",
-   description = "";
+// get values from Team object
+let assigned = localStorage.getItem(teamString),   // team responsible
+   due_on = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).due_on,
+   id = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id,
+   points = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).points,
+   status = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).status,
+   title = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).title;
 
-// for(let i = 0; i < response.teams.length; i++)  // for each team
-// {
-//    for(let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
-//    {
-     assigned = response.teams[0].task_list[0].parent_project;
-     value = response.teams[0].task_list[0].points;
-     description = response.teams[0].task_list[0].description;
-//    }
-// }
-console.log(`Assigned: Team ${assigned}`);
-console.log(`Value: ${value} points`);
-console.log(`Description: ${description}`);
+let output = document.getElementById("task_breakdown");
+let myValues = [`Assigned: ${assigned}`, 
+               `Due On: ${due_on}`, 
+               `Task ID: ${id}`, 
+               `Points: ${points}`, 
+               `Status: ${status}`, 
+               `Title: ${title}`];
+for(let i = 0; i < myValues.length; i++) {
+   output.innerHTML += myValues[i] + `</br>`   ;
+}
+
+// // for(let i = 0; i < response.teams.length; i++)  // for each team
+// // {
+// //    for(let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
+// //    {
+//      assigned = response.teams[0].task_list[0].parent_project;
+//      value = response.teams[0].task_list[0].points;
+//      description = response.teams[0].task_list[0].description;
+// //    }
+// // }
+// console.log(`Assigned: Team ${assigned}`);
+// console.log(`Value: ${value} points`);
+// console.log(`Description: ${description}`);
 
 
-// Assigned: teams[i].task_list[j].parent_project;
-// Value: teams[i].task_list[j].points;
-// Description: teams[i].task_list[j].points;
-
-
-// // Original code from Andrew? below:
-// //=============================================================
-// // Helper Method to 
-// var button = document.createElement('button');
-
-// //Generates a List of HTML items from database items
-// async function generateList(){
-//    // Performs initial fetch to get the database
-//    let res = await getList();
-//    // if the database is empty then we create an import button
-//    if (res.length == 0){
-//       generateImportButton();
-//    }
-//    else {
-//       //if not empty then we populate the list 
-//       createList(res)
-//    }
-// }
-
-// // Gets list of issues from github
-// function getList(){
-//    return fetch('http://localhost:5000/issues')
-//       .then( res => res.json())
-//       .catch(err => console.log(err))
-// }
-
-// // Generates button for import and registers click event
-// function generateImportButton(){
-//    button.id = "mybutton";
-//    button.innerText = "import"
-//    document.body.appendChild(button);
-//    var butt = document.getElementById('mybutton');
-//    butt.addEventListener('click', importDatabase);
-// }
-
-// // Generate a list of ul elements
-// function createList(databaseElems){
-//    var list = document.createElement('ui');
-//    list.id = "my_list";
-//    for(var i = 0; i < databaseElems.length; i++){
-//       var item = document.createElement('li');
-
-//       // Register click event so we can delete it from the list
-//       item.addEventListener('click', function(event) {
-//          listItem = event.target;
-//          //delete from database
-//          id = listItem.innerText.split(" ")[1];
-//          fetch('http:localhost:5000/delete?id=' + id , {method: 'POST'})
-//             .then(res => {
-//                listItem.remove()
-//             })
-//       });
-
-//       item.appendChild(document.createTextNode(databaseElems[i].title + " " +  databaseElems[i].id));
-//       list.appendChild(item);
-//    }
-//    document.body.appendChild(list)
-// }
-
-// // Makes post request to update the database
-// async function importDatabase() {
-//    await fetch('http://localhost:5000/import', {method: 'POST'})
-//    //remove the import button
-//    generateList() 
-// }
-
-// generateList();
-
+// // Assigned: teams[i].task_list[j].parent_project;
+// // Value: teams[i].task_list[j].points;
+// // Description: teams[i].task_list[j].points;

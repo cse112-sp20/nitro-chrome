@@ -1,134 +1,244 @@
 /****************************************************************
-TODO: no import btn, each reload should be automatic GET request
-login 
-then GET/tasks
-
-clicks on teams should redirect?
+TODO/NOTES: 
+Store 'curr_Team': team name (string)
+Store 'curr_Task': task name (string)
+   // These are needed b/c team responsible and project_id are values of Team object rather than Task object:   
+   GET ITEM `${taskName} Team` ==> return team responsible for this task
+   GET ITEM `${taskName} Project` ==> return project ID  for this task
+-------------------------------------
+Store entire team object: 
+	team name: teamObject
+-------------------------------------
+Store entire task object
+	task name: taskObject
+-------------------------------------
+1) User uses login button
+2) After logging in, user should re-open the extension
+3) Show updated data
+-------------------------------------
+BUGS (?):
+Some tasks not showing up in JSON?
+Checked off items from Basecamp not giving points?
+Where to implement clear_completed endpoint?
 ****************************************************************/
-let myJSON = 
-`{
-   "account_id": "4514340", 
-   "teams": [
-     {
-       "name": "Front end", 
-       "project_id": 17150139, 
-       "task_list": [
-         {
-           "description": "", 
-           "parent_id": 2679895739, 
-           "parent_project": "Front end", 
-           "points": 3, 
-           "points_completed": 0, 
-           "task": [
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679895952, 
-               "points": 0, 
-               "status": "active", 
-               "title": "nitro two"
-             }, 
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679895968, 
-               "points": 3, 
-               "status": "active", 
-               "title": "nitro (3)"
-             }
-           ], 
-           "task_list_id": 2679895900, 
-           "task_list_name": "Front end (NITRO)"
-         }
-       ], 
-       "todoset_id": 2679895739
-     }, 
-     {
-       "name": "Devops", 
-       "project_id": 17149883, 
-       "task_list": [
-         {
-           "description": "", 
-           "parent_id": 2679853458, 
-           "parent_project": "Devops", 
-           "points": 0, 
-           "points_completed": 0, 
-           "task": [], 
-           "task_list_id": 2680519875, 
-           "task_list_name": "anotehr list (NITRO)"
-         }, 
-         {
-           "description": "", 
-           "parent_id": 2679853458, 
-           "parent_project": "Devops", 
-           "points": 30, 
-           "points_completed": 15, 
-           "task": [
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679854538, 
-               "points": 0, 
-               "status": "active", 
-               "title": "not normal shit 3"
-             }, 
-             {
-               "assignees": [], 
-               "due_on": null, 
-               "id": 2679854530, 
-               "points": 30, 
-               "status": "active", 
-               "title": "not normal shit 2 (30)"
-             }
-           ], 
-           "task_list_id": 2679854470, 
-           "task_list_name": "devops (NITRO)"
-         }
-       ], 
-       "todoset_id": 2679853458
-     }
-   ]
- }`;
-
- let response = JSON.parse(myJSON);
- console.log(response);
-//  console.log(`Account ID = ${response.account_id}`);
-//  console.log(`# of Teams = ${response.teams.length}`);
-//  console.log(`Team 0 = ${response.teams[0].name}`);
-//  console.log(`Points completed = ${response.teams[0].task_list[0].points_completed}`);
-//  console.log(`Team 1 = ${response.teams[1].name}`);
-//  console.log(`Points completed = ${response.teams[1].task_list[0].points_completed}`);
-
-let login = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
-   /*----------------------
+const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
+const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
+const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
+const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
+// New Client ID = fe9d30b1a7dedf4dcb0b8121346bab30b6588224
+// const extension_redirect = "&redirect_uri=chrome-extension://dnaoddbfigikpkhpicbfpbcaagaodgmm/HTML/leaderboard.html/&response_type=token";
+// const chromium_redirect  = "&redirect_uri=https://dnaoddbfigikpkhpicbfpbcaagaodgmm.chromiumapp.org/&response_type=token";
+// const full_extension= "https://launchpad.37signals.com/authorization/new?type=web_server&client_id=e248ec7a9944bc25e9f6a9220a8a56860e1121f7&redirect_uri=chrome-extension://dnaoddbfigikpkhpicbfpbcaagaodgmm/HTML/leaderboard.html&response_type=token";
+// const full_chromium = "https://launchpad.37signals.com/authorization/new?type=web_server&client_id=e248ec7a9944bc25e9f6a9220a8a56860e1121f7&redirect_uri=https://dnaoddbfigikpkhpicbfpbcaagaodgmm.chromiumapp.org/HTML/leaderboard.html&response_type=token";
+/*----------------------
    Racecartest1@gmail.com
    teamracecar123
+   clientID: a47cf299c52e97bcfdb14afdc43410d7e55fdaa2
    ----------------------*/
-let tasks = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
-// let hack = "http://ec2-54-227-1-34.compute-1.amazonaws.com/get_token?code=964e0964";
 
-// fetch(login)
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-//   fetch(login, {method: "POST"}).then(res => res.json()).then(data => console.log(data))
+/*==============================================================
+Functionality of 'Tasks' button --> redirect to 'Tasks' screen
+==============================================================*/
+let tasksBtn = document.getElementById('btn');
+function gotoTasks(){
+   location.href = "./tasks.html";
+}
+tasksBtn.addEventListener('click', gotoTasks);
+let response = null;
+/*==============================================================
+Functionality of 'Logout' button --> logout the user
+==============================================================*/
+let logoutBtn = document.getElementById('logout');
+function logOUT(){
+   // make sure to clear chrome storage
+   chrome.storage.local.clear(function() {});
+   // make sure to clean local storage
+   localStorage.clear();
+   // Redirect to logout endpoint      
+   chrome.tabs.create({ url: logout_endpoint });   
+}
+logoutBtn.addEventListener('click', logOUT);
 
-if(confirm("Login to Basecamp?")){
-   let windowBC = window.open(login);  //open new window/tab to login to Basecamp
 
-   // somehow determine when user has successfully logged in
-      // check if token is received/stored?
-      
+function logIN()
+{
+   // make sure to clear chrome storage
+   chrome.storage.local.clear(function() {});
+   // make sure to clean local storage
+   localStorage.clear();
+
+   // Redirect user to login endpoint
+   chrome.tabs.create({ url: login_endpoint });
+   // window.location.href = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
+
    // let xhr = new XMLHttpRequest();
    // xhr.onreadystatechange = function() {
    //    if (this.readyState == 4 && this.status == 200) {
-   //       // Typical action to be performed when the document is ready:
-   //       //  document.getElementById("demo").innerHTML = xhr.responseText;
-   //       let response = JSON.parse(xhr.responseText);
+   //       response = JSON.parse(xhr.responseText);
    //       console.log(response);
+   //       // chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
    //    }
    // };
-   // xhr.open("GET", login, true);
-   // xhr.send();     
+   // xhr.open("GET", tasks_endpoint, true);
+   // // xhr.setRequestHeader("Authorization", result.stored_token);
+   // xhr.send(); 
+
+
+   // Using launchWebAuthFlow
+   // chrome.identity.launchWebAuthFlow(
+   // {'url': login_endpoint, 'interactive': true}, function(url) {
+   //    console.log("Entered launchWebAuthFlow");
+      
+   //    console.log(url); 
+      
+   //       // auth_token = full_chromium.substring(test.indexOf("#") + 1);
+   //    // Parse uri and retrieve auth token as substring. Then store auth token in local storage
+   //    chrome.storage.local.set({'stored_token': url.substring(url.indexOf("#") + 1)});
+   //       // console.log('Storing token with value = ' + auth_token);
+   //    console.log("Exiting launchWebAuthFlow");
+
+   // });
+   /***************************************************
+   Use localStorage API if chrome.storage doesnt work?
+   ***************************************************/ 
+   // localStorage.setItem('test', "1234567890");
+   // let temp = localStorage.getItem('test');
+   // console.log(`Temp = ${temp}`);   
+
+   // // GET tasks
+   // let xhr = new XMLHttpRequest();
+   // xhr.onreadystatechange = function() {
+   //    if (this.readyState == 4 && this.status == 200) {
+   //       response = JSON.parse(xhr.responseText);
+   //       console.log(response);
+   //       chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
+   //    }
+   // };
+   // xhr.open("GET", tasks, true);
+   // chrome.storage.local.get(['stored_token'], function(result) {
+   //    xhr.setRequestHeader("Authorization", result.stored_token);
+   // });
+   // xhr.send();    
+
+   // // populate table
+   // chrome.storage.local.get(['full_response'], function(result) {
+   //    populateTable(result.fullResponse);   
+   // });
+}
+let loginBtn = document.getElementById("login");
+loginBtn.addEventListener('click', logIN);
+
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      response = JSON.parse(xhr.responseText);
+      console.log(response);
+      // chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
+      useJSON(response);   
+   }
+};
+xhr.open("GET", tasks_endpoint, true);
+// xhr.setRequestHeader("Authorization", result.stored_token);
+xhr.send(); 
+
+
+/*==============================================================
+Get JSON data/values, then populate the table: 
+==============================================================*/
+function useJSON(response) {
+   console.log("Refresh populate with: " + response);
+   // Use a map to store {Team Name: Team Points}
+   let initMap = new Map(); //unsorted
+   let myMap = new Map(); // sorted
+   // Store team names and their respective total points completed
+   for (let i = 0; i < response.teams.length; i++) // for each team
+   {
+      // Map each team with their points completed  
+      initMap.set(response.teams[i].name, response.teams[i].points_completed);
+   }
+   // sort the initMap in descending order
+   myMap = new Map([...initMap.entries()].sort((a, b) => b[1] - a[1]));
+   // Get reference to the table element from the HTML
+   let table = document.getElementById('table');
+
+   // Populate the table: 
+   function populateTable(value, key) {
+      let anchorTeam = document.createElement('a');
+      // Insert a new row at the end of the table
+      let newRow = table.insertRow(-1);
+      // create/insert 2 new <td> (table data/cell) elements in the new row
+      let cell1 = newRow.insertCell(0); // Team Name
+      let cell2 = newRow.insertCell(1); // Points Completed   
+      // create/insert the contents of the new cells
+      let cell1Text = document.createTextNode(`Team ${key}`);
+      let cell2Text = document.createTextNode(`${value} points`);
+      anchorTeam.appendChild(cell1Text);
+      anchorTeam.onclick = function(){
+         // Store the team that was clicked for reference for other screens
+         localStorage.setItem('curr_Team', key);
+         location.href = "./team.html"
+         // localStorage.getItem('curr_Team');
+      }
+      anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+      cell1.appendChild(anchorTeam);
+      cell2.appendChild(cell2Text);
+   }
+   myMap.forEach(populateTable);
+}
+
+
+// chrome.storage.local.get(['full_response'], function(result) {
+//    populateTable(result.fullResponse);   
+// });
+
+// alert(window.location.href);
+   // chrome-extension://dnaoddbfigikpkhpicbfpbcaagaodgmm/HTML/leaderboard.html
+// alert(window.location.hostname);    // this is the extension ID
+   // dnaoddbfigikpkhpicbfpbcaagaodgmm
+
+// let redirect_url = chrome.identity.getRedirectURL("*://launchpad.37signals.com/*");
+// let redirect_url = window.location.href;
+// let redirect_url = "http://ec2-54-227-1-34.compute-1.amazonaws.com/get_token";
+
+// window.open(login);  //open new window/tab to login to Basecamp
+
+// chrome.identity.getAuthToken(
+//    {'url': login, 'interactive': true}, function(aws_get_token) {
+//       alert("PLEASE");
+//    });
+
+// chrome.identity.launchWebAuthFlow(
+//    {'url': login, 'interactive': true}, function(chromiumapp_token) {
+//       alert("PLEASE");
+//       alert(chromiumapp_token);
+//    });
+ 
+
+
+
+
+         // fetch(login)
+         //   .then(response => response.json())
+         //   .then(data => console.log(data));
+         //   fetch(login, {method: "POST"}).then(res => res.json()).then(data => console.log(data))
+
+// if(confirm("Login to Basecamp?")){
+//   window.open(login);  //open new window/tab to login to Basecamp
+
+//    // somehow determine when user has successfully logged in
+//    //    check if token is received/stored?
+      
+//    let xhr = new XMLHttpRequest();
+//    xhr.onreadystatechange = function() {
+//       if (this.readyState == 4 && this.status == 200) {
+//          // Typical action to be performed when the document is ready:
+//          //  document.getElementById("demo").innerHTML = xhr.responseText;
+//          let response = JSON.parse(xhr.responseText);
+//          console.log(response);
+//       }
+//    };
+//    xhr.open("GET", login, true);
+//    xhr.send();     
    
 
    // // GET tasks
@@ -145,13 +255,13 @@ if(confirm("Login to Basecamp?")){
    // xhr.open("GET", tasks, true);
    // xhr.send(); 
 
-   // Automatically close newly opened window?
-   // setTimeout(function() {
-   //    windowBC.close();
-   //  }, 15000);
-}
-else
-   alert("Didn't login to Basecamp...");
+//    // Automatically close newly opened window?
+//    setTimeout(function() {
+//       windowBC.close();
+//     }, 15000);
+// }
+// else
+//    alert("Didn't login to Basecamp...");
 
 // XMLHttpRequest Boilerplate Code
 // let xhr = new XMLHttpRequest();
@@ -170,129 +280,51 @@ else
 // fetch(tasks, {method: "POST"}).then(response => response.json()).then(data => console.log(data))
 
 
-/*==============================================================
-Functionality of 'Tasks' button --> redirect to 'TaI casks' screen
-==============================================================*/
-let tasksBtn = document.getElementById('btn');
-function gotoTasks(){
-   location.href = "./tasks.html";
-}
-tasksBtn.addEventListener('click', gotoTasks);
-
-
-/*==============================================================
-Testing functionality to populate the table: 
-NOTE: Values are hardcoded. 
-TODO: Need to get data from JSON. (halp)
-==============================================================*/
-// Use a map to store {Team Name: Team Points} 
-let initMap = new Map();   //unsorted
-
-// Store team names and their respective total points completed
-for(let i = 0; i < response.teams.length; i++)  // for each team
-{
-   let totalPoints = 0;
-   // Calculate total points completed
-   for(let j = 0; j < response.teams[i].task_list.length; j++)
-   {
-      totalPoints += response.teams[i].task_list[j].points_completed;
-   }
-   initMap.set(response.teams[i].name, totalPoints);
-}
-let myMap = new Map([...initMap.entries()].sort((a, b) => b[1] - a[1])); // sorted map
-
-// Get reference to the table element from the HTML
-let table = document.getElementById('table');
-
-// Populate the table: 
-//==================== Map.prototype.forEach() ====================
-function populateTable(value, key, map){
-   let anchorTeam = document.createElement('a');
-   // Insert a new row at the end of the table
-   let newRow = table.insertRow(-1);
-   // create/insert 2 new <td> (table data/cell) elements in the new row
-   let cell1 = newRow.insertCell(0);   // Team Name
-   let cell2 = newRow.insertCell(1);   // Points   
-   // create/insert the contents of the new cells
-   let cell1Text = document.createTextNode(`Team ${key}`);
-   let cell2Text = document.createTextNode(`${value} points`);
-
-   anchorTeam.appendChild(cell1Text);
-   anchorTeam.href = "./team.html";
-   anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
-
-   cell1.appendChild(anchorTeam);
-   cell2.appendChild(cell2Text);
-
-}
-myMap.forEach(populateTable);
-
-//=============================================================
-
-// // Original code from Andrew? below:
-// //=============================================================
-// // Helper Method to 
-// var button = document.createElement('button');
-
-// //Generates a List of HTML items from database items
-// async function generateList(){
-//    // Performs initial fetch to get the database
-//    let res = await getList();
-//    // if the database is empty then we create an import button
-//    if (res.length == 0){
-//       generateImportButton();
-//    }
-//    else {
-//       //if not empty then we populate the list 
-//       createList(res)
-//    }
+// /*==============================================================
+// Functionality of 'Tasks' button --> redirect to 'Tasks' screen
+// ==============================================================*/
+// let tasksBtn = document.getElementById('btn');
+// function gotoTasks(){
+//    location.href = "./tasks.html";
 // }
+// tasksBtn.addEventListener('click', gotoTasks);
 
-// // Gets list of issues from github
-// function getList(){
-//    return fetch('http://localhost:5000/issues')
-//       .then( res => res.json())
-//       .catch(err => console.log(err))
+
+// /*==============================================================
+// Get JSON data/values, then populate the table: 
+// ==============================================================*/
+// // Use a map to store {Team Name: Team Points} 
+// let initMap = new Map();   //unsorted
+
+// // Store team names and their respective total points completed
+// for(let i = 0; i < response.teams.length; i++)  // for each team
+// {
+//   // Map each team with their points completed  
+//   initMap.set(response.teams[i].name, response.teams[i].completed);
 // }
+// let myMap = new Map([...initMap.entries()].sort((a, b) => b[1] - a[1])); // sorted map
 
-// // Generates button for import and registers click event
-// function generateImportButton(){
-//    button.id = "mybutton";
-//    button.innerText = "import"
-//    document.body.appendChild(button);
-//    var butt = document.getElementById('mybutton');
-//    butt.addEventListener('click', importDatabase);
+// // Get reference to the table element from the HTML
+// let table = document.getElementById('table');
+
+// // Populate the table: 
+// function populateTable(value, key){
+//    let anchorTeam = document.createElement('a');
+//    // Insert a new row at the end of the table
+//    let newRow = table.insertRow(-1);
+//    // create/insert 2 new <td> (table data/cell) elements in the new row
+//    let cell1 = newRow.insertCell(0);   // Team Name
+//    let cell2 = newRow.insertCell(1);   // Points   
+//    // create/insert the contents of the new cells
+//    let cell1Text = document.createTextNode(`Team ${key}`);
+//    let cell2Text = document.createTextNode(`${value} points`);
+
+//    anchorTeam.appendChild(cell1Text);
+//    anchorTeam.href = "./team.html";
+//    anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+
+//    cell1.appendChild(anchorTeam);
+//    cell2.appendChild(cell2Text);
+
 // }
-
-// // Generate a list of ul elements
-// function createList(databaseElems){
-//    var list = document.createElement('ui');
-//    list.id = "my_list";
-//    for(var i = 0; i < databaseElems.length; i++){
-//       var item = document.createElement('li');
-
-//       // Register click event so we can delete it from the list
-//       item.addEventListener('click', function(event) {
-//          listItem = event.target;
-//          //delete from database
-//          id = listItem.innerText.split(" ")[1];
-//          fetch('http:localhost:5000/delete?id=' + id , {method: 'POST'})
-//             .then(res => {
-//                listItem.remove()
-//             })
-//       });
-
-//       item.appendChild(document.createTextNode(databaseElems[i].title + " " +  databaseElems[i].id));
-//       list.appendChild(item);
-//    }
-//    document.body.appendChild(list)
-// }
-
-// // Makes post request to update the database
-// async function importDatabase() {
-//    await fetch('http://localhost:5000/import', {method: 'POST'})
-//    //remove the import button
-//    generateList() 
-// }
-
-// generateList();
+// myMap.forEach(populateTable);

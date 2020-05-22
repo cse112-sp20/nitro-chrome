@@ -118,5 +118,3 @@ function useJSON(response){
    myMap.forEach(populateTable);
 
 }
-
-

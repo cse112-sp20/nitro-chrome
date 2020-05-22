@@ -1,5 +1,7 @@
 /*====================================================================
  TODO:
+   - test button functionalities 
+   - checkmark and delete functionality
    - implement redirect to team screen when team is clicked?
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
@@ -66,7 +68,6 @@ function checkoffTask(){
 
    //Redirect back to tasks page
    // gotoTasks();
-
 }
 checkBtn.addEventListener('click', checkoffTask);
 
@@ -84,6 +85,9 @@ function deleteTask(){
    };
    xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=${projectID_post}&task=${taskID_post}`, true);
    xhr.send();
+
+   //Redirect back to tasks page
+   // gotoTasks();
 }
 deleteBtn.addEventListener('click', deleteTask);
 
@@ -106,4 +110,3 @@ let myValues = [`Assigned: ${assigned}`,
 for(let i = 0; i < myValues.length; i++) {
    output.innerHTML += myValues[i] + `</br>`   ;
 }
-

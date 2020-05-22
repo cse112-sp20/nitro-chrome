@@ -24,7 +24,7 @@ productivity.innerHTML += "Feature WIP";
 totalPoints.innerHTML += `${currTeamObject.points_completed + currTeamObject.points_required}`;
 
 // Apply title
-document.querySelector("h1").innerHTML += `Team ${currTeamName}`;
+document.getElementById("teamNameHere").innerHTML = `Team ${currTeamName}`;
 let ulP = document.getElementById("progress");
 let ulC = document.getElementById("completed");
 
@@ -53,5 +53,3 @@ for(let i = 0; i < currTeamObject.consolidated_tasks.length; i++){
     ulC.appendChild(liP);    
   }
 }
-
-

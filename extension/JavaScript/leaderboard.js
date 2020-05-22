@@ -11,9 +11,9 @@ const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_com
 /*==============================================================
 Functionality of 'Tasks' button --> redirect to 'Tasks' screen
 ==============================================================*/
-let tasksBtn = document.getElementById('btn');
-function gotoTasks(){
-   location.href = "./tasks.html";
+let tasksBtn = document.getElementById('tasks');
+function gotoTasks() {
+  location.href = "./tasks.html";
 }
 tasksBtn.addEventListener('click', gotoTasks);
 let response = null;

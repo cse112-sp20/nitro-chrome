@@ -1,3 +1,16 @@
+const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
+
+// // GET tasks
+let response = null;
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+   if (this.readyState == 4 && this.status == 200) {
+      response = JSON.parse(xhr.responseText);
+      console.log(response);
+   }
+};
+xhr.open("GET", tasks_endpoint, true);
+xhr.send(); 
 /*====================================================================
  TODO:
   - implement redirect to Task screen when task is clicked?
@@ -41,19 +54,4 @@ for(let i = 0; i < currTeamObject.consolidated_tasks.length; i++){
   }
 }
 
-
-
-// myMap.set(response.teams[0].task_list[0].task[0].id, response.teams[0].task_list[0].points);      
-// myMap.set(response.teams[0].task_list[0].task[1].id, response.teams[0].task_list[1].points);      
-         // myMap.set(response.teams[i].task_list[j].task[k].id.toString(), response.teams[i].name);      
- 
-// let liP = document.createElement("li");
-// // liP.appendChild(document.createTextNode(`Task ${myMap.keys().next().value} (${myMap.values().next().value})`));
-// liP.appendChild(document.createTextNode("Foo (200)"));
-// ulP.appendChild(liP);
-
-// let liC = document.createElement("li");
-// // liC.appendChild(document.createTextNode(`Task ${myMap.keys().next().value} (${myMap.values().next().value})`));
-// liC.appendChild(document.createTextNode("Bar (100)"));
-// ulC.appendChild(liC);
 

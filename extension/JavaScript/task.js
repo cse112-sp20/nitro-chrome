@@ -1,7 +1,5 @@
 /*====================================================================
  TODO:
-   - test button functionalities 
-   - checkmark and delete functionality
    - implement redirect to team screen when team is clicked?
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
@@ -25,13 +23,20 @@ let teamString = `${localStorage.getItem('curr_Task')} Team`;
 // let teamResponsible = localStorage.getItem(teamString);
 
 // Retrieve/store projectID and taskID for checkoff/delete calls
-let projectID = `${localStorage.getItem('curr_Task')} Project ID`;
-console.log(`Current project ID = ${projectID}` );
-let taskID = `JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id`;
-console.log(`Current project ID = ${taskID}` );
+let projectID_pre = `${localStorage.getItem('curr_Task')} Project ID`;
+let projectID_post = localStorage.getItem(projectID_pre);
+console.log(`Current project ID = ${projectID_post}` );
+// let taskID = `JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id`;
 
 // Retrieve task object
-console.log("Current task object = "  + JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))) );
+let taskID = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id;
+// let taskID = localStorage.getItem(localStorage.getItem('curr_Task')).id;
+// console.log("Current task object = "  + JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).id );
+
+console.log(typeof taskID);
+let taskID_post = String(taskID);
+// let taskID_post = JSON.stringify(taskID);
+console.log(typeof taskID_post);
 // console.log("Current task object = "  + JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).points );
 
 
@@ -56,31 +61,11 @@ function checkoffTask(){
          console.log(response);
       }
    };
-   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=${projectID}&task=${taskID}`, true);
+   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=${projectID_post}&task=${taskID_post}`, true);
    xhr.send();
 
    //Redirect back to tasks page
-   gotoTasks();
-
-
-         //   let checkoff_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=";
-         //   // Open a POST request to CHECKOFF this current task
-         //   chrome.storage.local.get(['curr_PID'], function(result) {
-         //       checkoff_endpoint += `${result.curr_PID}`;
-         //    });
-         //   chrome.storage.local.get(['curr_TID'], function(result) {
-         //       checkoff_endpoint += `&task=${result.curr_TID}`;
-         //    });
-
-         //    xhr.open("POST", checkoff_endpoint, true);
-
-         //    // Send Auth token as header
-         //   chrome.storage.local.get(['stored_token'], function(result) {
-         //       xhr.setRequestHeader("Authorization", result.stored_token);
-         //    });
-         //   xhr.send(); 
-
-         //   // TODO: update screen innerHTML contents
+   // gotoTasks();
 
 }
 checkBtn.addEventListener('click', checkoffTask);
@@ -97,30 +82,8 @@ function deleteTask(){
          console.log(response);
       }
    };
-   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=${projectID}&task=${taskID}`, true);
+   xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=${projectID_post}&task=${taskID_post}`, true);
    xhr.send();
-
-   //Redirect back to tasks page
-   gotoTasks();
-      
-         // let delete_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=";
-         // // Open a POST request to CHECKOFF this current task
-         // chrome.storage.local.get(['curr_PID'], function(result) {
-         //    delete_endpoint += `${result.curr_PID}`;
-         //  });
-         // chrome.storage.local.get(['curr_TID'], function(result) {
-         //    delete_endpoint += `&task=${result.curr_TID}`;
-         //  });
-      
-         //  xhr.open("POST", delete_endpoint, true);
-      
-         //  // Send Auth token as header
-         // chrome.storage.local.get(['stored_token'], function(result) {
-         //     xhr.setRequestHeader("Authorization", result.stored_token);
-         //  });
-         // xhr.send(); 
-      
-         // // TODO: update screen innerHTML contents 
 }
 deleteBtn.addEventListener('click', deleteTask);
 
@@ -144,20 +107,3 @@ for(let i = 0; i < myValues.length; i++) {
    output.innerHTML += myValues[i] + `</br>`   ;
 }
 
-// // for(let i = 0; i < response.teams.length; i++)  // for each team
-// // {
-// //    for(let j = 0; j < response.teams[i].task_list.length; j++) // for each team's task lists
-// //    {
-//      assigned = response.teams[0].task_list[0].parent_project;
-//      value = response.teams[0].task_list[0].points;
-//      description = response.teams[0].task_list[0].description;
-// //    }
-// // }
-// console.log(`Assigned: Team ${assigned}`);
-// console.log(`Value: ${value} points`);
-// console.log(`Description: ${description}`);
-
-
-// // Assigned: teams[i].task_list[j].parent_project;
-// // Value: teams[i].task_list[j].points;
-// // Description: teams[i].task_list[j].points;

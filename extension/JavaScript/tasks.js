@@ -12,14 +12,6 @@ Store entire team object:
 Store entire task object
 	task name: taskObject
 -------------------------------------
-1) User uses login button
-2) After logging in, user should re-open the extension
-3) Show updated data
--------------------------------------
- - attach task/project ID to each link on the table to use when 
-      sending to task.js 
- - new tasks items are not in the JSON??
- - store localStorage  as Objects rather than values --> use for-loop
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 let response = null;
@@ -124,9 +116,6 @@ function useJSON(response){
       anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
    }
    myMap.forEach(populateTable);
-
-// for(let i = 0; i < )
-
 
 }
 

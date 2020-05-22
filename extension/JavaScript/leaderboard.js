@@ -1,3 +1,6 @@
+/*global chrome, a*/
+/*eslint no-undef: "error"*/
+
 /****************************************************************
 TODO/NOTES: 
 Where to implement clear_completed endpoint? --> only for testing 

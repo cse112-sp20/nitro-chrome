@@ -18,7 +18,8 @@ xhr.open("GET", tasks_endpoint, true);
 xhr.send(); 
 
 // Apply title
-document.querySelector("h1").innerHTML += `Task ${localStorage.getItem('curr_Task')}`;
+document.getElementById("taskNameHere").innerHTML = `Task ${localStorage.getItem('curr_Task')}`;
+// document.querySelector("h1").innerHTML += `Task ${localStorage.getItem('curr_Task')}`;
 
 // Retrieve TEAM responsible for current task 
 let teamString = `${localStorage.getItem('curr_Task')} Team`;

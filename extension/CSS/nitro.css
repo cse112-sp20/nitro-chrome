@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
+/* HTML Element Style */
+
 head {
     font-family: 'Lato';
     color: white;
@@ -10,28 +12,33 @@ body {
     color: #EEEEEE;
 }
 
-#table {
-    font-family: 'Lato';
-    color: #FBA642;
-    
-}
-
-#btn {
+.button {
     font-size: 24px;
     width: 100px;
     font-size: 25px;
     font-family: 'Lato';
     box-shadow: inset 0 0 5px #333333;
-    border-radius: 12px; /* rounded corners */
+    border-radius: 12px;
     background-color: #6388E8;
     border: none;
     color: white;
     width: 120px;
+    cursor: pointer;
 }
+
+table {
+    font-family: 'Lato';
+    color: #FBA642;
+    
+}
+
+
+
+/* Custom Class Styles */
 
 .card {
     text-align: center;
-    border-radius: 20px; /* rounded corners */
+    border-radius: 20px;
     background-color: #3E3D3D;
     border-width: 6px;
     width: 240px;
@@ -46,7 +53,7 @@ body {
     
     font-size: 24px;
     box-shadow: inset 0 0 3px #333333;
-    border-radius: 12px; /* rounded corners */
+    border-radius: 12px;
     background-color: #6388E8;
     border-width: none;
     width: 239px;
@@ -54,17 +61,49 @@ body {
     position: relative;
 }
 
+.header img {
+    vertical-align: middle;
+    float: left;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+
 .header p {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
-    margin-right: 40px;
+    margin-right: 45px;
     width: 149px;
     float: right;
     padding-top: 7px;
     font-weight: bold;
     text-align: center;
 }
+
+.headerWOBackButton {
+    margin-top: auto;
+    margin-bottom: auto;
+    
+    font-size: 24px;
+    box-shadow: inset 0 0 3px #333333;
+    border-radius: 12px;
+    background-color: #57B582;
+    border-width: none;
+    width: 239px;
+    height: 45px;
+    position: relative;
+}
+
+.headerWOBackButton p {
+    padding-top: 6px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+
+
+/* Custom id Styles */
 
 #back {
     background-image: url('../images/blueBackButton.JPG');

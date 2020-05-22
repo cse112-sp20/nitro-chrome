@@ -50,6 +50,6 @@ for(let i = 0; i < currTeamObject.consolidated_tasks.length; i++){
     // store into completed
     let liC = document.createElement("li");
     liC.appendChild(document.createTextNode(currTeamObject.consolidated_tasks[i].title));
-    ulC.appendChild(liP);    
+    ulC.appendChild(liC);    
   }
 }

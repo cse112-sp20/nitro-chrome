@@ -1,4 +1,4 @@
-/*global chrome, a*/
+/*global chrome*/
 /*eslint no-undef: "error"*/
 
 // Copyright 2018 The Chromium Authors. All rights reserved.

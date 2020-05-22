@@ -1,4 +1,4 @@
-/*global chrome, a*/
+/*global chrome*/
 /*eslint no-undef: "error"*/
 
 /****************************************************************

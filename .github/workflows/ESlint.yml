@@ -25,6 +25,5 @@ jobs:
         run: npm install
 
       - name: Run ESlint
-        run: chmod 0555 ./node_modules/.bin/eslint
-        run: ./node_modules/.bin/eslint ./extension/JavaScript/*.js
+        run: chmod 0555 ./node_modules/.bin/eslint && ./node_modules/.bin/eslint ./extension/JavaScript/*.js
 

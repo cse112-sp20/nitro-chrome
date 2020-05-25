@@ -14,7 +14,7 @@
     "collectCoverage": true
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest ./extension/JavaScript"
   },
   "repository": {
     "type": "git",

@@ -24,6 +24,9 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: Run ESlint
-        run: chmod 0555 ./node_modules/.bin/eslint && ./node_modules/.bin/eslint ./extension/JavaScript/*.js
+      - name: set ESlint permissions
+        run: chmod 0555 ./node_modules/.bin/eslint 
+        
+      - name: run ESlint
+        run: ./node_modules/.bin/eslint ./extension/JavaScript/*.js
 

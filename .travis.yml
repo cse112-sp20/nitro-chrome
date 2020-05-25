@@ -3,11 +3,8 @@ language: node_js
 node_js:
   - node
 
-install:
-  - npm install -g codecov
+before_script:
+  - chmod 0555 ./node_modules/.bin/jest
 
 script:
   - npm run test
-
-after_success:
-  - codecov --token=2a020063-f8df-4470-94c2-1552573945e8

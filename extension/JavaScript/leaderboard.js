@@ -8,7 +8,7 @@ Where to implement clear_completed endpoint? --> only for testing
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
-// const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
+const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
 
 /*==============================================================
@@ -16,6 +16,7 @@ Functionality of 'Tasks' button --> redirect to 'Tasks' screen
 ==============================================================*/
 let tasksBtn = document.getElementById('tasks');
 function gotoTasks() {
+   localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);
   location.href = "./tasks.html";
 }
 tasksBtn.addEventListener('click', gotoTasks);
@@ -25,10 +26,9 @@ Functionality of 'Logout' button --> logout the user
 ==============================================================*/
 let logoutBtn = document.getElementById('logout');
 function logOUT(){
-   // make sure to clear chrome storage
-   chrome.storage.local.clear(function() {});
    // make sure to clean local storage
    localStorage.clear();
+   
    // Redirect to logout endpoint      
    chrome.tabs.create({ url: logout_endpoint });   
 }
@@ -37,10 +37,11 @@ logoutBtn.addEventListener('click', logOUT);
 
 function logIN()
 {
-   // make sure to clear chrome storage
-   chrome.storage.local.clear(function() {});
-   // make sure to clean local storage
+   // make sure to clear local storage
    localStorage.clear();
+
+   // localStorage 
+   localStorage.setItem('logged_in', "true");
 
    // Redirect user to login endpoint
    chrome.tabs.create({ url: login_endpoint });
@@ -50,18 +51,39 @@ function logIN()
 let loginBtn = document.getElementById("login");
 loginBtn.addEventListener('click', logIN);
 
+
+if((localStorage.getItem("logged_in")) === "true")
+{
+   loginBtn.style.display = "none";
+   logoutBtn.style.display = "inline";
+}
+else {
+   loginBtn.style.display = "inline";
+   tasksBtn.style.display = "none";
+   logoutBtn.style.display = "none";
+}
+
+
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(xhr.responseText);
       console.log(response);
       // chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
+      for(let i = 0; i < response.teams.length; i++)  // for each team
+      {
+         // Store curr_Team object ==> name (string): Team object      
+         localStorage.setItem(response.teams[i].name, JSON.stringify(response.teams[i]));
+         // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].name)).project_id );
+      }      
       useJSON(response);   
    }
 };
 xhr.open("GET", tasks_endpoint, true);
 // xhr.setRequestHeader("Authorization", result.stored_token);
 xhr.send(); 
+
+
 
 
 /*==============================================================
@@ -96,8 +118,9 @@ function useJSON(response) {
       let cell2Text = document.createTextNode(`${value} points`);
       anchorTeam.appendChild(cell1Text);
       anchorTeam.onclick = function(){
-         // Store the team that was clicked for reference for other screens
+         // Store the team NAME that was clicked for reference for other screens
          localStorage.setItem('curr_Team', key);
+         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);
          location.href = "./team.html"
          // localStorage.getItem('curr_Team');
       }

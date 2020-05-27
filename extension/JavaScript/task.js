@@ -5,6 +5,10 @@
    - implement redirect to team screen when team is clicked?
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
+if(localStorage.getItem('back_target') === "./" + window.location.pathname.split("/")[2]){
+   localStorage.setItem('back_target', "./leaderboard.html");
+}
+
 // // GET tasks
 let response = null;
 let xhr = new XMLHttpRequest();
@@ -47,10 +51,11 @@ console.log(typeof taskID_post);
 Functionality of BACK button --> redirect to 'Tasks' screen
 ==============================================================*/
 let backBtn = document.getElementById('back');
-function gotoTasks(){
-   location.href = "./tasks.html";
+function goBack(){
+   location.href = localStorage.getItem("back_target");;
+   // location.href = "./tasks.html";
 }
-backBtn.addEventListener('click', gotoTasks);
+backBtn.addEventListener('click', goBack);
 
 /*==============================================================
 Functionality of CHECKMARK button --> checks off this task
@@ -67,8 +72,9 @@ function checkoffTask(){
    xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/complete?project=${projectID_post}&task=${taskID_post}`, true);
    xhr.send();
 
-   //Redirect back to tasks page
-   // gotoTasks();
+   // Redirect back to tasks page
+   alert("This task has been checked off!");
+   goBack();
 }
 checkBtn.addEventListener('click', checkoffTask);
 
@@ -87,11 +93,11 @@ function deleteTask(){
    xhr.open("POST", `http://ec2-54-227-1-34.compute-1.amazonaws.com/delete?project=${projectID_post}&task=${taskID_post}`, true);
    xhr.send();
 
-   //Redirect back to tasks page
-   // gotoTasks();
+   // Redirect back to tasks page
+   alert("This task has been deleted!");
+   goBack();
 }
 deleteBtn.addEventListener('click', deleteTask);
-
 
 // get values from Team object
 let assigned = localStorage.getItem(teamString),   // team responsible

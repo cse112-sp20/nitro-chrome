@@ -14,8 +14,12 @@ Store entire task object
 -------------------------------------
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
-let response = null;
+if(localStorage.getItem('back_target') === "./" + window.location.pathname.split("/")[2]){
+   localStorage.setItem('back_target', "./leaderboard.html");
+}
 
+
+let response = null;
 /*==============================================================
 Functionality of BACK button --> redirect to 'Leaderboard' screen
 ==============================================================*/
@@ -53,6 +57,7 @@ function useJSON(response){
       // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].name)).project_id );
 
       for(let j = 0; j < response.teams[i].consolidated_tasks.length; j++) // for each team's tasks
+      // NOTE: We are not displaying completed tasks since it would be redundant
       {
          // Store curr_Task object into localStorage ==>  task(string): object
          localStorage.setItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0], JSON.stringify(response.teams[i].consolidated_tasks[j]) );
@@ -66,7 +71,8 @@ function useJSON(response){
                   // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0] + " Team")));
       
          // {Task Name: Assigned Team}
-         myMap.set(response.teams[i].consolidated_tasks[j].title.split(" (")[0], response.teams[i].name);      
+         myMap.set(response.teams[i].consolidated_tasks[j].title.split(" (")[0], response.teams[i].name + "," + String(response.teams[i].consolidated_tasks[j].points));    
+                                                                                    //TEST, points --> "TEST, 2"   
          // myMap.set(response.teams[i].tasks[j].title, response.teams[i].name);      
       }
 
@@ -80,20 +86,23 @@ function useJSON(response){
       // Create 2 anchor elements
       let anchorTask = document.createElement('a');
       let anchorTeam = document.createElement('a');
+      let anchorPoints = document.createElement('a');
       // Insert a new row at the end of the table
       let newRow = table.insertRow(-1);
       // create/insert 2 new <td> (table data/cell) elements in the new row
-      let cell1 = newRow.insertCell(0);   // Team Name
-      let cell2 = newRow.insertCell(1);   // Points   
+      let cell1 = newRow.insertCell(0);   // Task Name
+      let cell2 = newRow.insertCell(1);   // Task Team   
+      let cell3 = newRow.insertCell(2);   // Task Points   
       // create the contents of the new cells
-      let cell1Text = document.createTextNode(`Task ${key} - `);
-      let cell2Text = document.createTextNode(`Team ${value}`);
+      let cell1Text = document.createTextNode(`${key} - `);
+      let cell2Text = document.createTextNode(`${value.split(",")[0]}`);
+      let cell3Text = document.createTextNode(`${value.split(",")[1]}`);
 
       anchorTask.appendChild(cell1Text);
       anchorTask.href = "./task.html";
       anchorTask.onclick = function(){
          // Store the team that was clicked for reference for other screens
-         localStorage.setItem('curr_Task', key);
+         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Task', key);
          location.href = "./task.html"
          // localStorage.getItem('curr_Task');
       }
@@ -102,18 +111,28 @@ function useJSON(response){
       anchorTeam.appendChild(cell2Text);
       anchorTeam.onclick = function(){
          // Store the team that was clicked for reference for other screens
-         localStorage.setItem('curr_Team', value);
+         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Team', value.split(",")[0]);
          location.href = "./team.html"
+         // localStorage.getItem('curr_Team');
+      }
+      
+      anchorPoints.appendChild(cell3Text);
+      anchorPoints.onclick = function(){
+         // Store the team that was clicked for reference for other screens
+         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Team', value.split(",")[0]);
+         location.href = "./task.html"
          // localStorage.getItem('curr_Team');
       }
 
       // insert the contents of the new cells to the table
       cell1.appendChild(anchorTask);
       cell2.appendChild(anchorTeam);
+      cell3.appendChild(anchorPoints);
     
       // Remove underlink/color of the anchor text? 
       anchorTask.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
       anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+      anchorPoints.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
    }
    myMap.forEach(populateTable);
 

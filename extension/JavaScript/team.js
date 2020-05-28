@@ -57,7 +57,7 @@ Functionality of BACK button --> redirect to 'Tasks' screen
 ==============================================================*/
 let backBtn = document.getElementById('back');
 function gotoTasks(){
-   location.href = localStorage.getItem("back_target");;
+   location.href = localStorage.getItem("back_target");
   //  location.href = "./tasks.html";
 }
 backBtn.addEventListener('click', gotoTasks);

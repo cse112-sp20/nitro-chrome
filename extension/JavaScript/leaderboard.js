@@ -8,7 +8,7 @@ Where to implement clear_completed endpoint? --> only for testing
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
-const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
+// const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
 
 /*==============================================================

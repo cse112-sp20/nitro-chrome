@@ -1,7 +1,8 @@
-/* eslint-disable no-undef */
+/* global module:writable */
+let status = null;
+
 function request(endpoint) {
   let xhr = new XMLHttpRequest();
-  let status = null;
   xhr.onreadystatechange = function() {
      if (this.readyState == 4 && this.status == 200) {
         status =  Number(this.status);

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* global require:writable, test:writable, expect:writable */
 const request = require('./request');
 
 test('send GET request, expect 200 status', () => {

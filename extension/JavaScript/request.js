@@ -5,7 +5,7 @@ function request(endpoint) {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
      if (this.readyState == 4 && this.status == 200) {
-        status =  Number(this.status);
+        status = Number(this.status);
      }
   };
   xhr.open("GET", endpoint, false);

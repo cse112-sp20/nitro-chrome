@@ -1,6 +1,6 @@
 /*====================================================================
  TODO/NOTES:
-Store 'curr_Team': team name (string)
+Store "curr_Team": team name (string)
 Store 'curr_Task': task name (string)
    // These are needed b/c team responsible and project_id are values of Team object rather than Task object:   
    GET ITEM `${taskName} Team` ==> return team responsible for this task
@@ -14,22 +14,24 @@ Store entire task object
 -------------------------------------
 ====================================================================*/
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
-if(localStorage.getItem('back_target') === "./" + window.location.pathname.split("/")[2]){
-   localStorage.setItem('back_target', "./leaderboard.html");
-}
 
+if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
+   localStorage.setItem("back_target", "./leaderboard.html");
+}
 
 let response = null;
 /*==============================================================
-Functionality of BACK button --> redirect to 'Leaderboard' screen
+Functionality of BACK button
 ==============================================================*/
-let backBtn = document.getElementById('back');
+let backBtn = document.getElementById("back");
 function gotoLeaderboard(){
    location.href = "./leaderboard.html";
 }
-backBtn.addEventListener('click', gotoLeaderboard);
+backBtn.addEventListener("click", gotoLeaderboard);
 
-// // GET tasks
+/*==============================================================
+Call tasks endpoint to retrieve JSON data
+==============================================================*/
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -40,7 +42,6 @@ xhr.onreadystatechange = function() {
 };
 xhr.open("GET", tasks_endpoint, true);
 xhr.send(); 
-
 
 /*==============================================================
 Store and use JSON data and populate the table
@@ -54,39 +55,34 @@ function useJSON(response){
    {
       // Store curr_Team object ==> name (string): Team object      
       localStorage.setItem(response.teams[i].name, JSON.stringify(response.teams[i]));
-      // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].name)).project_id );
 
       for(let j = 0; j < response.teams[i].consolidated_tasks.length; j++) // for each team's tasks
       // NOTE: We are not displaying completed tasks since it would be redundant
       {
+         let currentTaskName = response.teams[i].consolidated_tasks[j].title.split(" (")[0];
          // Store curr_Task object into localStorage ==>  task(string): object
-         localStorage.setItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0], JSON.stringify(response.teams[i].consolidated_tasks[j]) );
-         // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0])).points);
+         localStorage.setItem(currentTaskName, JSON.stringify(response.teams[i].consolidated_tasks[j]) );
 
          // Store team responsible for curr_task into localStorage ==> task team (string): team(string)
-         localStorage.setItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0] + " Team", JSON.stringify(response.teams[i].name) );
+         localStorage.setItem(currentTaskName + " Team", JSON.stringify(response.teams[i].name) );
 
          // Store curr_Task's project ID (from team object) into localStorage ==> task Project ID (string): project_id(string)
-         localStorage.setItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0] + " Project ID", JSON.stringify(response.teams[i].project_id) );
-                  // console.log("Testing localStorage objects = " + JSON.parse(localStorage.getItem(response.teams[i].consolidated_tasks[j].title.split(" (")[0] + " Team")));
+         localStorage.setItem(currentTaskName + " Project ID", JSON.stringify(response.teams[i].project_id) );
       
          // {Task Name: Assigned Team}
-         myMap.set(response.teams[i].consolidated_tasks[j].title.split(" (")[0], response.teams[i].name + "," + String(response.teams[i].consolidated_tasks[j].points));    
-                                                                                    //TEST, points --> "TEST, 2"   
-         // myMap.set(response.teams[i].tasks[j].title, response.teams[i].name);      
+         myMap.set(currentTaskName, response.teams[i].name + "," + String(response.teams[i].consolidated_tasks[j].points));    
       }
-
    }
 
    // Get reference to the table element from the HTML
-   let table = document.getElementById('table');
+   let table = document.getElementById("table");
    
    // Populate the table: 
    function populateTable(value, key){
       // Create 2 anchor elements
-      let anchorTask = document.createElement('a');
-      let anchorTeam = document.createElement('a');
-      let anchorPoints = document.createElement('a');
+      let anchorTask = document.createElement("a");
+      let anchorTeam = document.createElement("a");
+      let anchorPoints = document.createElement("a");
       // Insert a new row at the end of the table
       let newRow = table.insertRow(-1);
       // create/insert 2 new <td> (table data/cell) elements in the new row
@@ -102,26 +98,25 @@ function useJSON(response){
       anchorTask.href = "./task.html";
       anchorTask.onclick = function(){
          // Store the team that was clicked for reference for other screens
-         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Task', key);
+         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
+         localStorage.setItem("curr_Task", key);
          location.href = "./task.html"
-         // localStorage.getItem('curr_Task');
       }
       
-
       anchorTeam.appendChild(cell2Text);
       anchorTeam.onclick = function(){
          // Store the team that was clicked for reference for other screens
-         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Team', value.split(",")[0]);
+         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
+         localStorage.setItem("curr_Team", value.split(",")[0]);
          location.href = "./team.html"
-         // localStorage.getItem('curr_Team');
       }
       
       anchorPoints.appendChild(cell3Text);
       anchorPoints.onclick = function(){
          // Store the team that was clicked for reference for other screens
-         localStorage.setItem('back_target', "./" + window.location.pathname.split("/")[2]);         localStorage.setItem('curr_Team', value.split(",")[0]);
+         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
+         localStorage.setItem("curr_Team", value.split(",")[0]);
          location.href = "./task.html"
-         // localStorage.getItem('curr_Team');
       }
 
       // insert the contents of the new cells to the table

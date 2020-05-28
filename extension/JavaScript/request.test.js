@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const request = require('./request');
 
 test('send GET request, expect 200 status', () => {

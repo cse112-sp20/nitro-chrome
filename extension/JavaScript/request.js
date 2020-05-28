@@ -10,7 +10,7 @@ function request(endpoint) {
       //   console.log(response);  
      }
   };
-  xhr.open("GET", endpoint, true);
+  xhr.open("GET", endpoint, false);
   xhr.send();  
   return status;
 }

@@ -6,8 +6,6 @@ function request(endpoint) {
   xhr.onreadystatechange = function() {
      if (this.readyState == 4 && this.status == 200) {
         status =  Number(this.status);
-      //    let response = JSON.parse(xhr.responseText);
-      //   console.log(response);  
      }
   };
   xhr.open("GET", endpoint, false);

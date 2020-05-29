@@ -70,6 +70,11 @@ xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(xhr.responseText);
       console.log(response);
+      for(let i = 0; i < response.teams.length; i++)  // for each team
+      {
+         // Store curr_Team object ==> name (string): Team object      
+         localStorage.setItem(response.teams[i].name, JSON.stringify(response.teams[i])); // needed to update storage with most recent changes
+      }          
       rankByPoints = true;
       reverse = false;
       useJSON(response);   
@@ -168,6 +173,7 @@ function populateTable(value, key) {
    cell3Link.onclick = function(){
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);
+      localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
       location.href = "./team.html"
    }
    cell0.appendChild(cell0Image);

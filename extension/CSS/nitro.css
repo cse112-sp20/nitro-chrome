@@ -29,7 +29,10 @@ body {
 table {
     font-family: 'Lato';
     color: #FBA642;
-    
+}
+
+tr {
+    border-bottom: 1px solid #C0C0C0;
 }
 
 
@@ -100,8 +103,35 @@ table {
     margin: 0;
 }
 
+.container {
+    display: flex;
+}
 
+.taskCol {
+    float: left;
+    width: 50%;
+}
 
+.teamCol {
+    display: inline-block;
+    width: 40%;
+}
+
+.pointsCol {
+    float: right;
+    width: 9.999%;
+}
+
+.taskHeader {
+    width: 80%;
+    margin: auto;
+}
+
+.btnText {
+    padding-left: 60px;
+    width: 80%;
+    margin: auto;
+}
 
 /* Custom id Styles */
 
@@ -117,21 +147,76 @@ table {
 }
 
 #delete {
-    background-image: url('../images/delete.JPG');
+    background-image: url('../images/delete.png');
     background-size: contain;
-    width: 72px;
-    height: 60px;
+    background-color: #3E3D3D;
+    width: 17px;
+    height: 17px;
+    position: relative;
+    bottom: 17px;
+    left: 16px;
     border: 0;
     clear: both;
     cursor: pointer;
 }
 
 #check {
-    background-image: url('../images/checkmark.JPG');
+    background-image: url('../images/square_check.png');
     background-size: contain;
-    width: 73px;
-    height: 60px;
+    background-color: #3E3D3D;
+    width: 18px;
+    height: 18px;
     border: 0;
+    position: relative;
+    bottom: 17px;
+    left: 38px;
+    float: left;
     clear: both;
     cursor: pointer;
+}
+
+#taskTable {
+    font-family: 'Lato';
+    color: #FBA642;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#tasksLine {
+    height: 0.1px;
+    margin: 0px;
+    align-self: center;
+}
+
+#teamName {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
+}
+
+#dueDate {
+    width: 49%;
+    display: inline-block;
+    text-align: right;
+    margin: 0px;
+}
+
+#taskUnderline {
+    width: 80%;
+    align-self: center;
+}
+
+#completeText {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
+}
+
+#deleteText {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
 }

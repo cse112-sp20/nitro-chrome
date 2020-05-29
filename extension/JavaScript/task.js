@@ -21,7 +21,7 @@ xhr.send();
 /*==============================================================
 Apply title to top of page
 ==============================================================*/
-document.getElementById("taskNameHere").innerHTML = `Task ${localStorage.getItem("curr_Task")}`;
+document.getElementById("taskNameHere").innerHTML = `Task`;
 
 let teamString = `${localStorage.getItem("curr_Task")} Team`;
 
@@ -93,15 +93,25 @@ let assigned = localStorage.getItem(teamString),   // team responsible
    id = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).id,
    points = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).points,
    status = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).status,
-   title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title;
-
+   title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title.split("(")[0];
 let output = document.getElementById("task_breakdown");
-let myValues = [`Assigned: ${assigned}`, 
-               `Due On: ${due_on}`, 
-               `Task ID: ${id}`, 
+let myValues = [`Title: ${title}`, 
                `Points: ${points}`, 
-               `Status: ${status}`, 
-               `Title: ${title}`];
+               `Status: ${status}`];
+output.style.width = "80%";
+output.style.alignSelf = "center";
+output.style.marginLeft = "10%";
+
+let teamName = document.getElementById("teamName");
+assigned = assigned.replace(/['"]+/g, '');
+teamName.innerHTML += assigned;
+let dueDate = document.getElementById("dueDate");
+dueDate.innerHTML += due_on;
+
 for(let i = 0; i < myValues.length; i++) {
-   output.innerHTML += myValues[i] + `</br>`;
+   let newNode = document.createElement("p");
+   newNode.innerHTML = myValues[i];
+   newNode.style.textAlign = "left";
+   newNode.style.fontSise = "10px";
+   output.appendChild(newNode);
 }

@@ -137,43 +137,52 @@ function populateTable(value, key) {
    // Insert a new row at the end of the table
    let newRow = table.insertRow(-1);
    // create/insert 2 new <td> (table data/cell) elements in the new row
-   let cell0 = newRow.insertCell(0); // Medal
-   let cell1 = newRow.insertCell(1); // Team Name
-   let cell2 = newRow.insertCell(2); // Points Completed
-   let cell3 = newRow.insertCell(3); // Right Arrow
-   // create/insert the contents of the new cells
-   let cell0Image = document.createElement("img");
-   if (key === gold) {
-      cell0Image.src = "../images/gold_medal.png";
-   } else if (key === silver) {
-      cell0Image.src = "../images/silver_medal.png";
-   } else if (key === bronze) {
-      cell0Image.src = "../images/bronze_medal.png";
-   } else {
-      cell0Image.src = "../images/medal.png";
-   }
-   cell0Image.style.width = "15px";
-   cell0Image.style.height = "15px";
-   cell0Image.style.marginTop = "3px";
-      
-   let cell1Text = document.createTextNode(`${key}`);
-   let cell2Text = document.createTextNode(`${value}`);
+   let cellMedal = newRow.insertCell(0); // Medal
+   let cellTeam = newRow.insertCell(1); // Team Name
+   let cellPoints = newRow.insertCell(2); // Points Completed
+   let cellArrow = newRow.insertCell(3); // Right Arrow
 
-   let cell3Link = document.createElement("a");
-   let cell3Image = document.createElement("img");
-   cell3Image.src = "../images/right_arrow.png";
-   cell3Image.style.width = "10px";
-   cell3Image.style.height = "10px";
-   cell3Link.appendChild(cell3Image);
-   cell3Link.onclick = function(){
+   // create/insert the contents of the new cells
+   let cellMedalImage = document.createElement("img");
+   if (key === gold) {
+      cellMedalImage.src = "../images/gold_medal.png";
+   } else if (key === silver) {
+      cellMedalImage.src = "../images/silver_medal.png";
+   } else if (key === bronze) {
+      cellMedalImage.src = "../images/bronze_medal.png";
+   } else {
+      cellMedalImage.src = "../images/medal.png";
+   }
+   cellMedalImage.style.width = "15px";
+   cellMedalImage.style.height = "15px";
+   cellMedalImage.style.marginTop = "3px";
+
+   let cellTeamLink = document.createElement("a");   
+   let cellTeamText = document.createTextNode(`${key}`);
+   cellTeamLink.appendChild(cellTeamText);
+
+   let cellPointsText = document.createTextNode(`${value}`);
+
+   let cellArrowLink = document.createElement("a");
+   let cellArrowImage = document.createElement("img");
+   cellArrowImage.src = "../images/right_arrow.png";
+   cellArrowImage.style.width = "10px";
+   cellArrowImage.style.height = "10px";
+   cellArrowLink.appendChild(cellArrowImage);
+
+   // direct to team page
+   function goToTeam () {
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);
+      localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
       location.href = "./team.html"
    }
-   cell0.appendChild(cell0Image);
-   cell1.appendChild(cell1Text);
-   cell2.appendChild(cell2Text);
-   cell3.appendChild(cell3Link);
+   cellTeamLink.onclick = goToTeam;
+   cellArrowLink.onclick = goToTeam;
+   cellMedal.appendChild(cellMedalImage);
+   cellTeam.appendChild(cellTeamLink);
+   cellPoints.appendChild(cellPointsText);
+   cellArrow.appendChild(cellArrowLink);
 }
 
 // Add onclick listeners to buttons

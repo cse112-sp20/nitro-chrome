@@ -9,21 +9,21 @@ const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 // const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
+let response = null;
+var rankByPoints = true;
+var reverse = false;
 
 /*==============================================================
 Functionality of 'Tasks' button
 ==============================================================*/
-let tasksBtn = document.getElementById("tasks");
 function gotoTasks() {
    localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
   location.href = "./tasks.html";
 }
-tasksBtn.addEventListener("click", gotoTasks);
-let response = null;
+
 /*==============================================================
 Functionality of 'Logout' button --> logout the user
 ==============================================================*/
-let logoutBtn = document.getElementById("logout");
 function logOUT(){
    // make sure to clean local storage
    localStorage.clear();
@@ -31,9 +31,10 @@ function logOUT(){
    // Redirect to logout endpoint      
    chrome.tabs.create({ url: logout_endpoint });   
 }
-logoutBtn.addEventListener("click", logOUT);
 
-
+/*==============================================================
+Functionality of 'Login' button
+==============================================================*/
 function logIN()
 {
    // make sure to clear local storage
@@ -45,11 +46,25 @@ function logIN()
    // Redirect user to login endpoint
    chrome.tabs.create({ url: login_endpoint });
 }
-let loginBtn = document.getElementById("login");
-loginBtn.addEventListener("click", logIN);
 
-var rankByPoints = true;
-var reverse = false;
+/*==============================================================
+Functionality of 'sort-by-points' button --> Sort teams by points
+==============================================================*/
+function sortByPoints(){
+   reverse = rankByPoints ? !reverse : false;
+   rankByPoints = true;
+   useJSON(response);
+}
+
+/*==============================================================
+Functionality of 'sort-by-name' button --> Sort teams by name
+==============================================================*/
+function sortByName(){
+   reverse = rankByPoints ? false : !reverse;
+   rankByPoints = false;
+   useJSON(response);
+}
+
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -62,7 +77,8 @@ xhr.onreadystatechange = function() {
    }
 };
 xhr.open("GET", tasks_endpoint, true);
-xhr.send(); 
+xhr.send();
+
 /*==============================================================
 Use  JSON data/values to  then populate the table: 
 ==============================================================*/
@@ -77,7 +93,7 @@ function useJSON(response) {
       // Map each team with their points completed  
       initMap.set(response.teams[i].name, response.teams[i].points_completed);
    }
-   let myMap = sortTeams(initMap); // sorted myMap
+   let myMap = sortTeams(initMap, rankByPoints, reverse); // sorted myMap
 
    // Create table
    let table = document.getElementById("table-body");
@@ -87,7 +103,7 @@ function useJSON(response) {
 }
 
 // Sort the team list
-function sortTeams(initMap) {
+function sortTeams(initMap, rankByPoints, reverse) {
    console.log("rankBypoints = " + rankByPoints + ", reverse = " + reverse);
    let myMap = new Map();
    // sort by points, descending order
@@ -161,24 +177,20 @@ function populateTable(value, key) {
    cell3.appendChild(cell3Link);
 }
 
-/*==============================================================
-Functionality of 'sort-by-name' button --> Sort teams by name
-==============================================================*/
-let sortByNameBtn = document.getElementById("sort-by-name");
-function sortByName(){
-   reverse = rankByPoints ? false : !reverse;
-   rankByPoints = false;
-   useJSON(response);
-}
-sortByNameBtn.addEventListener("click", sortByName);
+// Add onclick listeners to buttons
+window.onload = function () {
+   let tasksBtn = document.getElementById("tasks");
+   tasksBtn.addEventListener("click", gotoTasks);
 
-/*==============================================================
-Functionality of 'sort-by-points' button --> Sort teams by points
-==============================================================*/
-let sortByPointsBtn = document.getElementById("sort-by-points");
-function sortByPoints(){
-   reverse = rankByPoints ? !reverse : false;
-   rankByPoints = true;
-   useJSON(response);
+   let logoutBtn = document.getElementById("logout");
+   logoutBtn.addEventListener("click", logOUT);
+
+   let loginBtn = document.getElementById("login");
+   loginBtn.addEventListener("click", logIN);
+
+   let sortByNameBtn = document.getElementById("sort-by-name");
+   sortByNameBtn.addEventListener("click", sortByName);
+
+   let sortByPointsBtn = document.getElementById("sort-by-points");
+   sortByPointsBtn.addEventListener("click", sortByPoints);
 }
-sortByPointsBtn.addEventListener("click", sortByPoints);

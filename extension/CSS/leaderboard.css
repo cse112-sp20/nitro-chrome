@@ -48,6 +48,7 @@ td {
 th {
     width: 108px;
     height: 20px;
+    text-align: left;
     overflow: auto;
 }
 

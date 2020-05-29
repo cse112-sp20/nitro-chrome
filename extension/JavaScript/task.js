@@ -93,13 +93,10 @@ let assigned = localStorage.getItem(teamString),   // team responsible
    points = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).points,
    status = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).status,
    title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title.split("(")[0];
-let output = document.getElementById("task_breakdown");
+let output = document.getElementById("taskBreakdown");
 let myValues = [`Title: ${title}`, 
                `Points: ${points}`, 
                `Status: ${status}`];
-output.style.width = "80%";
-output.style.alignSelf = "center";
-output.style.marginLeft = "10%";
 
 let teamName = document.getElementById("teamName");
 assigned = assigned.replace(/['"]+/g, '');
@@ -109,8 +106,7 @@ dueDate.innerHTML += due_on;
 
 for(let i = 0; i < myValues.length; i++) {
    let newNode = document.createElement("p");
+   newNode.className = "task";
    newNode.innerHTML = myValues[i];
-   newNode.style.textAlign = "left";
-   newNode.style.fontSise = "10px";
    output.appendChild(newNode);
 }

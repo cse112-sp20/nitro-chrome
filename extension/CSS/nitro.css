@@ -107,6 +107,11 @@ tr {
     display: flex;
 }
 
+.task {
+    text-align: left;
+    font-size: 11px;
+}
+
 .taskCol {
     float: left;
     width: 50%;
@@ -180,6 +185,12 @@ tr {
     color: #FBA642;
     border-collapse: collapse;
     text-align: left;
+}
+
+#taskBreakdown {
+    width: 80%;
+    align-self: center;
+    margin-left: 10%;
 }
 
 #tasksLine {

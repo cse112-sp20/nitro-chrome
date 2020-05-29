@@ -100,7 +100,17 @@ table {
     margin: 0;
 }
 
+.user-profile-block {
+    margin-top: 10px;
+}
 
+.user-profile-block p {
+    display: inline;
+}
+
+.user-profile-data {
+    margin-left: 10px;
+}
 
 
 /* Custom id Styles */

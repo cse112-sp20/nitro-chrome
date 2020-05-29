@@ -41,7 +41,7 @@ function logIN()
    localStorage.clear();
 
    // checks if user is logged in or not
-   localStorage.setItem("logged_in", "true");
+   localStorage.setItem("logged_in", true);
 
    // Redirect user to login endpoint
    chrome.tabs.create({ url: login_endpoint });
@@ -51,7 +51,7 @@ function logIN()
 Functionality of 'sort-by-points' button --> Sort teams by points
 ==============================================================*/
 function sortByPoints(){
-   reverse = rankByPoints ? !reverse : false;
+   reverse = rankByPoints && !reverse;
    rankByPoints = true;
    useJSON(response);
 }
@@ -60,7 +60,7 @@ function sortByPoints(){
 Functionality of 'sort-by-name' button --> Sort teams by name
 ==============================================================*/
 function sortByName(){
-   reverse = rankByPoints ? false : !reverse;
+   reverse = !(rankByPoints || reverse);
    rankByPoints = false;
    useJSON(response);
 }
@@ -70,7 +70,6 @@ xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(xhr.responseText);
       console.log(response);
-      // chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
       rankByPoints = true;
       reverse = false;
       useJSON(response);   
@@ -97,14 +96,14 @@ function useJSON(response) {
 
    // Create table
    let table = document.getElementById("table-body");
-   while(table.rows[0])
+   while(table.rows[0]) {
       table.deleteRow(0);
+   }
    myMap.forEach(populateTable);
 }
 
 // Sort the team list
 function sortTeams(initMap, rankByPoints, reverse) {
-   console.log("rankBypoints = " + rankByPoints + ", reverse = " + reverse);
    let myMap = new Map();
    // sort by points, descending order
    if (rankByPoints && !reverse) {
@@ -193,4 +192,22 @@ window.onload = function () {
 
    let sortByPointsBtn = document.getElementById("sort-by-points");
    sortByPointsBtn.addEventListener("click", sortByPoints);
+
+   let userBtn = this.document.getElementById("user-profile");
+   let darkLightBtn = this.document.getElementById("dark-mode");
+
+   //Toggle the display based on logged in status
+   if((localStorage.getItem("logged_in"))) {
+      loginBtn.style.display = "none";
+      userBtn.style.display = "inline";
+      tasksBtn.style.display = "inline";
+      darkLightBtn.style.display = "inline";
+      logoutBtn.style.display = "inline";
+   } else {
+      loginBtn.style.display = "inline";
+      userBtn.style.display = "none";
+      tasksBtn.style.display = "none";
+      darkLightBtn.style.display = "none";
+      logoutBtn.style.display = "none";
+   }
 }

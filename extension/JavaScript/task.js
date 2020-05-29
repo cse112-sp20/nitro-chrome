@@ -21,7 +21,7 @@ xhr.send();
 /*==============================================================
 Apply title to top of page
 ==============================================================*/
-document.getElementById("taskNameHere").innerHTML = `Task ${localStorage.getItem("curr_Task")}`;
+document.getElementById("taskNameHere").innerHTML = `Task`;
 
 let teamString = `${localStorage.getItem("curr_Task")} Team`;
 
@@ -92,22 +92,21 @@ let assigned = localStorage.getItem(teamString),   // team responsible
    due_on = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).due_on,
    points = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).points,
    status = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).status,
-   title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title;
-
-let output = document.getElementById("task_breakdown");
-let myValues = [`Title: ${title}`,
+   title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title.split("(")[0];
+let output = document.getElementById("taskBreakdown");
+let myValues = [`Title: ${title}`, 
                `Points: ${points}`, 
-               `Status: ${status}`, 
-               ];
-output.style.width = '80%';
-output.style.alignSelf = 'center';
-output.style.marginLeft = '10%';
+               `Status: ${status}`];
 
-let teamname = document.getElementById("team_name");
-teamname.innerHTML = assigned;
-let duedate = document.getElementById("due_date");
-duedate.innerHTML = due_on;
+let teamName = document.getElementById("teamName");
+assigned = assigned.replace(/['"]+/g, '');
+teamName.innerHTML += assigned;
+let dueDate = document.getElementById("dueDate");
+dueDate.innerHTML += due_on;
 
 for(let i = 0; i < myValues.length; i++) {
-   output.innerHTML += myValues[i] + `</br>`;
+   let newNode = document.createElement("p");
+   newNode.className = "task";
+   newNode.innerHTML = myValues[i];
+   output.appendChild(newNode);
 }

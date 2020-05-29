@@ -12,24 +12,29 @@
 <body class="card">
     <div class="header">
         <button id="back"></button> <p id="taskNameHere"></p>
-       
     </div>
 
-    <div style="width: 80%; margin: auto;">
-        <p style="width: 49%; display: inline-block; text-align: left; margin: 0;" id = "team_name">Team name</p>
-        <p style="width: 49%; display: inline-block; text-align: right; margin: 0;" id = "due_date">Due date</p>
+    <div class="taskHeader">
+        <p id="teamName">Team: </p>
+        <p id="dueDate">Due: </p>
     </div>
-    <hr style="width: 80%; align-self: center;">
-    <p id="task_breakdown"></p> <!--Use JS to populate here-->
-    <!-- <ul id=“task_breakdown”> -->
-        <!-- // use js to populate description -->
-    <!-- </ul> -->
+
+    <hr id="taskUnderline">
+
+    <div id="taskBreakdown"></div> <!--Use JS to populate here-->
+
+    <br>
+    <br>
+    <br>
+
+    <div class="btnText">
+        <p id="completeText">Complete</p>
+        <p id="deleteText">Delete</p>
+    </div>
+
+    <button id="check"></button> 
+    <button id="delete"></button> 
     
-
-    <button id="check"></button>
-    <button id="delete"></button>
-
-
     <script src="../JavaScript/task.js"></script>
 </body>
 

@@ -32,44 +32,11 @@ table {
     margin-right: auto;
     margin-top: 2%;
     font-family: 'Lato';
-    border-collapse: collapse;
+    color: #FBA642;
 }
 
 tr {
-    font-family: 'Lato';
     border-bottom: 1px solid #C0C0C0;
-}
-
-td {
-    height: 25px;
-}
-
-th {
-    height: 20px;
-    overflow: auto;
-    text-align: left;
-}
-
-th:first-child {
-    text-align: left;
-}
-
-td:first-child {
-    width: 10%;
-}
-
-td:nth-child(2) {
-    text-align: left;
-    width: 45%;
-}
-
-td:nth-child(3) {
-    width: 35%;
-}
-
-td:last-child {
-    width: 10%;
-    text-align: right;
 }
 
 
@@ -139,27 +106,40 @@ td:last-child {
     margin: 0;
 }
 
-.sort {
-    background-image: url('../images/rank.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 15px;
-    width: 15px;
-    display: block;
+.container {
+    display: flex;
+}
+
+.task {
+    text-align: left;
+    font-size: 11px;
+}
+
+.taskCol {
     float: left;
+    width: 50%;
 }
 
-.bottom-buttons {
-    background-color: #57B582;
-    width: 240px;
-    position: fixed;
-    margin-left: auto;
-    margin-right: auto;
-    bottom: 10%;
-    left: 0;
-    right: 0;
+.teamCol {
+    display: inline-block;
+    width: 40%;
 }
 
+.pointsCol {
+    float: right;
+    width: 9.999%;
+}
+
+.taskHeader {
+    width: 80%;
+    margin: auto;
+}
+
+.btnText {
+    padding-left: 60px;
+    width: 80%;
+    margin: auto;
+}
 
 /* Custom id Styles */
 
@@ -175,21 +155,82 @@ td:last-child {
 }
 
 #delete {
-    background-image: url('../images/delete.JPG');
+    background-image: url('../images/delete.png');
     background-size: contain;
-    width: 72px;
-    height: 60px;
+    background-color: #3E3D3D;
+    width: 17px;
+    height: 17px;
+    position: relative;
+    bottom: 17px;
+    left: 16px;
     border: 0;
     clear: both;
     cursor: pointer;
 }
 
 #check {
-    background-image: url('../images/checkmark.JPG');
+    background-image: url('../images/square_check.png');
     background-size: contain;
-    width: 73px;
-    height: 60px;
+    background-color: #3E3D3D;
+    width: 18px;
+    height: 18px;
     border: 0;
+    position: relative;
+    bottom: 17px;
+    left: 38px;
+    float: left;
     clear: both;
     cursor: pointer;
+}
+
+#taskTable {
+    font-family: 'Lato';
+    color: #FBA642;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#taskBreakdown {
+    width: 80%;
+    align-self: center;
+    margin-left: 10%;
+}
+
+#tasksLine {
+    height: 0.1px;
+    margin: 0px;
+    align-self: center;
+}
+
+#teamName {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
+}
+
+#dueDate {
+    width: 49%;
+    display: inline-block;
+    text-align: right;
+    margin: 0px;
+}
+
+#taskUnderline {
+    width: 80%;
+    align-self: center;
+}
+
+#completeText {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
+}
+
+#deleteText {
+    width: 49%;
+    display: inline-block;
+    text-align: left;
+    margin: 0px;
 }

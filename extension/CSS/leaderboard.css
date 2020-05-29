@@ -157,6 +157,26 @@ td:last-child {
     height: 14px;
 }
 
+::-webkit-scrollbar-track
+{
+    margin-top: 2px;
+    border-radius: 10px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    margin-top: 2px;
+    border-radius: 10px;
+	background-color: #000000;
+}
+
 /* Custom id Styles */
 
 #table-body {

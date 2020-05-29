@@ -14,16 +14,16 @@ const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 /*==============================================================
 Functionality of 'Tasks' button --> redirect to 'Tasks' screen
 ==============================================================*/
-let tasksBtn = document.getElementById('tasks');
+let tasksBtn = document.getElementById("tasks");
 function gotoTasks() {
   location.href = "./tasks.html";
 }
-tasksBtn.addEventListener('click', gotoTasks);
+tasksBtn.addEventListener("click", gotoTasks);
 let response = null;
 /*==============================================================
 Functionality of 'Logout' button --> logout the user
 ==============================================================*/
-let logoutBtn = document.getElementById('logout');
+let logoutBtn = document.getElementById("logout");
 function logOUT(){
    // make sure to clear chrome storage
    chrome.storage.local.clear(function() {});
@@ -32,7 +32,7 @@ function logOUT(){
    // Redirect to logout endpoint      
    chrome.tabs.create({ url: logout_endpoint });   
 }
-logoutBtn.addEventListener('click', logOUT);
+logoutBtn.addEventListener("click", logOUT);
 
 
 function logIN()
@@ -48,9 +48,10 @@ function logIN()
 
 }
 let loginBtn = document.getElementById("login");
-loginBtn.addEventListener('click', logIN);
+loginBtn.addEventListener("click", logIN);
 
 var rankByPoints = true;
+var reverse = false;
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -58,6 +59,7 @@ xhr.onreadystatechange = function() {
       console.log(response);
       // chrome.storage.local.set({'full_response': response}); // keep the JSON data in storage
       rankByPoints = true;
+      reverse = false;
       useJSON(response);   
    }
 };
@@ -74,41 +76,54 @@ function useJSON(response) {
    console.log("Refresh populate with: " + response);
    // Use a map to store {Team Name: Team Points}
    let initMap = new Map(); //unsorted
-   let myMap = new Map(); // sorted
    // Store team names and their respective total points completed
    for (let i = 0; i < response.teams.length; i++) // for each team
    {
       // Map each team with their points completed  
       initMap.set(response.teams[i].name, response.teams[i].points_completed);
    }
-   // sort the initMap in descending order
-   if (rankByPoints) {
+   let myMap = sortTeams(initMap); // sorted myMap
+
+   // Create table
+   let table = document.getElementById("table-body");
+   while(table.rows[0])
+      table.deleteRow(0);
+   myMap.forEach(populateTable);
+}
+
+// Sort the team list
+function sortTeams(initMap) {
+   console.log("rankBypoints = " + rankByPoints + ", reverse = " + reverse);
+   let myMap = new Map();
+   // sort by points, descending order
+   if (rankByPoints && !reverse) {
       myMap = new Map([...initMap.entries()].sort((a, b) => b[1] - a[1]));
+      // update 1st, 2nd, 3rd
       let iter = myMap.keys();
       gold = myMap.size > 0 ? iter.next().value : undefined;
       silver = myMap.size> 1 ? iter.next().value : undefined;
       bronze = myMap.size > 2 ? iter.next().value : undefined;
-   } else {
+   }
+   // sort by points, ascending order
+   else if (rankByPoints) {
+      myMap = new Map([...initMap.entries()].sort((a, b) => a[1] - b[1]));
+   }
+   // sort by team name, descending order
+   else if (!reverse) {
       myMap = new Map([...initMap.entries()].sort((a, b) => a[0].localeCompare(b[0])));
    }
+   // sort by team name, ascending order
+   else {
+      myMap = new Map([...initMap.entries()].sort((a, b) => b[0].localeCompare(a[0])));
+   }
 
-   // Clear table
-   let table = document.getElementById('table');
-   while(table.rows[1])
-      table.deleteRow(1);
-   myMap.forEach(populateTable);
-
-   let teamColumn = document.getElementById("team-col");
-   let pointsColumn = document.getElementById("points-col");
-   teamColumn.setAttribute("colspan", 2);
-   pointsColumn.setAttribute("colspan", 2);
+   return myMap;
 }
 
-// Populate the table: 
+// Populate the table
 function populateTable(value, key) {
    // Get reference to the table element from the HTML
-   let table = document.getElementById('table');
-   // let anchorTeam = document.createElement('a');
+   let table = document.getElementById("table-body");
    // Insert a new row at the end of the table
    let newRow = table.insertRow(-1);
    // create/insert 2 new <td> (table data/cell) elements in the new row
@@ -117,17 +132,14 @@ function populateTable(value, key) {
    let cell2 = newRow.insertCell(2); // Points Completed
    let cell3 = newRow.insertCell(3); // Right Arrow
    // create/insert the contents of the new cells
-   let cell0Image = document.createElement('img');
+   let cell0Image = document.createElement("img");
    if (key === gold) {
       cell0Image.src = "../images/gold_medal.png";
-   }  
-   else if (key === silver) {
+   } else if (key === silver) {
       cell0Image.src = "../images/silver_medal.png";
-   }
-   else if (key === bronze) {
+   } else if (key === bronze) {
       cell0Image.src = "../images/bronze_medal.png";
-   }
-   else {
+   } else {
       cell0Image.src = "../images/medal.png";
    }
    cell0Image.style.width = "15px";
@@ -137,15 +149,15 @@ function populateTable(value, key) {
    let cell1Text = document.createTextNode(`${key}`);
    let cell2Text = document.createTextNode(`${value}`);
 
-   let cell3Link = document.createElement('a');
-   let cell3Image = document.createElement('img');
+   let cell3Link = document.createElement("a");
+   let cell3Image = document.createElement("img");
    cell3Image.src = "../images/right_arrow.png";
    cell3Image.style.width = "10px";
    cell3Image.style.height = "10px";
    cell3Link.appendChild(cell3Image);
    cell3Link.onclick = function(){
       // Store the team that was clicked for reference for other screens
-      localStorage.setItem('curr_Team', key);
+      localStorage.setItem("curr_Team", key);
       location.href = "./team.html"
    }
    cell0.appendChild(cell0Image);
@@ -159,17 +171,19 @@ Functionality of 'sort-by-name' button --> Sort teams by name
 ==============================================================*/
 let sortByNameBtn = document.getElementById("sort-by-name");
 function sortByName(){
+   reverse = rankByPoints ? false : !reverse;
    rankByPoints = false;
    useJSON(response);
 }
-sortByNameBtn.addEventListener('click', sortByName);
+sortByNameBtn.addEventListener("click", sortByName);
 
 /*==============================================================
 Functionality of 'sort-by-points' button --> Sort teams by points
 ==============================================================*/
 let sortByPointsBtn = document.getElementById("sort-by-points");
 function sortByPoints(){
+   reverse = rankByPoints ? !reverse : false;
    rankByPoints = true;
    useJSON(response);
 }
-sortByPointsBtn.addEventListener('click', sortByPoints);
+sortByPointsBtn.addEventListener("click", sortByPoints);

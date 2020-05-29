@@ -18,7 +18,7 @@ xhr.open("GET", tasks_endpoint, true);
 xhr.send(); 
 
 // Apply title
-document.getElementById("taskNameHere").innerHTML = `Task ${localStorage.getItem('curr_Task')}`;
+document.getElementById("taskNameHere").innerHTML = `Task`;
 // document.querySelector("h1").innerHTML += `Task ${localStorage.getItem('curr_Task')}`;
 
 // Retrieve TEAM responsible for current task 
@@ -102,12 +102,27 @@ let assigned = localStorage.getItem(teamString),   // team responsible
    title = JSON.parse(localStorage.getItem(localStorage.getItem('curr_Task'))).title;
 
 let output = document.getElementById("task_breakdown");
-let myValues = [`Assigned: ${assigned}`, 
-               `Due On: ${due_on}`, 
-               `Task ID: ${id}`, 
+let myValues = [`Title: ${title}`,
+               // `Assigned: ${assigned}`, 
+               // `Due On: ${due_on}`, 
+               // `Task ID: ${id}`, 
                `Points: ${points}`, 
                `Status: ${status}`, 
-               `Title: ${title}`];
+               ];
+output.style.width = '80%';
+output.style.alignSelf = 'center';
+output.style.marginLeft = '10%';
+
+let teamname = document.getElementById("team_name");
+teamname.innerHTML = assigned;
+let duedate = document.getElementById("due_date");
+duedate.innerHTML = due_on;
+
 for(let i = 0; i < myValues.length; i++) {
-   output.innerHTML += myValues[i] + `</br>`   ;
+   let newNode = document.createElement('p');
+   newNode.innerHTML = myValues[i];
+   newNode.style.textAlign= 'left';
+   newNode.style.fontSize = '10px';
+   // output.innerHTML += myValues[i] + '<br>';
+   output.appendChild(newNode);
 }

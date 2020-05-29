@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
-    <link href="../CSS/nitro.css" rel="stylesheet">
+    <link href="../CSS/leaderboard.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
@@ -14,9 +14,9 @@
         <p>Leaderboard</p>
     </div>
 
-    <table id="table" style="font-family: Lato; width: 100%;">
-        <tr>
-            <th id="team-col" style="padding-left: 8%;">
+    <table id="table" style="font-family: Lato;">
+        <tr style="position: absolute; width: 80%;">
+            <th id="team-col">
                 <span class="sort" id="sort-by-name"></span>
                 Team name
             </th>
@@ -26,6 +26,7 @@
             </th>
         </tr>
         <!-- {{#each teams}} -->
+        <tbody id="table-body"></tbody>
     </table>
 
     <div class="bottom-buttons">

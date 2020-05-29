@@ -141,9 +141,20 @@ td:last-child {
     position: fixed;
     margin-left: auto;
     margin-right: auto;
-    bottom: 10%;
+    bottom: 8%;
     left: 0;
     right: 0;
+}
+
+.bottom-buttons button {
+    background-color: transparent;
+    border: none;
+    color: #C0C0C0;
+}
+
+.bottom-buttons img {
+    width: 14px;
+    height: 14px;
 }
 
 /* Custom id Styles */
@@ -152,7 +163,7 @@ td:last-child {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 100%;
-    height: 120px;
+    height: 125px;
     display: block;
     margin-top: 22px;
 }

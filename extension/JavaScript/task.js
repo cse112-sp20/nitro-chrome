@@ -90,7 +90,6 @@ Get and use values from to populate the page
 // get values from Team object
 let assigned = localStorage.getItem(teamString),   // team responsible
    due_on = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).due_on,
-   id = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).id,
    points = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).points,
    status = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).status,
    title = JSON.parse(localStorage.getItem(localStorage.getItem("curr_Task"))).title.split("(")[0];

@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - node
+
+before_script:
+  - chmod 0555 ./node_modules/.bin/jest
+
+script:
+  - npm run test

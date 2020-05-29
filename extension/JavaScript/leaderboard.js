@@ -10,12 +10,12 @@ const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 // const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
-
 /*==============================================================
-Functionality of 'Tasks' button --> redirect to 'Tasks' screen
+Functionality of 'Tasks' button
 ==============================================================*/
 let tasksBtn = document.getElementById("tasks");
 function gotoTasks() {
+   localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
   location.href = "./tasks.html";
 }
 tasksBtn.addEventListener("click", gotoTasks);
@@ -25,10 +25,9 @@ Functionality of 'Logout' button --> logout the user
 ==============================================================*/
 let logoutBtn = document.getElementById("logout");
 function logOUT(){
-   // make sure to clear chrome storage
-   chrome.storage.local.clear(function() {});
    // make sure to clean local storage
    localStorage.clear();
+   
    // Redirect to logout endpoint      
    chrome.tabs.create({ url: logout_endpoint });   
 }
@@ -37,15 +36,14 @@ logoutBtn.addEventListener("click", logOUT);
 
 function logIN()
 {
-   // make sure to clear chrome storage
-   chrome.storage.local.clear(function() {});
-   // make sure to clean local storage
+   // make sure to clear local storage
    localStorage.clear();
+
+   // checks if user is logged in or not
+   localStorage.setItem("logged_in", "true");
 
    // Redirect user to login endpoint
    chrome.tabs.create({ url: login_endpoint });
-   // window.location.href = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
-
 }
 let loginBtn = document.getElementById("login");
 loginBtn.addEventListener("click", logIN);
@@ -64,12 +62,9 @@ xhr.onreadystatechange = function() {
    }
 };
 xhr.open("GET", tasks_endpoint, true);
-// xhr.setRequestHeader("Authorization", result.stored_token);
 xhr.send(); 
-
-
 /*==============================================================
-Get JSON data/values, then populate the table: 
+Use  JSON data/values to  then populate the table: 
 ==============================================================*/
 var gold, silver, bronze;
 function useJSON(response) {

@@ -29,6 +29,7 @@ body {
 table {
     width: 90% !important;
     margin-left: auto;
+    margin-right: auto;
     margin-top: 2%;
     font-family: 'Lato';
     color: #FBA642;

@@ -100,11 +100,6 @@ table {
     margin: 0;
 }
 
-.user-table {
-    color: #FFFFFF;
-}
-
-
 /* Custom id Styles */
 
 #back {
@@ -136,4 +131,14 @@ table {
     border: 0;
     clear: both;
     cursor: pointer;
+}
+
+#user-table {
+    color: #FFFFFF;
+}
+
+#user-profile-table {
+    color: #FFFFFF;
+    padding-left: 20px;
+    padding-right: 20px;
 }

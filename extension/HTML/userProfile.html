@@ -15,55 +15,33 @@
         <p>User Profile</p>
     </div>
 
-    <!--<div class="user-profile-block">
-        <p class="user-profile-title">Username</p>
-        <p class="user-profile-data">racecar</p>
-    </div>
-
-    <div class="user-profile-block">
-        <p class="user-profile-title">Team</p>
-        <p class="user-profile-data">Team</p>
-    </div>
-
-    <div class="user-profile-block">
-        <p class="user-profile-title">Productivity</p>
-        <p class="user-profile-data">1.35x</p>
-    </div>
-
-    <div class="user-profile-block">
-        <p class="user-profile-title">Total Points</p>
-        <p class="user-profile-data">100</p>
-    </div>
-
-    -->
     <br>
 
-    <table class="user-table" style="font-family: Lato; width: 100%;">
+    <table id="user-profile-table" style="font-family: Lato; width: 100%;">
         <tr>
             <td>Username</td>
-            <td>racecar</td>
+            <td id="username"></td>
         </tr>
         <tr>
             <td>Team</td>
-            <td>Frontend</td>
+            <td id="team">Frontend</td>
+        </tr>
+        <tr>
+            <td>Points Completed</td>
+            <td id="points-completed">20</td>
+        </tr>
+        <tr>
+            <td>Points Required</td>
+            <td id="points-required">100</td>
         </tr>
         <tr>
             <td>Productivity</td>
-            <td>1.35x</td>
-        </tr>
-        <tr>
-            <td>Total Points</td>
-            <td>100</td>
+            <td id="productivity">1.35x</td>
         </tr>
     </table>
 
     <br>
     <br>
-    <br>
-    <br>
-
-    <button id="leaderboard-btn" style="margin-right: 10px;">Leaderboard</button>
-    <button id="tasks-btn">Tasks</button>
 
     <script src="../JavaScript/userProfile.js"></script>
 </body>

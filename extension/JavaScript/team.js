@@ -49,7 +49,7 @@ totalPoints.innerHTML += `${currTeamObject.points_completed}`;// + currTeamObjec
 /*==============================================================
 Apply title to top of page
 ==============================================================*/
-document.getElementById("teamNameHere").innerHTML = `Team ${currTeamName}`;
+document.getElementById("teamNameHere").innerHTML = currTeamName;
 
 /*==============================================================
 Functionality of BACK button

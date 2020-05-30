@@ -75,7 +75,7 @@ function useJSON(response){
    }
 
    // Get reference to the table element from the HTML
-   let table = document.getElementById("table");
+   let table = document.getElementById("taskTable");
    
    // Populate the table: 
    function populateTable(value, key){
@@ -90,7 +90,7 @@ function useJSON(response){
       let cell2 = newRow.insertCell(1);   // Task Team   
       let cell3 = newRow.insertCell(2);   // Task Points   
       // create the contents of the new cells
-      let cell1Text = document.createTextNode(`${key} - `);
+      let cell1Text = document.createTextNode(`${key}`);
       let cell2Text = document.createTextNode(`${value.split(",")[0]}`);
       let cell3Text = document.createTextNode(`${value.split(",")[1]}`);
 
@@ -118,17 +118,18 @@ function useJSON(response){
          localStorage.setItem("curr_Team", value.split(",")[0]);
          location.href = "./task.html"
       }
-
+      cell1.className = "tasksCol";
+      cell2.className = "teamCol";
+      cell3.className = "pointsCol";
       // insert the contents of the new cells to the table
       cell1.appendChild(anchorTask);
       cell2.appendChild(anchorTeam);
       cell3.appendChild(anchorPoints);
     
       // Remove underlink/color of the anchor text? 
-      anchorTask.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
-      anchorTeam.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
-      anchorPoints.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
+      anchorTask.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
+      anchorTeam.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
+      anchorPoints.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
    }
    myMap.forEach(populateTable);
-
 }

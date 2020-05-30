@@ -103,6 +103,7 @@ tr {
 
 .headerWOBackButton p {
     padding-top: 6px;
+    font-weight: bold;
     margin: 0;
 }
 
@@ -115,19 +116,21 @@ tr {
     font-size: 11px;
 }
 
-.taskCol {
+.tasksHeader {
     float: left;
-    width: 50%;
-}
-
-.teamCol {
-    display: inline-block;
     width: 40%;
 }
 
-.pointsCol {
+.teamHeader {
+    display: inline-block;
+    width: 30%;
+    padding-right: 14%;
+}
+
+.pointsHeader {
     float: right;
     width: 9.999%;
+    padding-right: 6%;
 }
 
 .taskHeader {
@@ -139,6 +142,20 @@ tr {
     padding-left: 60px;
     width: 80%;
     margin: auto;
+}
+
+.tasksCol {
+    width: 35%;
+}
+
+.teamCol {
+    width: 20%;
+    padding-left: 6%;
+}
+
+.pointsCol {
+    width: 10%;
+    padding-left: 6%;
 }
 
 /* Custom id Styles */
@@ -188,6 +205,8 @@ tr {
     color: #FBA642;
     border-collapse: collapse;
     text-align: left;
+    margin-left: 5%;
+    width: 91%;
 }
 
 #taskBreakdown {
@@ -197,8 +216,10 @@ tr {
 }
 
 #tasksLine {
-    height: 0.1px;
-    margin: 0px;
+    margin: 0;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    width: 90%;
     align-self: center;
 }
 

@@ -141,6 +141,17 @@ tr {
     margin: auto;
 }
 
+.td1 {
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.td2 {
+    text-align: left;
+    padding-left: 10px;
+}
+
 /* Custom id Styles */
 
 #back {
@@ -189,8 +200,6 @@ tr {
 
 #user-profile-table {
     color: #FFFFFF;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 #taskTable {

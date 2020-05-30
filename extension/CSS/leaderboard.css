@@ -110,7 +110,6 @@ td:last-child {
 .headerWOBackButton {
     margin-top: auto;
     margin-bottom: auto;
-    
     font-size: 20px;
     box-shadow: inset 0 0 3px #333333;
     border-radius: 6px 6px 0 0;
@@ -194,8 +193,15 @@ td:last-child {
 
 /* Dark and Light Mode */
 
+.dark {
+    background-color: #3E3D3D;
+    color: #C0C0C0;
+    border-color: #C0C0C0;
+}
+
 .light,
 .light * { 
     background-color: #DEE4E7;
     color: #000000;
+    border-color: #C0C0C0;
 }

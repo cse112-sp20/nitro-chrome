@@ -9,31 +9,33 @@
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
-<body class="card">
+<body class="card dark">
     <div class="header">
         <button id="back"></button> <p id="taskNameHere"></p>
     </div>
 
-    <div class="taskHeader">
-        <p id="teamName">Team: </p>
-        <p id="dueDate">Due: </p>
+    <div id="darkness">
+        <div class="taskHeader">
+            <p id="teamName">Team: </p>
+            <p id="dueDate">Due: </p>
+        </div>
+
+        <hr id="taskUnderline">
+
+        <div id="taskBreakdown"></div> <!--Use JS to populate here-->
+
+        <br>
+        <br>
+        <br>
+
+        <div class="btnText">
+            <p id="completeText">Complete</p>
+            <p id="deleteText">Delete</p>
+        </div>
+
+        <button id="check"></button> 
+        <button id="delete"></button>
     </div>
-
-    <hr id="taskUnderline">
-
-    <div id="taskBreakdown"></div> <!--Use JS to populate here-->
-
-    <br>
-    <br>
-    <br>
-
-    <div class="btnText">
-        <p id="completeText">Complete</p>
-        <p id="deleteText">Delete</p>
-    </div>
-
-    <button id="check"></button> 
-    <button id="delete"></button> 
     
     <script src="../JavaScript/task.js"></script>
     <script src="../JavaScript/darkLightMode.js"></script>

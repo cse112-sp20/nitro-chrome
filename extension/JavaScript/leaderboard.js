@@ -225,3 +225,6 @@ window.onload = function () {
       logoutBtn.style.display = "none";
    }
 }
+
+/* Dark and Light Mode */
+localStorage.setItem("mode", "dark");

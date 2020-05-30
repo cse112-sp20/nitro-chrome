@@ -213,10 +213,14 @@ tr {
 
 #user-table {
     color: #FFFFFF;
+    padding-bottom: 10px;
+    width: 100%;
 }
 
 #user-profile-table {
     color: #FFFFFF;
+    padding-top: 10px;
+    width: 100%
 }
 
 #taskTable {

@@ -75,7 +75,6 @@ td:last-child {
 }
 
 
-
 /* Custom Class Styles */
 
 .card {
@@ -191,4 +190,12 @@ td:last-child {
 
 #team-col {
     padding-left: 8%;
+}
+
+/* Dark and Light Mode */
+
+.light,
+.light * { 
+    background-color: #DEE4E7;
+    color: #000000;
 }

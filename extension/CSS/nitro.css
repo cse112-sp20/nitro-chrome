@@ -39,6 +39,10 @@ tr {
     border-bottom: 1px solid #C0C0C0;
 }
 
+li {
+    cursor: pointer;
+}
+
 
 
 /* Custom Class Styles */

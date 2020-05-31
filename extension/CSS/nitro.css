@@ -10,6 +10,7 @@ head {
 body {
     font-family: 'Lato';
     color: #EEEEEE;
+    margin: 0px;
 }
 
 .button {
@@ -45,9 +46,8 @@ tr {
 
 .card {
     text-align: center;
-    border-radius: 12px;
     background-color: #3E3D3D;
-    border-width: 5px;
+    border-width: 7px;
     width: 240px;
     border-color: #C0C0C0;
     border-style: solid;

@@ -278,3 +278,11 @@ tr {
     text-align: left;
     margin: 0px;
 }
+
+#progress {
+  text-align: left;
+}
+
+#completed {
+  text-align: left;
+}

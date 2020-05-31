@@ -40,6 +40,10 @@ tr {
     border-bottom: 1px solid #C0C0C0;
 }
 
+li {
+    cursor: pointer;
+}
+
 
 
 /* Custom Class Styles */
@@ -277,4 +281,12 @@ tr {
     display: inline-block;
     text-align: left;
     margin: 0px;
+}
+
+#progress {
+  text-align: left;
+}
+
+#completed {
+  text-align: left;
 }

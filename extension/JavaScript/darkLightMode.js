@@ -1,22 +1,14 @@
-
-
-var currMode = localStorage.getItem("mode");
-
-var element2 = document.getElementById( "darkness" );
-element2.classList.toggle(currMode);
-
-function switchMode() {
-    console.log("Button Clicked");
-    var element = document.getElementById( "darkness" );
-    mode = localStorage.getItem("mode");
-    if(mode == "dark") {
-        mode = "light";
+function setColorForCard() {
+    let card = document.getElementById("card");
+    let mode = localStorage.getItem("mode");
+    if (mode == "dark") {
+        card.classList.add("dark-mode");
     } else {
-        mode = "dark";
+        card.classList.add("light-mode");
     }
-    element.classList.toggle(mode);
 }
 
-darkModeBtn = document.getElementById("dark-mode");
-darkModeBtn.addEventListener("click", switchMode);
+export { setColorForCard };
+
+
 

@@ -85,3 +85,13 @@ for(let i = 0; i < currTeamObject.completed_tasks.length; i++){
     liC.appendChild(document.createTextNode(currTeamObject.completed_tasks[i].title));
     ulC.appendChild(liC);    
 }
+
+window.onload = function () {
+  let card = document.getElementById("card");
+  let mode = localStorage.getItem("mode");
+  if (mode == "dark") {
+      card.classList.add("dark-mode");
+  } else {
+      card.classList.add("light-mode");
+  }
+}

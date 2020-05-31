@@ -25,3 +25,13 @@ pointsRequired.innerHTML = localStorage.getItem("curr_points_required");
 let prod_percentage = (localStorage.getItem("curr_productivity") * 100).toFixed(0);
 let productivity = document.getElementById("productivity");
 productivity.innerHTML = `${prod_percentage}%`;
+
+window.onload = function () {
+    let card = document.getElementById("card");
+    let mode = localStorage.getItem("mode");
+    if (mode == "dark") {
+        card.classList.add("dark-mode");
+    } else {
+        card.classList.add("light-mode");
+    }
+}

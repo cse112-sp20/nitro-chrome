@@ -57,7 +57,16 @@ function populateTable(value, key) {
         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
         location.href = "./userProfile.html"
     }
-    anchorUser.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
 
     cellUser.appendChild(anchorUser);
+}
+
+window.onload = function () {
+    let card = document.getElementById("card");
+    let mode = localStorage.getItem("mode");
+    if (mode == "dark") {
+        card.classList.add("dark-mode");
+    } else {
+        card.classList.add("light-mode");
+    }
 }

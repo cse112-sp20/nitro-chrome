@@ -115,3 +115,13 @@ for(let i = 0; i < myValues.length; i++) {
    newNode.innerHTML = myValues[i];
    output.appendChild(newNode);
 }
+
+window.onload = function () {
+   let card = document.getElementById("card");
+   let mode = localStorage.getItem("mode");
+   if (mode == "dark") {
+       card.classList.add("dark-mode");
+   } else {
+       card.classList.add("light-mode");
+   }
+}

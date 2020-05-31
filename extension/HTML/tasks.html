@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
     <link href="../CSS/nitro.css" rel="stylesheet">
+    <link href="../CSS/darkLightMode.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
-<body class="card dark">
+<body class="card" id="card">
     <div class="header">
         <button id="back"></button>
         <p>Tasks</p>
     </div>
-    <div id="darkness">
-        <div class="tableHeader">
-            <div class="tasksHeader">Task</div>
-            <div class="teamHeader">Team</div>
-            <div class="pointsHeader">Pts</div>
-        </div>
-        <hr id="tasksLine">
-        <table id="taskTable">
-            <!-- each task -->
-        </table>
+
+    <div class="tableHeader">
+        <div class="tasksHeader">Task</div>
+        <div class="teamHeader">Team</div>
+        <div class="pointsHeader">Pts</div>
     </div>
+    <hr id="tasksLine">
+    <table id="taskTable">
+        <!-- each task -->
+    </table>
 
     <script src="../JavaScript/tasks.js"></script>
     <script src="../JavaScript/darkLightMode.js"></script>

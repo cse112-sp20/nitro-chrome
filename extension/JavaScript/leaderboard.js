@@ -20,7 +20,7 @@ Functionality of 'Tasks' button
 ==============================================================*/
 function gotoTasks() {
    localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
-  location.href = "./tasks.html";
+   location.href = "./tasks.html";
 }
 
 /*==============================================================
@@ -33,25 +33,24 @@ function gotoUser() {
 /*==============================================================
 Functionality of 'Logout' button --> logout the user
 ==============================================================*/
-function logOut(){
+function logOut() {
 
    // Redirect to logout endpoint
-   chrome.tabs.create({ url: logout_endpoint, active: false }, function(tab) {
-     setTimeout(function() {
-       chrome.tabs.remove(tab.id);
-       localStorage.clear();
-     }, 800);
+   chrome.tabs.create({ url: logout_endpoint, active: false }, function (tab) {
+      setTimeout(function () {
+         chrome.tabs.remove(tab.id);
+         localStorage.clear();
+      }, 800);
    });
 
    // make sure to clean local storage
-   setTimeout(function() {location.reload();}, 200);
+   setTimeout(function () { location.reload(); }, 200);
 }
 
 /*==============================================================
 Functionality of 'Login' button
 ==============================================================*/
-function logIn()
-{
+function logIn() {
    // make sure to clear local storage
    localStorage.clear();
 
@@ -65,7 +64,7 @@ function logIn()
 /*==============================================================
 Functionality of 'sort-by-points' button --> Sort teams by points
 ==============================================================*/
-function sortByPoints(){
+function sortByPoints() {
    reverse = rankByPoints && !reverse;
    rankByPoints = true;
    useJSON(response);
@@ -74,7 +73,7 @@ function sortByPoints(){
 /*==============================================================
 Functionality of 'sort-by-name' button --> Sort teams by name
 ==============================================================*/
-function sortByName(){
+function sortByName() {
    reverse = !(rankByPoints || reverse);
    rankByPoints = false;
    useJSON(response);
@@ -108,11 +107,11 @@ function switchMode() {
 }
 
 let xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
    if (this.readyState == 4 && this.status == 200) {
       response = JSON.parse(xhr.responseText);
       console.log(response);
-      for(let i = 0; i < response.teams.length; i++)  // for each team
+      for (let i = 0; i < response.teams.length; i++)  // for each team
       {
          // Store curr_Team object ==> name (string): Team object
          localStorage.setItem(response.teams[i].name, JSON.stringify(response.teams[i])); // needed to update storage with most recent changes
@@ -143,7 +142,7 @@ function useJSON(response) {
 
    // Create table
    let table = document.getElementById("table-body");
-   while(table.rows[0]) {
+   while (table.rows[0]) {
       table.deleteRow(0);
    }
    myMap.forEach(populateTable);
@@ -158,7 +157,7 @@ function sortTeams(initMap, rankByPoints, reverse) {
       // update 1st, 2nd, 3rd
       let iter = myMap.keys();
       gold = myMap.size > 0 ? iter.next().value : undefined;
-      silver = myMap.size> 1 ? iter.next().value : undefined;
+      silver = myMap.size > 1 ? iter.next().value : undefined;
       bronze = myMap.size > 2 ? iter.next().value : undefined;
    }
    // sort by points, ascending order
@@ -218,7 +217,7 @@ function populateTable(value, key) {
    cellArrowLink.appendChild(cellArrowImage);
 
    // direct to team page
-   function goToTeam () {
+   function goToTeam() {
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);
       localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
@@ -256,7 +255,7 @@ window.onload = function () {
    darkLightBtn.addEventListener("click", switchMode);
 
    //Toggle the display based on logged in status
-   if((localStorage.getItem("logged_in"))) {
+   if ((localStorage.getItem("logged_in"))) {
       loginBtn.style.display = "none";
       userBtn.style.display = "inline";
       tasksBtn.style.display = "inline";
@@ -271,11 +270,22 @@ window.onload = function () {
    }
 
    /* Dark and Light Mode */
-   localStorage.setItem("mode", "dark");
+   if (localStorage.getItem("mode") === null) {
+      localStorage.setItem("mode", "dark");
+   }
    let card = document.getElementById("card");
-   card.classList.add("dark-mode");
    let buttons = document.getElementsByClassName("change-color");
-   for (let i = 0; i < buttons.length; i++) {
-      buttons[i].classList.add("dark-mode-btn-text");
+
+   let mode = localStorage.getItem("mode");
+   if (mode == "dark") {
+      card.classList.add("dark-mode");
+      for (let i = 0; i < buttons.length; i++) {
+         buttons[i].classList.add("dark-mode-btn-text");
+      }
+   } else {
+      card.classList.add("light-mode");
+      for (let i = 0; i < buttons.length; i++) {
+         buttons[i].classList.add("light-mode-btn-text");
+      }
    }
 }

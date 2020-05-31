@@ -33,7 +33,6 @@ table {
     margin-right: auto;
     margin-top: 2%;
     font-family: 'Lato';
-    /* color: #FBA642; */
 }
 
 tr {
@@ -50,7 +49,6 @@ li {
 
 .card {
     text-align: center;
-    /* background-color: #3E3D3D; */
     border-width: 7px;
     border-radius: 5px;
     width: 240px;
@@ -217,20 +215,17 @@ li {
 }
 
 #user-table {
-    /* color: #FFFFFF; */
     padding-bottom: 10px;
     width: 100%;
 }
 
 #user-profile-table {
-    /* color: #FFFFFF; */
     padding-top: 10px;
     width: 100%
 }
 
 #taskTable {
     font-family: 'Lato';
-    /* color: #FBA642; */
     border-collapse: collapse;
     text-align: left;
     margin-left: 5%;

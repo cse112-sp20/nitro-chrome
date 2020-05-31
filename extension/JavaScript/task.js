@@ -116,6 +116,9 @@ for(let i = 0; i < myValues.length; i++) {
    output.appendChild(newNode);
 }
 
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
 window.onload = function () {
    let card = document.getElementById("card");
    let mode = localStorage.getItem("mode");

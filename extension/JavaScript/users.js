@@ -61,6 +61,9 @@ function populateTable(value, key) {
     cellUser.appendChild(anchorUser);
 }
 
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
 window.onload = function () {
     let card = document.getElementById("card");
     let mode = localStorage.getItem("mode");

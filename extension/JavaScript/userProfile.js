@@ -26,6 +26,9 @@ let prod_percentage = (localStorage.getItem("curr_productivity") * 100).toFixed(
 let productivity = document.getElementById("productivity");
 productivity.innerHTML = `${prod_percentage}%`;
 
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
 window.onload = function () {
     let card = document.getElementById("card");
     let mode = localStorage.getItem("mode");

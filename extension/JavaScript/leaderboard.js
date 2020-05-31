@@ -88,7 +88,9 @@ function switchMode() {
    let card = document.getElementById("card");
    let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
+   let modeButton = document.getElementById("dark-mode");
    if (mode == "dark") {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
       localStorage.setItem("mode", "light");
       card.classList.add("light-mode");
       card.classList.remove("dark-mode");
@@ -97,6 +99,7 @@ function switchMode() {
          buttons[i].classList.remove("dark-mode-btn-text");
       }
    } else {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
       localStorage.setItem("mode", "dark");
       card.classList.add("dark-mode");
       card.classList.remove("light-mode");
@@ -274,16 +277,20 @@ window.onload = function () {
    if (localStorage.getItem("mode") === null) {
       localStorage.setItem("mode", "dark");
    }
+
    let card = document.getElementById("card");
    let buttons = document.getElementsByClassName("change-color");
-
    let mode = localStorage.getItem("mode");
+   let modeButton = document.getElementById("dark-mode");
+
    if (mode == "dark") {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
       card.classList.add("dark-mode");
       for (let i = 0; i < buttons.length; i++) {
          buttons[i].classList.add("dark-mode-btn-text");
       }
    } else {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
       card.classList.add("light-mode");
       for (let i = 0; i < buttons.length; i++) {
          buttons[i].classList.add("light-mode-btn-text");

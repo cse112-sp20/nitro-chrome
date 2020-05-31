@@ -22,6 +22,13 @@ function gotoTasks() {
 }
 
 /*==============================================================
+Functionality of 'Users' button
+==============================================================*/
+function gotoUser() {
+   location.href = "./users.html";
+}
+
+/*==============================================================
 Functionality of 'Logout' button --> logout the user
 ==============================================================*/
 function logOUT(){
@@ -208,6 +215,8 @@ window.onload = function () {
    sortByPointsBtn.addEventListener("click", sortByPoints);
 
    let userBtn = this.document.getElementById("user-profile");
+   userBtn.addEventListener("click", gotoUser);
+   
    let darkLightBtn = this.document.getElementById("dark-mode");
 
    //Toggle the display based on logged in status

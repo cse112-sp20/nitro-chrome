@@ -144,6 +144,17 @@ tr {
     margin: auto;
 }
 
+.td1 {
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.td2 {
+    text-align: left;
+    padding-left: 10px;
+}
+
 .tasksCol {
     width: 35%;
 }
@@ -198,6 +209,18 @@ tr {
     float: left;
     clear: both;
     cursor: pointer;
+}
+
+#user-table {
+    color: #FFFFFF;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#user-profile-table {
+    color: #FFFFFF;
+    padding-top: 10px;
+    width: 100%
 }
 
 #taskTable {

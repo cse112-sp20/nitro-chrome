@@ -40,7 +40,7 @@ function logOut(){
      setTimeout(function() {
        chrome.tabs.remove(tab.id);
        localStorage.clear();
-     }, 200);
+     }, 800);
    });
 
    // make sure to clean local storage

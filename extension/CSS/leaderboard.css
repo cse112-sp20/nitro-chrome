@@ -80,7 +80,7 @@ td:last-child {
 
 .card {
     text-align: center;
-    background-color: #3E3D3D;
+    /* background-color: #3E3D3D; */
     border-width: 7px;
     width: 240px;
     border-color: #C0C0C0;

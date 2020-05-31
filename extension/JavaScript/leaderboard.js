@@ -80,6 +80,24 @@ function sortByName(){
    useJSON(response);
 }
 
+/*========================================================================
+Functionality of 'dark' button --> Interchange between dark and light mode
+========================================================================*/
+function switchMode() {
+   console.log("Button Clicked");
+   let card = document.getElementById("card");
+   let mode = localStorage.getItem("mode");
+   if (mode == "dark") {
+      localStorage.setItem("mode", "light");
+      card.classList.add("light-mode");
+      card.classList.remove("dark-mode");
+   } else {
+      localStorage.setItem("mode", "dark");
+      card.classList.add("dark-mode");
+      card.classList.remove("light-mode");
+   }
+}
+
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
    if (this.readyState == 4 && this.status == 200) {
@@ -226,6 +244,7 @@ window.onload = function () {
    userBtn.addEventListener("click", gotoUser);
 
    let darkLightBtn = this.document.getElementById("dark-mode");
+   darkLightBtn.addEventListener("click", switchMode);
 
    //Toggle the display based on logged in status
    if((localStorage.getItem("logged_in"))) {
@@ -241,7 +260,9 @@ window.onload = function () {
       darkLightBtn.style.display = "none";
       logoutBtn.style.display = "none";
    }
-}
 
-/* Dark and Light Mode */
-localStorage.setItem("mode", "dark");
+   /* Dark and Light Mode */
+   localStorage.setItem("mode", "dark");
+   let card = document.getElementById("card");
+   card.classList.toggle("dark-mode");
+}

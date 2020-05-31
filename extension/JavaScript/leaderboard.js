@@ -36,15 +36,16 @@ Functionality of 'Logout' button --> logout the user
 function logOut() {
 
    // Redirect to logout endpoint
-   chrome.tabs.create({ url: logout_endpoint, active: false }, function (tab) {
-      setTimeout(function () {
-         chrome.tabs.remove(tab.id);
-         localStorage.clear();
-      }, 800);
+
+   chrome.tabs.create({ url: logout_endpoint, active: false }, function(tab) {
+     setTimeout(function() {
+       chrome.tabs.remove(tab.id);
+       localStorage.clear();
+     }, 900);
    });
 
    // make sure to clean local storage
-   setTimeout(function () { location.reload(); }, 200);
+   setTimeout(function() {location.reload();}, 1000);
 }
 
 /*==============================================================

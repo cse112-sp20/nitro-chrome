@@ -2,13 +2,15 @@
 /*eslint no-undef: "error"*/
 
 /****************************************************************
-TODO/NOTES: 
-Where to implement clear_completed endpoint? --> only for testing 
+TODO/NOTES:
+Where to implement clear_completed endpoint? --> only for testing
 ****************************************************************/
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 // const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
+
 let response = null;
 var rankByPoints = true;
 var reverse = false;
@@ -22,20 +24,33 @@ function gotoTasks() {
 }
 
 /*==============================================================
+Functionality of 'Users' button
+==============================================================*/
+function gotoUser() {
+   location.href = "./users.html";
+}
+
+/*==============================================================
 Functionality of 'Logout' button --> logout the user
 ==============================================================*/
-function logOUT(){
+function logOut(){
+
+   // Redirect to logout endpoint
+   chrome.tabs.create({ url: logout_endpoint, active: false }, function(tab) {
+     setTimeout(function() {
+       chrome.tabs.remove(tab.id);
+       localStorage.clear();
+     }, 200);
+   });
+
    // make sure to clean local storage
-   localStorage.clear();
-   
-   // Redirect to logout endpoint      
-   chrome.tabs.create({ url: logout_endpoint });   
+   setTimeout(function() {location.reload();}, 200);
 }
 
 /*==============================================================
 Functionality of 'Login' button
 ==============================================================*/
-function logIN()
+function logIn()
 {
    // make sure to clear local storage
    localStorage.clear();
@@ -72,19 +87,19 @@ xhr.onreadystatechange = function() {
       console.log(response);
       for(let i = 0; i < response.teams.length; i++)  // for each team
       {
-         // Store curr_Team object ==> name (string): Team object      
+         // Store curr_Team object ==> name (string): Team object
          localStorage.setItem(response.teams[i].name, JSON.stringify(response.teams[i])); // needed to update storage with most recent changes
-      }          
+      }
       rankByPoints = true;
       reverse = false;
-      useJSON(response);   
+      useJSON(response);
    }
 };
 xhr.open("GET", tasks_endpoint, true);
 xhr.send();
 
 /*==============================================================
-Use  JSON data/values to  then populate the table: 
+Use JSON data/values to then populate the table:
 ==============================================================*/
 var gold, silver, bronze;
 function useJSON(response) {
@@ -94,7 +109,7 @@ function useJSON(response) {
    // Store team names and their respective total points completed
    for (let i = 0; i < response.teams.length; i++) // for each team
    {
-      // Map each team with their points completed  
+      // Map each team with their points completed
       initMap.set(response.teams[i].name, response.teams[i].points_completed);
    }
    let myMap = sortTeams(initMap, rankByPoints, reverse); // sorted myMap
@@ -162,7 +177,7 @@ function populateTable(value, key) {
    cellMedalImage.style.height = "15px";
    cellMedalImage.style.marginTop = "3px";
 
-   let cellTeamLink = document.createElement("a");   
+   let cellTeamLink = document.createElement("a");
    let cellTeamText = document.createTextNode(`${key}`);
    cellTeamLink.appendChild(cellTeamText);
 
@@ -196,10 +211,10 @@ window.onload = function () {
    tasksBtn.addEventListener("click", gotoTasks);
 
    let logoutBtn = document.getElementById("logout");
-   logoutBtn.addEventListener("click", logOUT);
+   logoutBtn.addEventListener("click", logOut);
 
    let loginBtn = document.getElementById("login");
-   loginBtn.addEventListener("click", logIN);
+   loginBtn.addEventListener("click", logIn);
 
    let sortByNameBtn = document.getElementById("sort-by-name");
    sortByNameBtn.addEventListener("click", sortByName);
@@ -208,6 +223,8 @@ window.onload = function () {
    sortByPointsBtn.addEventListener("click", sortByPoints);
 
    let userBtn = this.document.getElementById("user-profile");
+   userBtn.addEventListener("click", gotoUser);
+
    let darkLightBtn = this.document.getElementById("dark-mode");
 
    //Toggle the display based on logged in status

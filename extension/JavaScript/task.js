@@ -102,7 +102,12 @@ let teamName = document.getElementById("teamName");
 assigned = assigned.replace(/['"]+/g, '');
 teamName.innerHTML += assigned;
 let dueDate = document.getElementById("dueDate");
-dueDate.innerHTML += due_on;
+if (due_on == null) {
+  dueDate.style.display = "none";
+} else {
+  dueDate.innerHTML += due_on;
+  teamName.style.width = "49%";
+}
 
 for(let i = 0; i < myValues.length; i++) {
    let newNode = document.createElement("p");

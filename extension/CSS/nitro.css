@@ -10,6 +10,7 @@ head {
 body {
     font-family: 'Lato';
     color: #EEEEEE;
+    margin: 0px;
 }
 
 .button {
@@ -39,15 +40,18 @@ tr {
     border-bottom: 1px solid #C0C0C0;
 }
 
+li {
+    cursor: pointer;
+}
+
 
 
 /* Custom Class Styles */
 
 .card {
     text-align: center;
-    border-radius: 12px;
     background-color: #3E3D3D;
-    border-width: 5px;
+    border-width: 7px;
     width: 240px;
     border-color: #C0C0C0;
     border-style: solid;
@@ -144,6 +148,17 @@ tr {
     margin: auto;
 }
 
+.td1 {
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.td2 {
+    text-align: left;
+    padding-left: 10px;
+}
+
 .tasksCol {
     width: 35%;
 }
@@ -200,6 +215,18 @@ tr {
     cursor: pointer;
 }
 
+#user-table {
+    color: #FFFFFF;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#user-profile-table {
+    color: #FFFFFF;
+    padding-top: 10px;
+    width: 100%
+}
+
 #taskTable {
     font-family: 'Lato';
     color: #FBA642;
@@ -224,7 +251,6 @@ tr {
 }
 
 #teamName {
-    width: 49%;
     display: inline-block;
     text-align: left;
     margin: 0px;
@@ -254,4 +280,12 @@ tr {
     display: inline-block;
     text-align: left;
     margin: 0px;
+}
+
+#progress {
+  text-align: left;
+}
+
+#completed {
+  text-align: left;
 }

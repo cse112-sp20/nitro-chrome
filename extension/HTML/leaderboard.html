@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link href="../CSS/leaderboard.css" rel="stylesheet">
+    <link href="../CSS/darkLightMode.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
@@ -14,47 +15,46 @@
         <p>Leaderboard</p>
     </div>
 
-    <div id="darkness">
-        <table id="table">
-            <tr style="position: absolute; width: 80%;">
-                <th id="team-col">
-                    <span class="sort" id="sort-by-name"></span>
-                    Team name
-                </th>
-                <th id="points-col">
-                    <span class="sort" id="sort-by-points"></span>
-                    Total points
-                </th>
-            </tr>
-        
-            <tbody id="table-body"></tbody>
-        </table>
+    <table id="table">
+        <tr style="position: absolute; width: 80%;">
+            <th id="team-col">
+                <span class="sort" id="sort-by-name"></span>
+                Team name
+            </th>
+            <th id="points-col">
+                <span class="sort" id="sort-by-points"></span>
+                Total points
+            </th>
+        </tr>
 
-        <div class="bottom-buttons">
-            <button id="login">
-                <img src="../images/login.png"><br>
-                Login
-            </button>
-            <button id="user-profile">
-                <img src="../images/user.png"><br>
-                User
-            </button>
-            <button id="tasks">
-                <img src="../images/tasks.png"><br>
-                Tasks
-            </button>
-            <button id="dark-mode">
-                <img src="../images/dark.png"><br>
-                Dark
-            </button>
+        <tbody id="table-body"></tbody>
+    </table>
 
-            <button id="logout">
-                <img src="../images/logout.png"><br>
-                Log out
-            </button>
-        </div>
+    <div class="bottom-buttons">
+        <button class="change-color" id="login">
+            <img src="../images/login.png"><br>
+            Login
+        </button>
+        <button class="change-color" id="user-profile">
+            <img src="../images/user.png"><br>
+            User
+        </button>
+        <button class="change-color" id="tasks">
+            <img src="../images/tasks.png"><br>
+            Tasks
+        </button>
+        <button class="change-color" id="dark-mode">
+            <img src="../images/dark.png"><br>
+            Dark
+        </button>
+
+        <button class="change-color" id="logout">
+            <img src="../images/logout.png"><br>
+            Log out
+        </button>
     </div>
+
     <script src="../JavaScript/leaderboard.js"></script>
-    <script src="../JavaScript/darkLightMode.js"></script>
 </body>
+
 </html>

@@ -148,7 +148,7 @@ td:last-child {
 .bottom-buttons button {
     background-color: transparent;
     border: none;
-    color: #C0C0C0;
+    /* color: #C0C0C0; */
 }
 
 .bottom-buttons img {
@@ -189,19 +189,4 @@ td:last-child {
 
 #team-col {
     padding-left: 8%;
-}
-
-/* Dark and Light Mode */
-
-.dark {
-    background-color: #3E3D3D;
-    color: #C0C0C0;
-    border-color: #C0C0C0;
-}
-
-.light,
-.light * { 
-    background-color: #DEE4E7;
-    color: #000000;
-    border-color: #C0C0C0;
 }

@@ -7,3 +7,11 @@
     background-color: #CFD8DC;
     color: #000000;
 }
+
+.dark-mode-btn-text {
+    color: #C0C0C0;
+}
+
+.light-mode-btn-text {
+    color: #000000;
+}

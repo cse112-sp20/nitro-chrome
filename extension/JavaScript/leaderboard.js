@@ -86,15 +86,24 @@ Functionality of 'dark' button --> Interchange between dark and light mode
 function switchMode() {
    console.log("Button Clicked");
    let card = document.getElementById("card");
+   let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
    if (mode == "dark") {
       localStorage.setItem("mode", "light");
       card.classList.add("light-mode");
       card.classList.remove("dark-mode");
+      for (let i = 0; i < buttons.length; i++) {
+         buttons[i].classList.add("light-mode-btn-text");
+         buttons[i].classList.remove("dark-mode-btn-text");
+      }
    } else {
       localStorage.setItem("mode", "dark");
       card.classList.add("dark-mode");
       card.classList.remove("light-mode");
+      for (let i = 0; i < buttons.length; i++) {
+         buttons[i].classList.add("dark-mode-btn-text");
+         buttons[i].classList.remove("light-mode-btn-text");
+      }
    }
 }
 
@@ -264,5 +273,9 @@ window.onload = function () {
    /* Dark and Light Mode */
    localStorage.setItem("mode", "dark");
    let card = document.getElementById("card");
-   card.classList.toggle("dark-mode");
+   card.classList.add("dark-mode");
+   let buttons = document.getElementsByClassName("change-color");
+   for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.add("dark-mode-btn-text");
+   }
 }

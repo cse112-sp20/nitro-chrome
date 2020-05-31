@@ -52,6 +52,7 @@ li {
     text-align: center;
     background-color: #3E3D3D;
     border-width: 7px;
+    border-radius: 5px;
     width: 240px;
     border-color: #C0C0C0;
     border-style: solid;

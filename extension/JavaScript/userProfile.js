@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 /*==============================================================
 Functionality of BACK button --> redirect to 'Leaderboard' screen
 ==============================================================*/
@@ -25,3 +27,10 @@ pointsRequired.innerHTML = localStorage.getItem("curr_points_required");
 let prod_percentage = (localStorage.getItem("curr_productivity") * 100).toFixed(0);
 let productivity = document.getElementById("productivity");
 productivity.innerHTML = `${prod_percentage}%`;
+
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
+window.onload = function () {
+    DarkLightMode.setColorForCard();
+}

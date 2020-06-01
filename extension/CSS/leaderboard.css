@@ -76,12 +76,10 @@ td:last-child {
 }
 
 
-
 /* Custom Class Styles */
 
 .card {
     text-align: center;
-    background-color: #3E3D3D;
     border-width: 7px;
     border-radius: 5px;
     width: 240px;
@@ -112,7 +110,6 @@ td:last-child {
 .headerWOBackButton {
     margin-top: auto;
     margin-bottom: auto;
-    
     font-size: 20px;
     box-shadow: inset 0 0 3px #333333;
     border-radius: 6px 6px 0 0;
@@ -151,7 +148,6 @@ td:last-child {
 .bottom-buttons button {
     background-color: transparent;
     border: none;
-    color: #C0C0C0;
 }
 
 .bottom-buttons img {

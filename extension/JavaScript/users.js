@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
 
 // GET user data
@@ -57,7 +59,13 @@ function populateTable(value, key) {
         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
         location.href = "./userProfile.html"
     }
-    anchorUser.setAttribute("style", "text-decoration:none; color: #FFFFFF;");
 
     cellUser.appendChild(anchorUser);
+}
+
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
+window.onload = function () {
+    DarkLightMode.setColorForCard();
 }

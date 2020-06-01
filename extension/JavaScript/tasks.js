@@ -13,6 +13,8 @@ Store entire task object
 	task name: taskObject
 -------------------------------------
 ====================================================================*/
+import * as DarkLightMode from "./darkLightMode.js";
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
 if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
@@ -95,7 +97,7 @@ function useJSON(response){
       let cell3Text = document.createTextNode(`${value.split(",")[1]}`);
 
       anchorTask.appendChild(cell1Text);
-      anchorTask.href = "./task.html";
+      //anchorTask.href = "./task.html";
       anchorTask.onclick = function(){
          // Store the team that was clicked for reference for other screens
          localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
@@ -125,11 +127,13 @@ function useJSON(response){
       cell1.appendChild(anchorTask);
       cell2.appendChild(anchorTeam);
       cell3.appendChild(anchorPoints);
-    
-      // Remove underlink/color of the anchor text? 
-      anchorTask.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
-      anchorTeam.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
-      anchorPoints.setAttribute("style", "text-decoration: none; color: #FFFFFF;");
    }
    myMap.forEach(populateTable);
+}
+
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
+window.onload = function () {
+   DarkLightMode.setColorForCard();
 }

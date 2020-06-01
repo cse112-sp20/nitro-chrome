@@ -5,6 +5,7 @@
 TODO/NOTES:
 Where to implement clear_completed endpoint? --> only for testing
 ****************************************************************/
+import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
@@ -84,7 +85,6 @@ function sortByName() {
 Functionality of 'dark' button --> Interchange between dark and light mode
 ========================================================================*/
 function switchMode() {
-   console.log("Button Clicked");
    let card = document.getElementById("card");
    let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
@@ -278,20 +278,19 @@ window.onload = function () {
       localStorage.setItem("mode", "dark");
    }
 
-   let card = document.getElementById("card");
+   DarkLightMode.setColorForCard();
+
    let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
    let modeButton = document.getElementById("dark-mode");
 
    if (mode == "dark") {
       modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
-      card.classList.add("dark-mode");
       for (let i = 0; i < buttons.length; i++) {
          buttons[i].classList.add("dark-mode-btn-text");
       }
    } else {
       modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
-      card.classList.add("light-mode");
       for (let i = 0; i < buttons.length; i++) {
          buttons[i].classList.add("light-mode-btn-text");
       }

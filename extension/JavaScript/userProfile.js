@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 /*==============================================================
 Functionality of BACK button --> redirect to 'Leaderboard' screen
 ==============================================================*/
@@ -30,11 +32,5 @@ productivity.innerHTML = `${prod_percentage}%`;
 Set dark and light mode color
 ==============================================================*/
 window.onload = function () {
-    let card = document.getElementById("card");
-    let mode = localStorage.getItem("mode");
-    if (mode == "dark") {
-        card.classList.add("dark-mode");
-    } else {
-        card.classList.add("light-mode");
-    }
+    DarkLightMode.setColorForCard();
 }

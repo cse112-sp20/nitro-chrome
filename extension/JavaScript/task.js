@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
 if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
@@ -120,11 +122,5 @@ for(let i = 0; i < myValues.length; i++) {
 Set dark and light mode color
 ==============================================================*/
 window.onload = function () {
-   let card = document.getElementById("card");
-   let mode = localStorage.getItem("mode");
-   if (mode == "dark") {
-       card.classList.add("dark-mode");
-   } else {
-       card.classList.add("light-mode");
-   }
+   DarkLightMode.setColorForCard();
 }

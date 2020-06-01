@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
 
 // GET user data
@@ -65,11 +67,5 @@ function populateTable(value, key) {
 Set dark and light mode color
 ==============================================================*/
 window.onload = function () {
-    let card = document.getElementById("card");
-    let mode = localStorage.getItem("mode");
-    if (mode == "dark") {
-        card.classList.add("dark-mode");
-    } else {
-        card.classList.add("light-mode");
-    }
+    DarkLightMode.setColorForCard();
 }

@@ -41,11 +41,27 @@ xhr.send();
 
 let currTeamName = localStorage.getItem("curr_Team");
 let currTeamObject = JSON.parse(localStorage.getItem(currTeamName));
+let assignedUsers = document.getElementById("assigned_users");
 let productivity = document.getElementById("productivity");
 let totalPoints = document.getElementById("total_points");
 let ulP = document.getElementById("progress");
 let ulC = document.getElementById("completed");
-productivity.innerHTML += "Feature WIP";
+
+/*==============================================================
+Users assigned to
+==============================================================*/
+assignedUsers.innerHTML += `${currTeamObject.assigned_to}`;
+
+/*==============================================================
+Productivity in percentage
+==============================================================*/
+let prod_decimal = currTeamObject.points_completed / (currTeamObject.points_completed + currTeamObject.points_required);
+let prod_percentage = (prod_decimal * 100).toFixed(0);
+productivity.innerHTML += `${prod_percentage}%`;
+
+/*==============================================================
+Total Points Completed
+==============================================================*/
 totalPoints.innerHTML += `${currTeamObject.points_completed}`;// + currTeamObject.points_required}`;
 
 /*==============================================================

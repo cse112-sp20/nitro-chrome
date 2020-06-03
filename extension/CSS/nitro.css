@@ -278,10 +278,11 @@ li {
     margin: 0px;
 }
 
-#progress {
+#progress, #completed, #assigned_users {
   text-align: left;
 }
 
-#completed {
+#productivity, #total_points {
   text-align: left;
+  padding-left: 40px;
 }

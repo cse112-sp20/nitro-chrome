@@ -10,6 +10,7 @@ head {
 body {
     font-family: 'Lato';
     color: #EEEEEE;
+    margin: 0px;
 }
 
 .button {
@@ -32,11 +33,14 @@ table {
     margin-right: auto;
     margin-top: 2%;
     font-family: 'Lato';
-    color: #FBA642;
 }
 
 tr {
     border-bottom: 1px solid #C0C0C0;
+}
+
+li {
+    cursor: pointer;
 }
 
 
@@ -45,9 +49,8 @@ tr {
 
 .card {
     text-align: center;
-    border-radius: 12px;
-    background-color: #3E3D3D;
-    border-width: 5px;
+    border-width: 7px;
+    border-radius: 5px;
     width: 240px;
     border-color: #C0C0C0;
     border-style: solid;
@@ -103,6 +106,7 @@ tr {
 
 .headerWOBackButton p {
     padding-top: 6px;
+    font-weight: bold;
     margin: 0;
 }
 
@@ -115,19 +119,21 @@ tr {
     font-size: 11px;
 }
 
-.taskCol {
+.tasksHeader {
     float: left;
-    width: 50%;
-}
-
-.teamCol {
-    display: inline-block;
     width: 40%;
 }
 
-.pointsCol {
+.teamHeader {
+    display: inline-block;
+    width: 30%;
+    padding-right: 14%;
+}
+
+.pointsHeader {
     float: right;
     width: 9.999%;
+    padding-right: 6%;
 }
 
 .taskHeader {
@@ -139,6 +145,31 @@ tr {
     padding-left: 60px;
     width: 80%;
     margin: auto;
+}
+
+.td1 {
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.td2 {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.tasksCol {
+    width: 35%;
+}
+
+.teamCol {
+    width: 20%;
+    padding-left: 6%;
+}
+
+.pointsCol {
+    width: 10%;
+    padding-left: 6%;
 }
 
 /* Custom id Styles */
@@ -183,11 +214,22 @@ tr {
     cursor: pointer;
 }
 
+#user-table {
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#user-profile-table {
+    padding-top: 10px;
+    width: 100%
+}
+
 #taskTable {
     font-family: 'Lato';
-    color: #FBA642;
     border-collapse: collapse;
     text-align: left;
+    margin-left: 5%;
+    width: 91%;
 }
 
 #taskBreakdown {
@@ -197,13 +239,14 @@ tr {
 }
 
 #tasksLine {
-    height: 0.1px;
-    margin: 0px;
+    margin: 0;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    width: 90%;
     align-self: center;
 }
 
 #teamName {
-    width: 49%;
     display: inline-block;
     text-align: left;
     margin: 0px;
@@ -233,4 +276,12 @@ tr {
     display: inline-block;
     text-align: left;
     margin: 0px;
+}
+
+#progress {
+  text-align: left;
+}
+
+#completed {
+  text-align: left;
 }

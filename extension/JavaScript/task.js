@@ -1,3 +1,5 @@
+import * as DarkLightMode from "./darkLightMode.js";
+
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
 if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
@@ -102,11 +104,23 @@ let teamName = document.getElementById("teamName");
 assigned = assigned.replace(/['"]+/g, '');
 teamName.innerHTML += assigned;
 let dueDate = document.getElementById("dueDate");
-dueDate.innerHTML += due_on;
+if (due_on == null) {
+  dueDate.style.display = "none";
+} else {
+  dueDate.innerHTML += due_on;
+  teamName.style.width = "49%";
+}
 
 for(let i = 0; i < myValues.length; i++) {
    let newNode = document.createElement("p");
    newNode.className = "task";
    newNode.innerHTML = myValues[i];
    output.appendChild(newNode);
+}
+
+/*==============================================================
+Set dark and light mode color
+==============================================================*/
+window.onload = function () {
+   DarkLightMode.setColorForCard();
 }

@@ -10,6 +10,7 @@ head {
 body {
     font-family: 'Lato';
     color: #EEEEEE;
+    margin: 0px;
 }
 
 table {
@@ -48,7 +49,7 @@ td:first-child {
 
 td:nth-child(2) {
     text-align: left;
-    width: 45%;
+    width: 50%;
 }
 
 td:nth-child(3) {
@@ -61,14 +62,12 @@ td:last-child {
 }
 
 
-
 /* Custom Class Styles */
 
 .card {
     text-align: center;
-    border-radius: 12px;
-    background-color: #3E3D3D;
-    border-width: 5px;
+    border-width: 7px;
+    border-radius: 5px;
     width: 240px;
     border-color: #C0C0C0;
     border-style: solid;
@@ -96,10 +95,9 @@ td:last-child {
 .headerWOBackButton {
     margin-top: auto;
     margin-bottom: auto;
-    
     font-size: 20px;
     box-shadow: inset 0 0 3px #333333;
-    border-radius: 6px 6px 0 0;
+    /* border-radius: 6px 6px 0 0; */
     background-color: #57B582;
     border-width: none;
     width: 240px;
@@ -127,7 +125,7 @@ td:last-child {
     position: fixed;
     margin-left: auto;
     margin-right: auto;
-    bottom: 7%;
+    bottom: 4%;
     left: 0;
     right: 0;
 }
@@ -135,8 +133,6 @@ td:last-child {
 .bottom-buttons button {
     background-color: transparent;
     border: none;
-    font-size: 11px;
-    color: white;
 }
 
 .bottom-buttons img {
@@ -170,11 +166,15 @@ td:last-child {
     overflow-x: hidden;
     overflow-y: scroll;
     width: 100%;
-    height: 125px;
+    height: 300px;
     display: block;
     margin-top: 22px;
 }
 
 #team-col {
-    padding-left: 8%;
+    padding-left: 2%;
+}
+
+#points-col {
+    padding-left: 12%;
 }

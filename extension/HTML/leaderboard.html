@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link href="../CSS/leaderboard.css" rel="stylesheet">
+    <link href="../CSS/darkLightMode.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
-<body class="card">
+<body class="card" id="card">
     <div class="headerWOBackButton">
         <p>Leaderboard</p>
     </div>
 
     <table id="table">
-        <tr style="position: absolute; width: 80%;">
+        <tr style="position: absolute; width: 83%;">
             <th id="team-col">
                 <span class="sort" id="sort-by-name"></span>
                 Team name
@@ -25,32 +26,34 @@
                 Total points
             </th>
         </tr>
-        <!-- {{#each teams}} -->
+
         <tbody id="table-body"></tbody>
     </table>
 
     <div class="bottom-buttons">
-        <button id="login">
+        <button class="change-color" id="login">
             <img src="../images/login.png"><br>
             Login
         </button>
-        <button id="user-profile">
+        <button class="change-color" id="user-profile">
             <img src="../images/user.png"><br>
-            User
+            Users
         </button>
-        <button id="tasks">
+        <button class="change-color" id="tasks">
             <img src="../images/tasks.png"><br>
             Tasks
         </button>
-        <button id="dark-mode">
+        <button class="change-color" id="dark-mode">
             <img src="../images/dark.png"><br>
             Dark
         </button>
-        <button id="logout">
+
+        <button class="change-color" id="logout">
             <img src="../images/logout.png"><br>
-            Log out
+            Logout
         </button>
     </div>
-    <script src="../JavaScript/leaderboard.js"></script> <!-- <script src="leaderboard.js"></script> -->
+
+    <script type="module" src="../JavaScript/leaderboard.js"></script>
   </body>
 </html>

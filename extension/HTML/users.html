@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
+    <title>User Profile</title>
     <link href="../CSS/nitro.css" rel="stylesheet">
     <link href="../CSS/darkLightMode.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
@@ -13,20 +13,14 @@
 <body class="card" id="card">
     <div class="header">
         <button id="back"></button>
-        <p>Tasks</p>
+        <p>Users</p>
     </div>
 
-    <div class="tableHeader">
-        <div class="tasksHeader">Task</div>
-        <div class="teamHeader">Team</div>
-        <div class="pointsHeader">Pts</div>
-    </div>
-    <hr id="tasksLine">
-    <table id="taskTable">
-        <!-- each task -->
+    <table id="user-table">
+        <!-- {{#each user}} -->
     </table>
 
-    <script type="module" src="../JavaScript/tasks.js"></script>
+    <script type="module" src="../JavaScript/users.js"></script>
 </body>
 
 </html>

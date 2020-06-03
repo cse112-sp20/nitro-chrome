@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task</title>
     <link href="../CSS/nitro.css" rel="stylesheet">
+    <link href="../CSS/darkLightMode.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 </head>
 
-<body class="card">
+<body class="card" id="card">
     <div class="header">
-        <button id="back"></button> <p id="taskNameHere"></p>
+        <button id="back"></button>
+        <p id="taskNameHere"></p>
     </div>
 
     <div class="taskHeader">
@@ -21,7 +23,8 @@
 
     <hr id="taskUnderline">
 
-    <div id="taskBreakdown"></div> <!--Use JS to populate here-->
+    <div id="taskBreakdown"></div>
+    <!--Use JS to populate here-->
 
     <br>
     <br>
@@ -32,10 +35,10 @@
         <p id="deleteText">Delete</p>
     </div>
 
-    <button id="check"></button> 
-    <button id="delete"></button> 
-    
-    <script src="../JavaScript/task.js"></script>
+    <button id="check"></button>
+    <button id="delete"></button>
+
+    <script type="module" src="../JavaScript/task.js"></script>
 </body>
 
 </html>

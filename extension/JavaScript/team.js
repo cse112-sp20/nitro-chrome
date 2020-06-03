@@ -50,7 +50,7 @@ let ulC = document.getElementById("completed");
 /*==============================================================
 Users assigned to
 ==============================================================*/
-assignedUsers.innerHTML += `${currTeamObject.assigned_to}`;
+assignedUsers.appendChild(document.createTextNode(`${currTeamObject.assigned_to}`));
 
 /*==============================================================
 Productivity in percentage

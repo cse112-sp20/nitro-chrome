@@ -2,7 +2,9 @@ import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
-if (localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]) {
+const current_pathname = "./" + window.location.pathname.split("/")[2];
+
+if (localStorage.getItem("back_target") === current_pathname) {
   localStorage.setItem("back_target", "./leaderboard.html");
 }
 
@@ -90,7 +92,7 @@ for (let i = 0; i < currTeamObject.consolidated_tasks.length; i++) {
 
     liP.href = "./task.html";
     liP.onclick = function () {
-      localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
+      localStorage.setItem("back_target", current_pathname);
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Task", currTeamObject.consolidated_tasks[i].title.split(" (")[0]);
       location.href = "./task.html"

@@ -12,6 +12,8 @@ const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 // const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
+const current_pathname = "./" + window.location.pathname.split("/")[2];
+
 let response = null;
 var rankByPoints = true;
 var reverse = false;
@@ -57,7 +59,7 @@ if ((localStorage.getItem("logged_in"))) {
 Functionality of 'Tasks' button
 ==============================================================*/
 function gotoTasks() {
-   localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
+   localStorage.setItem("back_target", current_pathname);
    location.href = "./tasks.html";
 }
 
@@ -273,7 +275,7 @@ function populateTable(value, key) {
    function goToTeam() {
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);
-      localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
+      localStorage.setItem("back_target", current_pathname);
       location.href = "./team.html"
    }
    cellTeamLink.onclick = goToTeam;

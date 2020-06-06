@@ -2,7 +2,9 @@ import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
-if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
+const current_pathname = "./" + window.location.pathname.split("/")[2];
+
+if(localStorage.getItem("back_target") === current_pathname){
    localStorage.setItem("back_target", "./leaderboard.html");
 }
 

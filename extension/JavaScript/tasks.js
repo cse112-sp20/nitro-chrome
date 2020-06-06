@@ -17,7 +17,9 @@ import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 
-if(localStorage.getItem("back_target") === "./" + window.location.pathname.split("/")[2]){
+const current_pathname = "./" + window.location.pathname.split("/")[2];
+
+if(localStorage.getItem("back_target") === current_pathname){
    localStorage.setItem("back_target", "./leaderboard.html");
 }
 
@@ -76,59 +78,61 @@ function useJSON(response){
       }
    }
 
+   myMap.forEach(populateTable);
+}
+   
+/*==============================================================
+Populate the table
+==============================================================*/
+function populateTable(value, key){
    // Get reference to the table element from the HTML
    let table = document.getElementById("taskTable");
-   
-   // Populate the table: 
-   function populateTable(value, key){
-      // Create 2 anchor elements
-      let anchorTask = document.createElement("a");
-      let anchorTeam = document.createElement("a");
-      let anchorPoints = document.createElement("a");
-      // Insert a new row at the end of the table
-      let newRow = table.insertRow(-1);
-      // create/insert 2 new <td> (table data/cell) elements in the new row
-      let cell1 = newRow.insertCell(0);   // Task Name
-      let cell2 = newRow.insertCell(1);   // Task Team   
-      let cell3 = newRow.insertCell(2);   // Task Points   
-      // create the contents of the new cells
-      let cell1Text = document.createTextNode(`${key}`);
-      let cell2Text = document.createTextNode(`${value.split(",")[0]}`);
-      let cell3Text = document.createTextNode(`${value.split(",")[1]}`);
+   // Create 2 anchor elements
+   let anchorTask = document.createElement("a");
+   let anchorTeam = document.createElement("a");
+   let anchorPoints = document.createElement("a");
+   // Insert a new row at the end of the table
+   let newRow = table.insertRow(-1);
+   // create/insert 2 new <td> (table data/cell) elements in the new row
+   let cell1 = newRow.insertCell(0);   // Task Name
+   let cell2 = newRow.insertCell(1);   // Task Team   
+   let cell3 = newRow.insertCell(2);   // Task Points   
+   // create the contents of the new cells
+   let cell1Text = document.createTextNode(`${key}`);
+   let cell2Text = document.createTextNode(`${value.split(",")[0]}`);
+   let cell3Text = document.createTextNode(`${value.split(",")[1]}`);
 
-      anchorTask.appendChild(cell1Text);
-      //anchorTask.href = "./task.html";
-      anchorTask.onclick = function(){
-         // Store the team that was clicked for reference for other screens
-         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
-         localStorage.setItem("curr_Task", key);
-         location.href = "./task.html"
-      }
-      
-      anchorTeam.appendChild(cell2Text);
-      anchorTeam.onclick = function(){
-         // Store the team that was clicked for reference for other screens
-         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
-         localStorage.setItem("curr_Team", value.split(",")[0]);
-         location.href = "./team.html"
-      }
-      
-      anchorPoints.appendChild(cell3Text);
-      anchorPoints.onclick = function(){
-         // Store the team that was clicked for reference for other screens
-         localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);         
-         localStorage.setItem("curr_Team", value.split(",")[0]);
-         location.href = "./task.html"
-      }
-      cell1.className = "tasksCol";
-      cell2.className = "teamCol";
-      cell3.className = "pointsCol";
-      // insert the contents of the new cells to the table
-      cell1.appendChild(anchorTask);
-      cell2.appendChild(anchorTeam);
-      cell3.appendChild(anchorPoints);
+   anchorTask.appendChild(cell1Text);
+   //anchorTask.href = "./task.html";
+   anchorTask.onclick = function(){
+      // Store the team that was clicked for reference for other screens
+      redirect("curr_Task", key, "./task.html");
    }
-   myMap.forEach(populateTable);
+   
+   anchorTeam.appendChild(cell2Text);
+   anchorTeam.onclick = function(){
+      // Store the team that was clicked for reference for other screens
+      redirect("curr_Team", value.split(",")[0], "./team.html");
+   }
+   
+   anchorPoints.appendChild(cell3Text);
+   anchorPoints.onclick = function(){
+      // Store the team that was clicked for reference for other screens
+      redirect("curr_Team", value.split(",")[0], "./task.html");
+   }
+   cell1.className = "tasksCol";
+   cell2.className = "teamCol";
+   cell3.className = "pointsCol";
+   // insert the contents of the new cells to the table
+   cell1.appendChild(anchorTask);
+   cell2.appendChild(anchorTeam);
+   cell3.appendChild(anchorPoints);
+}
+
+function redirect(key, value, pathname) {
+   localStorage.setItem("back_target", current_pathname);
+   localStorage.setItem(key, value);
+   location.href = pathname;
 }
 
 /*==============================================================

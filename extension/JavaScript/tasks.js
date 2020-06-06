@@ -106,25 +106,19 @@ function populateTable(value, key){
    //anchorTask.href = "./task.html";
    anchorTask.onclick = function(){
       // Store the team that was clicked for reference for other screens
-      localStorage.setItem("back_target", current_pathname);         
-      localStorage.setItem("curr_Task", key);
-      location.href = "./task.html"
+      redirect("curr_Task", key, "./task.html");
    }
    
    anchorTeam.appendChild(cell2Text);
    anchorTeam.onclick = function(){
       // Store the team that was clicked for reference for other screens
-      localStorage.setItem("back_target", current_pathname);         
-      localStorage.setItem("curr_Team", value.split(",")[0]);
-      location.href = "./team.html"
+      redirect("curr_Team", value.split(",")[0], "./team.html");
    }
    
    anchorPoints.appendChild(cell3Text);
    anchorPoints.onclick = function(){
       // Store the team that was clicked for reference for other screens
-      localStorage.setItem("back_target", current_pathname);         
-      localStorage.setItem("curr_Team", value.split(",")[0]);
-      location.href = "./task.html"
+      redirect("curr_Team", value.split(",")[0], "./task.html");
    }
    cell1.className = "tasksCol";
    cell2.className = "teamCol";
@@ -133,6 +127,12 @@ function populateTable(value, key){
    cell1.appendChild(anchorTask);
    cell2.appendChild(anchorTeam);
    cell3.appendChild(anchorPoints);
+}
+
+function redirect(key, value, pathname) {
+   localStorage.setItem("back_target", current_pathname);
+   localStorage.setItem(key, value);
+   location.href = pathname;
 }
 
 /*==============================================================

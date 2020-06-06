@@ -123,17 +123,25 @@ Functionality of 'dark' button --> Interchange between dark and light mode
 ========================================================================*/
 function switchMode() {
    let mode = localStorage.getItem("mode");
-   let modeButton = document.getElementById("dark-mode");
    if (mode == "dark") {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
       localStorage.setItem("mode", "light");
+      setModeButton("light");
       switchModeForCard("card", "light-mode", "dark-mode");
       switchModeForButtons("change-color", "light-mode-btn-text", "dark-mode-btn-text");
    } else {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
       localStorage.setItem("mode", "dark");
+      setModeButton("dark");
       switchModeForCard("card", "dark-mode", "light-mode");
       switchModeForButtons("change-color", "dark-mode-btn-text", "light-mode-btn-text");
+   }
+}
+
+function setModeButton(mode) {
+   let modeButton = document.getElementById("dark-mode");
+   if (mode == "dark") {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark";
+   } else if (mode == "light") {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light";
    }
 }
 
@@ -284,19 +292,13 @@ window.onload = function () {
 
    DarkLightMode.setColorForCard();
 
-   let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
-   let modeButton = document.getElementById("dark-mode");
 
    if (mode == "dark") {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("dark-mode-btn-text");
-      }
+      setModeButton("dark");
+      switchModeForButtons("change-color", "dark-mode-btn-text", null);
    } else {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("light-mode-btn-text");
-      }
+      setModeButton("light");
+      switchModeForButtons("change-color", "light-mode-btn-text", null);
    }
 }

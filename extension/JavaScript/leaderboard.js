@@ -16,6 +16,43 @@ let response = null;
 var rankByPoints = true;
 var reverse = false;
 
+// Add onclick listeners to buttons
+let tasksBtn = document.getElementById("tasks");
+tasksBtn.addEventListener("click", gotoTasks);
+
+let logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", logOut);
+
+let loginBtn = document.getElementById("login");
+loginBtn.addEventListener("click", logIn);
+
+let sortByNameBtn = document.getElementById("sort-by-name");
+sortByNameBtn.addEventListener("click", sortByName);
+
+let sortByPointsBtn = document.getElementById("sort-by-points");
+sortByPointsBtn.addEventListener("click", sortByPoints);
+
+let userBtn = document.getElementById("user-profile");
+userBtn.addEventListener("click", gotoUser);
+
+let darkLightBtn = document.getElementById("dark-mode");
+darkLightBtn.addEventListener("click", switchMode);
+
+//Toggle the display based on logged in status
+if ((localStorage.getItem("logged_in"))) {
+   loginBtn.style.display = "none";
+   userBtn.style.display = "inline";
+   tasksBtn.style.display = "inline";
+   darkLightBtn.style.display = "inline";
+   logoutBtn.style.display = "inline";
+} else {
+   loginBtn.style.display = "inline";
+   userBtn.style.display = "none";
+   tasksBtn.style.display = "none";
+   darkLightBtn.style.display = "none";
+   logoutBtn.style.display = "none";
+}
+
 /*==============================================================
 Functionality of 'Tasks' button
 ==============================================================*/
@@ -239,44 +276,7 @@ function populateTable(value, key) {
    cellArrow.appendChild(cellArrowLink);
 }
 
-// Add onclick listeners to buttons
 window.onload = function () {
-   let tasksBtn = document.getElementById("tasks");
-   tasksBtn.addEventListener("click", gotoTasks);
-
-   let logoutBtn = document.getElementById("logout");
-   logoutBtn.addEventListener("click", logOut);
-
-   let loginBtn = document.getElementById("login");
-   loginBtn.addEventListener("click", logIn);
-
-   let sortByNameBtn = document.getElementById("sort-by-name");
-   sortByNameBtn.addEventListener("click", sortByName);
-
-   let sortByPointsBtn = document.getElementById("sort-by-points");
-   sortByPointsBtn.addEventListener("click", sortByPoints);
-
-   let userBtn = this.document.getElementById("user-profile");
-   userBtn.addEventListener("click", gotoUser);
-
-   let darkLightBtn = this.document.getElementById("dark-mode");
-   darkLightBtn.addEventListener("click", switchMode);
-
-   //Toggle the display based on logged in status
-   if ((localStorage.getItem("logged_in"))) {
-      loginBtn.style.display = "none";
-      userBtn.style.display = "inline";
-      tasksBtn.style.display = "inline";
-      darkLightBtn.style.display = "inline";
-      logoutBtn.style.display = "inline";
-   } else {
-      loginBtn.style.display = "inline";
-      userBtn.style.display = "none";
-      tasksBtn.style.display = "none";
-      darkLightBtn.style.display = "none";
-      logoutBtn.style.display = "none";
-   }
-
    /* Dark and Light Mode */
    if (localStorage.getItem("mode") === null) {
       localStorage.setItem("mode", "dark");

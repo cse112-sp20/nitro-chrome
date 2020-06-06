@@ -85,28 +85,32 @@ function sortByName() {
 Functionality of 'dark' button --> Interchange between dark and light mode
 ========================================================================*/
 function switchMode() {
-   let card = document.getElementById("card");
-   let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
    let modeButton = document.getElementById("dark-mode");
    if (mode == "dark") {
       modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
       localStorage.setItem("mode", "light");
-      card.classList.add("light-mode");
-      card.classList.remove("dark-mode");
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("light-mode-btn-text");
-         buttons[i].classList.remove("dark-mode-btn-text");
-      }
+      switchModeForCard("card", "light-mode", "dark-mode");
+      switchModeForButtons("change-color", "light-mode-btn-text", "dark-mode-btn-text");
    } else {
       modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
       localStorage.setItem("mode", "dark");
-      card.classList.add("dark-mode");
-      card.classList.remove("light-mode");
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("dark-mode-btn-text");
-         buttons[i].classList.remove("light-mode-btn-text");
-      }
+      switchModeForCard("card", "dark-mode", "light-mode");
+      switchModeForButtons("change-color", "dark-mode-btn-text", "light-mode-btn-text");
+   }
+}
+
+function switchModeForCard(id, classToAdd, classToRemove) {
+   let card = document.getElementById(id);
+   card.classList.add(classToAdd);
+   card.classList.remove(classToRemove);
+}
+
+function switchModeForButtons(classNameOfButtons, classToAdd, classToRemove) {
+   let buttons = document.getElementsByClassName(classNameOfButtons);
+   for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.add(classToAdd);
+      buttons[i].classList.remove(classToRemove);
    }
 }
 

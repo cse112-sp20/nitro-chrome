@@ -56,7 +56,6 @@ function populateTable(value, key) {
         localStorage.setItem("curr_points_completed", value.points_completed);
         localStorage.setItem("curr_points_required", value.points_required);
         localStorage.setItem("curr_productivity", value.productivity);
-        localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
         location.href = "./userProfile.html"
     }
 

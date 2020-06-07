@@ -12,15 +12,54 @@ const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
 // const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
+const current_pathname = "./" + window.location.pathname.split("/")[2];
+
 let response = null;
 var rankByPoints = true;
 var reverse = false;
+
+// Add onclick listeners to buttons
+let tasksBtn = document.getElementById("tasks");
+tasksBtn.addEventListener("click", gotoTasks);
+
+let logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", logOut);
+
+let loginBtn = document.getElementById("login");
+loginBtn.addEventListener("click", logIn);
+
+let sortByNameBtn = document.getElementById("sort-by-name");
+sortByNameBtn.addEventListener("click", sortByName);
+
+let sortByPointsBtn = document.getElementById("sort-by-points");
+sortByPointsBtn.addEventListener("click", sortByPoints);
+
+let userBtn = document.getElementById("user-profile");
+userBtn.addEventListener("click", gotoUser);
+
+let darkLightBtn = document.getElementById("dark-mode");
+darkLightBtn.addEventListener("click", switchMode);
+
+//Toggle the display based on logged in status
+if ((localStorage.getItem("logged_in"))) {
+   loginBtn.style.display = "none";
+   userBtn.style.display = "inline";
+   tasksBtn.style.display = "inline";
+   darkLightBtn.style.display = "inline";
+   logoutBtn.style.display = "inline";
+} else {
+   loginBtn.style.display = "inline";
+   userBtn.style.display = "none";
+   tasksBtn.style.display = "none";
+   darkLightBtn.style.display = "none";
+   logoutBtn.style.display = "none";
+}
 
 /*==============================================================
 Functionality of 'Tasks' button
 ==============================================================*/
 function gotoTasks() {
-   localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
+   localStorage.setItem("back_target", current_pathname);
    location.href = "./tasks.html";
 }
 
@@ -85,28 +124,40 @@ function sortByName() {
 Functionality of 'dark' button --> Interchange between dark and light mode
 ========================================================================*/
 function switchMode() {
-   let card = document.getElementById("card");
-   let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
+   if (mode == "dark") {
+      localStorage.setItem("mode", "light");
+      setModeButton("light");
+      switchModeForCard("card", "light-mode", "dark-mode");
+      switchModeForButtons("change-color", "light-mode-btn-text", "dark-mode-btn-text");
+   } else {
+      localStorage.setItem("mode", "dark");
+      setModeButton("dark");
+      switchModeForCard("card", "dark-mode", "light-mode");
+      switchModeForButtons("change-color", "dark-mode-btn-text", "light-mode-btn-text");
+   }
+}
+
+function setModeButton(mode) {
    let modeButton = document.getElementById("dark-mode");
    if (mode == "dark") {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
-      localStorage.setItem("mode", "light");
-      card.classList.add("light-mode");
-      card.classList.remove("dark-mode");
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("light-mode-btn-text");
-         buttons[i].classList.remove("dark-mode-btn-text");
-      }
-   } else {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
-      localStorage.setItem("mode", "dark");
-      card.classList.add("dark-mode");
-      card.classList.remove("light-mode");
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("dark-mode-btn-text");
-         buttons[i].classList.remove("light-mode-btn-text");
-      }
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark";
+   } else if (mode == "light") {
+      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light";
+   }
+}
+
+function switchModeForCard(id, classToAdd, classToRemove) {
+   let card = document.getElementById(id);
+   card.classList.add(classToAdd);
+   card.classList.remove(classToRemove);
+}
+
+function switchModeForButtons(classNameOfButtons, classToAdd, classToRemove) {
+   let buttons = document.getElementsByClassName(classNameOfButtons);
+   for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.add(classToAdd);
+      buttons[i].classList.remove(classToRemove);
    }
 }
 
@@ -224,7 +275,7 @@ function populateTable(value, key) {
    function goToTeam() {
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);
-      localStorage.setItem("back_target", "./" + window.location.pathname.split("/")[2]);
+      localStorage.setItem("back_target", current_pathname);
       location.href = "./team.html"
    }
    cellTeamLink.onclick = goToTeam;
@@ -235,44 +286,7 @@ function populateTable(value, key) {
    cellArrow.appendChild(cellArrowLink);
 }
 
-// Add onclick listeners to buttons
 window.onload = function () {
-   let tasksBtn = document.getElementById("tasks");
-   tasksBtn.addEventListener("click", gotoTasks);
-
-   let logoutBtn = document.getElementById("logout");
-   logoutBtn.addEventListener("click", logOut);
-
-   let loginBtn = document.getElementById("login");
-   loginBtn.addEventListener("click", logIn);
-
-   let sortByNameBtn = document.getElementById("sort-by-name");
-   sortByNameBtn.addEventListener("click", sortByName);
-
-   let sortByPointsBtn = document.getElementById("sort-by-points");
-   sortByPointsBtn.addEventListener("click", sortByPoints);
-
-   let userBtn = this.document.getElementById("user-profile");
-   userBtn.addEventListener("click", gotoUser);
-
-   let darkLightBtn = this.document.getElementById("dark-mode");
-   darkLightBtn.addEventListener("click", switchMode);
-
-   //Toggle the display based on logged in status
-   if ((localStorage.getItem("logged_in"))) {
-      loginBtn.style.display = "none";
-      userBtn.style.display = "inline";
-      tasksBtn.style.display = "inline";
-      darkLightBtn.style.display = "inline";
-      logoutBtn.style.display = "inline";
-   } else {
-      loginBtn.style.display = "inline";
-      userBtn.style.display = "none";
-      tasksBtn.style.display = "none";
-      darkLightBtn.style.display = "none";
-      logoutBtn.style.display = "none";
-   }
-
    /* Dark and Light Mode */
    if (localStorage.getItem("mode") === null) {
       localStorage.setItem("mode", "dark");
@@ -280,19 +294,13 @@ window.onload = function () {
 
    DarkLightMode.setColorForCard();
 
-   let buttons = document.getElementsByClassName("change-color");
    let mode = localStorage.getItem("mode");
-   let modeButton = document.getElementById("dark-mode");
 
    if (mode == "dark") {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Dark"
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("dark-mode-btn-text");
-      }
+      setModeButton("dark");
+      switchModeForButtons("change-color", "dark-mode-btn-text", null);
    } else {
-      modeButton.innerHTML = "<img src='../images/dark.png'><br>Light"
-      for (let i = 0; i < buttons.length; i++) {
-         buttons[i].classList.add("light-mode-btn-text");
-      }
+      setModeButton("light");
+      switchModeForButtons("change-color", "light-mode-btn-text", null);
    }
 }

@@ -272,8 +272,3 @@ li {
     align-self: center;
     text-align: left;
 }
-
-#user-table #productivity {
-    padding-left: 0;
-    background-color: red;
-}

@@ -104,6 +104,15 @@ for (let i = 0; i < currTeamObject.completed_tasks.length; i++) {
   let liC = document.createElement("li");
   liC.appendChild(document.createTextNode(currTeamObject.completed_tasks[i].title));
   ulC.appendChild(liC);
+
+  liC.href = "./task.html";
+  liC.onclick = function () {
+    localStorage.setItem("back_target", current_pathname);
+    // Store the team that was clicked for reference for other screens
+    localStorage.setItem("curr_Task", currTeamObject.completed_tasks[i].title.split(" (")[0]);
+    location.href = "./task.html"
+  }
+
 }
 
 /*==============================================================

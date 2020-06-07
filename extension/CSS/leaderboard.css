@@ -29,6 +29,7 @@ tr {
 
 td {
     height: 25px;
+    cursor: pointer;
 }
 
 th {

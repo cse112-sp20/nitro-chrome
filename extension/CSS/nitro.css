@@ -48,6 +48,10 @@ tr {
     height: 30px;
 }
 
+td {
+    cursor: pointer;
+}
+
 li {
     cursor: pointer;
 }

@@ -118,7 +118,7 @@ function populateTable(value, key){
    anchorPoints.appendChild(cell3Text);
    anchorPoints.onclick = function(){
       // Store the team that was clicked for reference for other screens
-      redirect("curr_Team", value.split(",")[0], "./task.html");
+      redirect("curr_Team", key, "./task.html");
    }
    cell1.className = "tasksCol";
    cell2.className = "teamCol";

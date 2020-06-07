@@ -9,7 +9,6 @@ head {
 
 body {
     font-family: 'Lato';
-    color: #EEEEEE;
     margin: 0px;
 }
 
@@ -74,40 +73,22 @@ td:last-child {
     min-height: 240px;
 }
 
-.header img {
-    vertical-align: middle;
-    float: left;
-    padding-left: 10px;
-    padding-top: 7px;
-}
-
-.header p {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 45px;
-    width: 149px;
-    float: right;
-    padding-top: 7px;
-    text-align: center;
-}
-
 .headerWOBackButton {
     margin-top: auto;
     margin-bottom: auto;
     font-size: 20px;
     box-shadow: inset 0 0 3px #333333;
-    /* border-radius: 6px 6px 0 0; */
     background-color: #57B582;
     border-width: none;
     width: 240px;
-    height: 40px;
+    height: 45px;
     position: relative;
 }
 
 .headerWOBackButton p {
-    padding-top: 6px;
+    align-self: center;
     margin: 0;
+    padding-top: 10px;
 }
 
 .sort {
@@ -123,21 +104,21 @@ td:last-child {
 .bottom-buttons {
     width: 240px;
     position: fixed;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    align-items: center;
     bottom: 4%;
-    left: 0;
-    right: 0;
 }
 
 .bottom-buttons button {
     background-color: transparent;
+    flex: 1;
+    font-size: 12px;
     border: none;
 }
 
 .bottom-buttons img {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
 }
 
 ::-webkit-scrollbar-track

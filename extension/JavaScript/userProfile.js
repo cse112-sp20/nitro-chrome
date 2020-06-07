@@ -25,7 +25,7 @@ let pointsRequired = document.getElementById("points-required");
 pointsRequired.innerHTML = localStorage.getItem("curr_points_required");
 
 let prod_percentage = (localStorage.getItem("curr_productivity") * 100).toFixed(0);
-let productivity = document.getElementById("productivity");
+let productivity = document.getElementById("user-productivity");
 productivity.innerHTML = `${prod_percentage}%`;
 
 /*==============================================================

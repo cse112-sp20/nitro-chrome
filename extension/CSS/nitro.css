@@ -13,6 +13,10 @@ body {
     margin: 0px;
 }
 
+h2 {
+    color: #6388E8;
+}
+
 .button {
     font-size: 24px;
     width: 100px;
@@ -32,11 +36,16 @@ table {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
+    margin-bottom: 10%;
+    overflow: auto;
     font-family: 'Lato';
+    border-collapse: collapse;
 }
 
 tr {
-    border-bottom: 1px solid #C0C0C0;
+    font-family: 'Lato';
+    border-bottom: 1px solid #6388E8;
+    height: 30px;
 }
 
 li {
@@ -126,6 +135,7 @@ li {
 }
 
 .td1 {
+    color: #6388E8;
     text-align: left;
     white-space: nowrap;
     padding-left: 10px;
@@ -240,6 +250,7 @@ li {
 #taskUnderline {
     width: 80%;
     align-self: center;
+    border-color: #6388E8;
 }
 
 #completeText {
@@ -257,6 +268,10 @@ li {
 }
 
 #progress, #completed, #assigned_users {
+  text-align: left;
+}
+
+#user-productivity {
   text-align: left;
 }
 

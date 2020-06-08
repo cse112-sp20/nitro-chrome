@@ -13,6 +13,10 @@ body {
     margin: 0px;
 }
 
+h2 {
+    color: #6388E8;
+}
+
 .button {
     font-size: 24px;
     width: 100px;
@@ -32,11 +36,20 @@ table {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
+    margin-bottom: 10%;
+    overflow: auto;
     font-family: 'Lato';
+    border-collapse: collapse;
 }
 
 tr {
-    border-bottom: 1px solid #C0C0C0;
+    font-family: 'Lato';
+    border-bottom: 1px solid #6388E8;
+    height: 30px;
+}
+
+td {
+    cursor: pointer;
 }
 
 li {
@@ -61,12 +74,11 @@ li {
     margin-top: auto;
     margin-bottom: auto;
     
-    font-size: 24px;
+    font-size: 20px;
     box-shadow: inset 0 0 3px #333333;
-    border-radius: 12px;
     background-color: #6388E8;
     border-width: none;
-    width: 239px;
+    width: 240px;
     height: 45px;
     position: relative;
 }
@@ -85,29 +97,8 @@ li {
     margin-right: 45px;
     width: 149px;
     float: right;
-    padding-top: 7px;
-    font-weight: bold;
+    padding-top: 10px;
     text-align: center;
-}
-
-.headerWOBackButton {
-    margin-top: auto;
-    margin-bottom: auto;
-    
-    font-size: 20px;
-    box-shadow: inset 0 0 3px #333333;
-    border-radius: 6px 6px 0 0;
-    background-color: #57B582;
-    border-width: none;
-    width: 240px;
-    height: 40px;
-    position: relative;
-}
-
-.headerWOBackButton p {
-    padding-top: 6px;
-    font-weight: bold;
-    margin: 0;
 }
 
 .container {
@@ -148,6 +139,7 @@ li {
 }
 
 .td1 {
+    color: #6388E8;
     text-align: left;
     white-space: nowrap;
     padding-left: 10px;
@@ -262,6 +254,7 @@ li {
 #taskUnderline {
     width: 80%;
     align-self: center;
+    border-color: #6388E8;
 }
 
 #completeText {
@@ -282,7 +275,19 @@ li {
   text-align: left;
 }
 
+#user-productivity {
+  text-align: left;
+}
+
 #productivity, #total_points {
   text-align: left;
   padding-left: 40px;
+}
+
+#user-table {
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+    text-align: left;
 }

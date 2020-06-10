@@ -1,6 +1,6 @@
 import * as DarkLightMode from "./darkLightMode.js";
 
-const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
+const users_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
 
 // GET user data
 let response = null;
@@ -12,7 +12,7 @@ xhr.onreadystatechange = function () {
         useJSON(response);
     }
 };
-xhr.open("GET", tasks_endpoint, true);
+xhr.open("GET", users_endpoint, true);
 xhr.send();
 
 /*==============================================================

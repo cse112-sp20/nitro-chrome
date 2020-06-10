@@ -12,6 +12,5 @@ answer.set("teamA", 9);
 answer.set("teamB", 55);
 
 test('sort map of name:points in ascending order of points', () => {
-  expect(sortPointsAsc(unsorted)).toEqual(answer);  // Check if arrays are equal
-//   expect(sortPointsAsc(unsorted)).not.toBe(answer); // Check for pass by value
+  expect(sortPointsAsc(unsorted)).toEqual(answer);
 });

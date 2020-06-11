@@ -15,7 +15,6 @@ import * as DarkLightMode from "./darkLightMode.js";
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
 const login_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/login";
 const logout_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/logout";
-// const clear_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/clear_completed";
 
 const current_pathname = "./" + window.location.pathname.split("/")[2];
 
@@ -81,7 +80,6 @@ Functionality of 'Logout' button --> logout the user
 function logOut() {
 
    // Redirect to logout endpoint
-
    chrome.tabs.create({ url: logout_endpoint, active: false }, function(tab) {
      setTimeout(function() {
        chrome.tabs.remove(tab.id);
@@ -279,7 +277,7 @@ function populateTable(value, key) {
    cellArrowImage.style.height = "10px";
    cellArrowLink.appendChild(cellArrowImage);
 
-   // direct to team page
+   // Direct to team page
    function goToTeam() {
       // Store the team that was clicked for reference for other screens
       localStorage.setItem("curr_Team", key);

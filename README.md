@@ -12,9 +12,7 @@
 
 [Repo Organization Guide](https://github.com/cse112-sp20/nitro-chrome/wiki/Repo-Organization)
 
-### Table of Contents
- * [Setup dev environment](#setup-dev-environment)
- * [Setup Git](#setup-git)
+### Getting Started Guide
 
 ### Setup Dev Environment
 1. Setup git below

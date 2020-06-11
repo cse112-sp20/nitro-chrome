@@ -1,3 +1,12 @@
+/****************************************************************
+OVERVIEW:
+   This file implements the functionality of the team.html
+   page. It will make a GET request to the tasks endpoint to get
+   a JSON dump from the backend which will be used to populate 
+   the page with the relevant data.
+   This file also implements the functionality to calculate the 
+   productivity score of the current team.
+****************************************************************/
 import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";

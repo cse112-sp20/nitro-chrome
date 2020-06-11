@@ -1,6 +1,14 @@
+/****************************************************************
+OVERVIEW:
+   This file implements the functionality of the users.html
+   page. It will make a GET request to the users endpoint to
+   retrieve a JSON dump fom the backend of user data. It will 
+   then store and use the response to populate the table/list of
+   users and display it to the page.
+****************************************************************/
 import * as DarkLightMode from "./darkLightMode.js";
 
-const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
+const users_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/users";
 
 // GET user data
 let response = null;
@@ -12,7 +20,7 @@ xhr.onreadystatechange = function () {
         useJSON(response);
     }
 };
-xhr.open("GET", tasks_endpoint, true);
+xhr.open("GET", users_endpoint, true);
 xhr.send();
 
 /*==============================================================

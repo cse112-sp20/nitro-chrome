@@ -1,3 +1,9 @@
+/****************************************************************
+OVERVIEW:
+   This file implements the functionality of the userProfile.html
+   page. It will retrieve the relevant data from the stored JSON dump
+    for the user that was clicked and display it to the page.
+****************************************************************/
 import * as DarkLightMode from "./darkLightMode.js";
 
 /*==============================================================

@@ -93,7 +93,7 @@ backBtn.addEventListener("click", gotoTasks);
 Populate In Progress and Complete lists
 ==============================================================*/
 for (let i = 0; i < currTeamObject.completed_tasks.length; i++) {
-  // append task title to "Completed" list
+  // Append task title to "Completed" list
   let liC = document.createElement("li");
   liC.style.cursor = "default";
   liC.appendChild(document.createTextNode(currTeamObject.completed_tasks[i].title));
@@ -101,7 +101,7 @@ for (let i = 0; i < currTeamObject.completed_tasks.length; i++) {
 }
 for (let i = 0; i < currTeamObject.consolidated_tasks.length; i++) {
   if (currTeamObject.consolidated_tasks[i].status === "active") {
-    // append task title to "In Progress" list
+    // Append task title to "In Progress" list
     let liP = document.createElement("li");
     liP.appendChild(document.createTextNode(currTeamObject.consolidated_tasks[i].title));
     ulP.appendChild(liP);

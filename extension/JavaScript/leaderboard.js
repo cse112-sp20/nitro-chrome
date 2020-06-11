@@ -2,8 +2,13 @@
 /*eslint no-undef: "error"*/
 
 /****************************************************************
-TODO/NOTES:
-Where to implement clear_completed endpoint? --> only for testing
+OVERVIEW:
+   This file implements the functionality of the leaderboard.html
+   page. It will make a GET request to the tasks endpoint to get
+   a JSON dump from the backend which will be used to compute
+   values and populate the page with the relevant data.
+NOTES:
+- Where/when to implement clear_completed endpoint? --> only for testing
 ****************************************************************/
 import * as DarkLightMode from "./darkLightMode.js";
 
@@ -160,7 +165,10 @@ function switchModeForButtons(classNameOfButtons, classToAdd, classToRemove) {
       buttons[i].classList.remove(classToRemove);
    }
 }
-
+/*==============================================================
+Make a GET request to tasks endpoint to retrieve JSON dump from
+the backend. Store response and use to populate table/page.
+==============================================================*/
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
    if (this.readyState == 4 && this.status == 200) {

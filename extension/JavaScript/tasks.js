@@ -1,17 +1,23 @@
 /*====================================================================
- TODO/NOTES:
-Store "curr_Team": team name (string)
-Store 'curr_Task': task name (string)
-   // These are needed b/c team responsible and project_id are values of Team object rather than Task object:   
-   GET ITEM `${taskName} Team` ==> return team responsible for this task
-   GET ITEM `${taskName} Project` ==> return project ID  for this task
--------------------------------------
-Store entire team object: 
-	team name: teamObject
--------------------------------------
-Store entire task object
-	task name: taskObject
--------------------------------------
+OVERVIEW:
+   This file implements the functionality of the tasks.html
+   page. It will make a GET request to the tasks endpoint to get
+   a JSON dump from the backend which will be used to compute
+   values and populate the page with the relevant data.
+
+NOTES:
+   Store "curr_Team": team name (string)
+   Store 'curr_Task': task name (string)
+      These are needed b/c team responsible and project_id are values of Team object rather than Task object:   
+      GET ITEM `${taskName} Team` ==> return team responsible for this task
+      GET ITEM `${taskName} Project` ==> return project ID  for this task
+   -------------------------------------
+   Store entire team object: 
+      team name: teamObject
+   -------------------------------------
+   Store entire task object
+      task name: taskObject
+   -------------------------------------
 ====================================================================*/
 import * as DarkLightMode from "./darkLightMode.js";
 
@@ -34,7 +40,8 @@ function gotoLeaderboard(){
 backBtn.addEventListener("click", gotoLeaderboard);
 
 /*==============================================================
-Call tasks endpoint to retrieve JSON data
+Make a GET request to tasks endpoint to retrieve JSON dump from
+the backend. Store response and use to populate table/page.
 ==============================================================*/
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {

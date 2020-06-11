@@ -1,3 +1,14 @@
+/****************************************************************
+OVERVIEW:
+   This file implements the functionality of the task.html
+   page. It will make a GET request to the tasks endpoint to get
+   a JSON dump from the backend which will be used to populate 
+   the page with the relevant data.
+   This file also implements the CHECKOFF TASK and DELETE TASK
+   functionality. This is done by making a POST request to 
+   the respective endpoints and passing as parameters specific
+   values that identify which task to checkoff or delete.
+****************************************************************/
 import * as DarkLightMode from "./darkLightMode.js";
 
 const tasks_endpoint = "http://ec2-54-227-1-34.compute-1.amazonaws.com/tasks";
@@ -9,7 +20,8 @@ if(localStorage.getItem("back_target") === current_pathname){
 }
 
 /*==============================================================
-Call tasks endpoint to retrieve JSON data
+Make a GET request to tasks endpoint to retrieve JSON dump from
+the backend. Store response and use to populate table/page.
 ==============================================================*/
 let response = null;
 let xhr = new XMLHttpRequest();
@@ -89,7 +101,7 @@ function deleteTask(){
 }
 deleteBtn.addEventListener("click", deleteTask);
 /*==============================================================
-Get and use values from to populate the page
+Get and use values from stored JSON data to populate the page
 ==============================================================*/
 // get values from Team object
 let assigned = localStorage.getItem(teamString),   // team responsible

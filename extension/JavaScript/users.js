@@ -51,9 +51,9 @@ function populateTable(value, key) {
     let anchorUser = document.createElement("a");
     // Insert a new row at the end of the table
     let newRow = table.insertRow(-1);
-    // create/insert 1 new <td> (table data/cell) element in the new row
+    // Create/insert 1 new <td> (table data/cell) element in the new row
     let cellUser = newRow.insertCell(0); // Team Name  
-    // create/insert the contents of the new cell
+    // Create/insert the contents of the new cell
     let cellUserText = document.createTextNode(`${key}`);
 
     anchorUser.appendChild(cellUserText);
